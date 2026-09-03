@@ -1,0 +1,88 @@
+# =============================================================================
+# MetrologyMitra (.gitignore)
+# Problem Statement: SIH26034
+# Legal Metrology (Packaged Commodities) Rules, 2011 Compliance System
+# =============================================================================
+
+# --- Node & Frontend Dependencies ---
+node_modules/
+frontend/node_modules/
+.pnp
+.pnp.js
+coverage/
+
+# --- Next.js Build Artifacts ---
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+dist/
+
+# --- Python & Bytecode Artifacts ---
+__pycache__/
+backend/**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Testing & Coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# --- Environment Variables & Secrets ---
+.env
+.env*.local
+backend/.env
+frontend/.env
+frontend/.env.local
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# --- Storage, Logs & Uploaded Media ---
+uploads/
+backend/uploads/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Database & Persistent Volumes ---
+postgres_data/
+*.db
+*.sqlite3
+
+# --- OS & IDE Specific Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Antigravity & AI Brain Data ---
+.gemini/
+scratch/
+
