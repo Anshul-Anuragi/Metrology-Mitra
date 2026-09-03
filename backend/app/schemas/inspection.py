@@ -36,6 +36,7 @@ class InspectionImageResponse(InspectionImageBase):
 
 class InspectionCreate(BaseModel):
     product_id: uuid.UUID | None = None
+    batch_id: uuid.UUID | None = None
     store_name: str | None = None
     store_address: str | None = None
     district: str | None = None
@@ -55,12 +56,14 @@ class InspectionResponse(BaseModel):
     id: uuid.UUID
     inspector_id: uuid.UUID
     product_id: uuid.UUID | None = None
+    batch_id: uuid.UUID | None = None
     store_name: str | None = None
     store_address: str | None = None
     district: str | None = None
     state: str | None = None
     gps_latitude: float | None = None
     gps_longitude: float | None = None
+    language_detected: str | None = None
     status: InspectionStatus
     overall_result: ComplianceResult | None = None
     started_at: datetime | None = None

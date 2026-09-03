@@ -58,5 +58,12 @@ class Declaration(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     digital_listing_data: Mapped[Dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
     measurement_data: Mapped[Dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
 
-    # Relationships
+    # Special Packaging & Statutory Exemptions (Phase 2.4)
+    package_type: Mapped[str] = mapped_column(Text, default="STANDARD", nullable=False)
+    exemption_applied: Mapped[str | None] = mapped_column(Text, nullable=True)
+    exemption_rationale: Mapped[str | None] = mapped_column(Text, nullable=True)
+    multi_piece_count: Mapped[int | None] = mapped_column(nullable=True)
+    combination_items: Mapped[Dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+
+    # Relationship
     inspection: Mapped["Inspection"] = relationship("Inspection", back_populates="declaration")

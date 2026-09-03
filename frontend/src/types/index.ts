@@ -163,12 +163,14 @@ export interface Inspection {
   id: string;
   inspector_id: string;
   product_id?: string | null;
+  batch_id?: string | null;
   store_name?: string | null;
   store_address?: string | null;
   district?: string | null;
   state?: string | null;
   gps_latitude?: number | null;
   gps_longitude?: number | null;
+  language_detected?: string | null;
   status: InspectionStatus;
   overall_result: ComplianceResult;
   started_at?: string | null;
@@ -188,6 +190,77 @@ export interface Inspection {
   reports?: Report[];
   audit_logs?: AuditLog[];
   inspector?: User | null;
+}
+
+export interface ScheduleIVCompliance {
+  lot_size: number;
+  sample_size_target: number;
+  samples_inspected: number;
+  compliant_count: number;
+  non_compliant_count: number;
+  review_count: number;
+  pending_count: number;
+  compliance_rate_percent: number;
+  lot_acceptance_verdict: string;
+  assessment_type?: string;
+  physical_gravimetric_verified?: boolean;
+  evaluation_standard: string;
+  source_version?: string;
+  effective_from?: string;
+  disclaimer?: string;
+}
+
+export interface InspectionBatch {
+  id: string;
+  name: string;
+  lot_size: number;
+  sample_size: number;
+  store_name?: string | null;
+  store_address?: string | null;
+  district?: string | null;
+  state?: string | null;
+  created_by_id: string;
+  status: string;
+  summary_stats?: Record<string, any> | null;
+  schedule_iv_compliance?: ScheduleIVCompliance | null;
+  inspections?: Inspection[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EnforcementNotice {
+  id: string;
+  inspection_id: string;
+  notice_number: string;
+  notice_type: string;
+  status: string;
+  offence_count: number;
+  statutory_sections?: string[] | null;
+  compounding_amount?: number | null;
+  challan_reference?: string | null;
+  officer_remarks?: string | null;
+  issued_at?: string | null;
+  compounded_at?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CompoundingCalculationResponse {
+  offence_count: number;
+  assessment_status: string;
+  statutory_section: string;
+  compounding_amount_reference?: number | null;
+  base_compounding_fee?: number | null;
+  max_statutory_penalty?: number | null;
+  is_compoundable?: boolean | null;
+  amount_determinable: boolean;
+  statutory_citations: string[];
+  source_legislation?: string;
+  source_version?: string;
+  effective_from?: string;
+  effective_to?: string | null;
+  legal_rationale: string;
+  disclaimer?: string;
 }
 
 export interface PipelineExecutionResult {
@@ -385,4 +458,126 @@ export interface DemoSeedResponse {
   message: string;
   total_presets: number;
   disclaimer: string;
+}
+
+// Phase 2.3: Gravimetric & MPE Types
+export interface SampleUnitWeightInput {
+  unit_number: number;
+  gross_weight: number;
+  tare_weight?: number;
+}
+
+export interface SampleUnitWeightResult {
+  unit_number: number;
+  gross_weight: number;
+  tare_weight: number;
+  net_weight: number;
+  error_value: number;
+  error_percent: number;
+  is_negative_error: boolean;
+  exceeds_mpe: boolean;
+  exceeds_double_mpe: boolean;
+}
+
+export interface GravimetricTestCreate {
+  inspection_id?: string;
+  batch_id?: string;
+  nominal_quantity_value: number;
+  nominal_quantity_unit: string;
+  declared_tare_weight: number;
+  samples: SampleUnitWeightInput[];
+  lot_size?: number;
+}
+
+export interface GravimetricTestResponse {
+  id: string;
+  inspection_id?: string | null;
+  batch_id?: string | null;
+  nominal_quantity_value: number;
+  nominal_quantity_unit: string;
+  declared_tare_weight: number;
+  mpe_value: number;
+  mpe_description: string;
+  sample_units_data?: SampleUnitWeightResult[];
+  sample_mean_net_quantity?: number | null;
+  sample_std_dev?: number | null;
+  defective_units_count: number;
+  double_mpe_defective_count: number;
+  lot_decision: string;
+  statutory_standard: string;
+  disclaimer?: string | null;
+  created_by_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// Phase 2.4: Statutory Exemptions & Special Packaging
+export interface ExemptionEvaluationRequest {
+  package_type: string;
+  declared_net_quantity_value?: number;
+  declared_net_quantity_unit?: string;
+  is_institutional_consumer?: boolean;
+  multi_piece_count?: number;
+  combination_items?: Record<string, any>[];
+}
+
+export interface ExemptionEvaluationResponse {
+  package_type: string;
+  is_exempt: boolean;
+  exemption_rule?: string | null;
+  exempt_mandatory_declarations: string[];
+  applicable_special_rules: string[];
+  statutory_citations: string[];
+  rationale: string;
+  source_legislation: string;
+  source_version: string;
+  effective_from: string;
+  effective_to?: string | null;
+  disclaimer: string;
+}
+
+// Phase 2.5: Geofence Validation & Offline Synchronization
+export interface GeoValidationRequest {
+  latitude: number;
+  longitude: number;
+  expected_state?: string;
+  expected_district?: string;
+}
+
+export interface GeoValidationResponse {
+  is_valid_coordinate: boolean;
+  in_bounds: boolean;
+  matched_region: string;
+  confidence: number;
+  geofence_status: string;
+  disclaimer: string;
+}
+
+export interface OfflineInspectionItem {
+  client_temp_id: string;
+  store_name?: string;
+  store_address?: string;
+  district?: string;
+  state?: string;
+  gps_latitude?: number;
+  gps_longitude?: number;
+  created_at_local?: string;
+  commodity_name?: string;
+  manufacturer_name?: string;
+  net_quantity?: string;
+  mrp?: string;
+  package_type?: string;
+  review_notes?: string;
+}
+
+export interface OfflineSyncBatchRequest {
+  device_id?: string;
+  offline_inspections: OfflineInspectionItem[];
+}
+
+export interface OfflineSyncBatchResponse {
+  synced_count: number;
+  failed_count: number;
+  synced_records: Record<string, any>[];
+  synced_at: string;
 }

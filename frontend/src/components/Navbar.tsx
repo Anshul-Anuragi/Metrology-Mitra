@@ -11,7 +11,11 @@ import {
   BarChart3,
   LogOut,
   User as UserIcon,
+  Boxes,
+  Gavel,
+  Scale,
 } from 'lucide-react';
+import OfflineSyncBadge from '@/components/OfflineSyncBadge';
 
 export default function Navbar() {
   const { user, logout, isInspector, isSupervisor } = useAuth();
@@ -56,6 +60,42 @@ export default function Navbar() {
                 Inspections
               </a>
 
+              <a
+                href="/batches"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname.startsWith('/batches')
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <Boxes className="h-4 w-4" />
+                Lots & Batches
+              </a>
+
+              <a
+                href="/gravimetric"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname === '/gravimetric'
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <Scale className="h-4 w-4" />
+                Net-Weight (MPE)
+              </a>
+
+              <a
+                href="/enforcement"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname === '/enforcement'
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <Gavel className="h-4 w-4" />
+                Enforcement
+              </a>
+
               {isInspector && (
                 <a
                   href="/inspections/new"
@@ -86,9 +126,10 @@ export default function Navbar() {
             </nav>
           )}
 
-          {/* User Profile & Logout */}
+          {/* User Profile & Offline Badge */}
           {user ? (
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              <OfflineSyncBadge />
               <div className="hidden sm:flex flex-col text-right">
                 <span className="text-xs font-semibold text-white">{user.name}</span>
                 <span className="text-[10px] text-sky-300 font-mono font-medium">

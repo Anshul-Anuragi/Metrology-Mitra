@@ -1,27 +1,82 @@
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
+DEVANAGARI_DIGITS_MAP = {
+    "०": "0", "१": "1", "२": "2", "३": "3", "४": "4",
+    "५": "5", "६": "6", "७": "7", "८": "8", "९": "9",
+}
+
+
+def translate_devanagari_numerals(text: str) -> str:
+    """
+    Translates Indic Devanagari numeral characters (०-९) to standard Arabic digits (0-9).
+    """
+    if not text:
+        return text
+    result = []
+    for ch in text:
+        result.append(DEVANAGARI_DIGITS_MAP.get(ch, ch))
+    return "".join(result)
+
+
+def detect_script_language(text: str) -> str:
+    """
+    Determines whether text is predominantly English, Hindi (Devanagari), or Mixed bilingual.
+    """
+    if not text:
+        return "ENG"
+    devanagari_count = len(re.findall(r"[\u0900-\u097F]", text))
+    latin_count = len(re.findall(r"[A-Za-z]", text))
+
+    if devanagari_count > 0 and latin_count > 0:
+        return "MIXED"
+    elif devanagari_count > 0:
+        return "HIN"
+    else:
+        return "ENG"
+
 
 def extract_mrp(text: str) -> Tuple[Optional[str], Optional[float]]:
     """
-    Extracts Maximum Retail Price and tax phrasing.
+    Extracts Maximum Retail Price and tax phrasing in English and Hindi.
     Matches e.g.:
     - MRP Rs. 40.00 incl. of all taxes
     - MRP ₹ 185.00 (inclusive of all taxes)
-    - MRP: 50.00 INCL OF ALL TAXES
+    - अधिकतम खुदरा मूल्य ₹ 50.00 (सभी करों सहित)
+    - अ.खु.मू. ₹ ५०.०० (सभी कर सहित)
     """
+    norm_text = translate_devanagari_numerals(text)
+
+    # 1. Hindi with tax phrasing
+    hin_p1 = r"(?i)\b(?:अधिकतम\s*खुदरा\s*मूल्य|अ\.?खु\.?मू\.?|खुदरा\s*मूल्य|एम\.?आर\.?पी\.?)\s*[:.-]?\s*(?:Rs\.?|₹|INR|रु\.?|रुपये)?\s*(\d+(?:\.\d{1,2})?)\s*(.*?(?:सभी\s*करों?\s*सहित|कर\s*सहित))"
+    m_hin1 = re.search(hin_p1, norm_text)
+    if m_hin1:
+        val = m_hin1.group(1).strip()
+        return f"MRP Rs. {val} incl. of all taxes (अधिकतम खुदरा मूल्य सभी कर सहित)", 0.95
+
+    # 2. English with tax phrasing
     p1 = r"(?i)\b(?:MRP|M\.R\.P\.?|Maximum\s*Retail\s*Price)\s*[:.-]?\s*(?:Rs\.?|₹|INR)?\s*(\d+(?:\.\d{1,2})?)\s*(.*?(?:(?:incl|inclusive)\s*(?:of)?\s*all\s*taxes|incl\.?\s*of\s*all\s*taxes|\(incl.*?taxes\)))"
-    m1 = re.search(p1, text)
+    m1 = re.search(p1, norm_text)
     if m1:
         val = m1.group(1).strip()
         tax_part = m1.group(2).strip()
         return f"MRP Rs. {val} {tax_part}".strip(), 0.95
 
+    # 3. Hindi without tax phrasing
+    hin_p2 = r"(?i)\b(?:अधिकतम\s*खुदरा\s*मूल्य|अ\.?खु\.?मू\.?|खुदरा\s*मूल्य|एम\.?आर\.?पी\.?)\s*[:.-]?\s*(?:Rs\.?|₹|INR|रु\.?|रुपये)?\s*(\d+(?:\.\d{1,2})?)"
+    m_hin2 = re.search(hin_p2, norm_text)
+    if m_hin2:
+        val = m_hin2.group(1).strip()
+        if re.search(r"(?i)(?:सभी\s*करों?\s*सहित|कर\s*सहित|(?:incl|inclusive)\s*(?:of)?\s*all\s*taxes)", norm_text):
+            return f"MRP Rs. {val} incl. of all taxes", 0.90
+        return f"MRP Rs. {val}", 0.85
+
+    # 4. English without tax phrasing
     p2 = r"(?i)\b(?:MRP|M\.R\.P\.?|Maximum\s*Retail\s*Price)\s*[:.-]?\s*(?:Rs\.?|₹|INR)?\s*(\d+(?:\.\d{1,2})?)"
-    m2 = re.search(p2, text)
+    m2 = re.search(p2, norm_text)
     if m2:
         val = m2.group(1).strip()
-        if re.search(r"(?i)(?:incl|inclusive)\s*(?:of)?\s*all\s*taxes", text):
+        if re.search(r"(?i)(?:incl|inclusive)\s*(?:of)?\s*all\s*taxes|सभी\s*करों?\s*सहित", norm_text):
             return f"MRP Rs. {val} incl. of all taxes", 0.90
         return f"MRP Rs. {val}", 0.85
 
@@ -30,15 +85,28 @@ def extract_mrp(text: str) -> Tuple[Optional[str], Optional[float]]:
 
 def extract_net_quantity(text: str) -> Tuple[Optional[str], Optional[float]]:
     """
-    Extracts Net Quantity.
+    Extracts Net Quantity in English and Hindi units.
     """
+    norm_text = translate_devanagari_numerals(text)
+
+    # Hindi Net Quantity: शुद्ध मात्रा / मात्रा ५०० ग्राम / १ किग्रा / 5 किग्रा
+    hin_p1 = r"(?i)(?:शुद्ध\s*मात्रा|नेट\s*मात्रा|मात्रा|नेट\s*वजन)\s*[:.-]?\s*(\d+(?:\.\d+)?\s*(?:g|kg|ml|l|n|u|ग्राम|किग्रा|मिली|लीटर))"
+    m_hin1 = re.search(hin_p1, norm_text)
+    if m_hin1:
+        val = m_hin1.group(1).strip()
+        val = re.sub(r"ग्राम", "g", val)
+        val = re.sub(r"किग्रा", "kg", val)
+        val = re.sub(r"मिली", "ml", val)
+        val = re.sub(r"लीटर", "l", val)
+        return val, 0.92
+
     p1 = r"(?i)\b(?:Net\s*(?:Qty|Quantity|Wt|Weight|Volume|Content|Contents)?)\s*[:.-]?\s*(\d+(?:\.\d+)?\s*(?:g|kg|ml|l|n|u|cm|m|gms|kgs|ltr|gm|ml\.))\b"
-    m1 = re.search(p1, text)
+    m1 = re.search(p1, norm_text)
     if m1:
         return m1.group(1).strip(), 0.92
 
     p2 = r"\b(\d+(?:\.\d+)?\s*(?:g|kg|ml|l|gms|kgs|ltr))\b"
-    m2 = re.search(p2, text, re.IGNORECASE)
+    m2 = re.search(p2, norm_text, re.IGNORECASE)
     if m2:
         return m2.group(1).strip(), 0.75
 
@@ -47,8 +115,9 @@ def extract_net_quantity(text: str) -> Tuple[Optional[str], Optional[float]]:
 
 def extract_dates(text: str) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str], Optional[float]]:
     """
-    Extracts Manufacturing Date, Packing Date, Expiry Date, and Best Before.
+    Extracts Manufacturing Date, Packing Date, Expiry Date, and Best Before in English and Hindi.
     """
+    norm_text = translate_devanagari_numerals(text)
     mfg_date = None
     pkd_date = None
     exp_date = None
@@ -57,24 +126,28 @@ def extract_dates(text: str) -> Tuple[Optional[str], Optional[str], Optional[str
 
     date_regex = r"(\b(?:0[1-9]|1[0-2])[/-](?:20\d{2}|\d{2})\b|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s*(?:20\d{2}|\d{2})\b|\b(?:20\d{2})[/-](?:0[1-9]|1[0-2])\b)"
 
-    mfg_m = re.search(r"(?i)\b(?:Mfd|Mfg|Manufactured|Mfg\s*Date|Mfd\s*Date)\s*[:.-]?\s*" + date_regex, text)
+    # Manufacturing date (English & Hindi)
+    mfg_m = re.search(r"(?i)\b(?:Mfd|Mfg|Manufactured|Mfg\s*Date|Mfd\s*Date|निर्माण\s*तिथि|उत्पादन\s*तिथि)\s*[:.-]?\s*" + date_regex, norm_text)
     if mfg_m:
         mfg_date = mfg_m.group(1).strip()
         conf = 0.90
 
-    pkd_m = re.search(r"(?i)\b(?:PKD|Packed|Pack|Pkg|Packed\s*on)\s*[:.-]?\s*" + date_regex, text)
+    # Packing date (English & Hindi)
+    pkd_m = re.search(r"(?i)\b(?:PKD|Packed|Pack|Pkg|Packed\s*on|पैकिंग\s*तिथि|पैक\s*तिथि)\s*[:.-]?\s*" + date_regex, norm_text)
     if pkd_m:
         pkd_date = pkd_m.group(1).strip()
         if not mfg_date:
             mfg_date = pkd_date
         conf = 0.90
 
-    exp_m = re.search(r"(?i)\b(?:Use\s*by|Expiry|Exp\s*Date|Exp)\s*[:.-]?\s*" + date_regex, text)
+    # Expiry date (English & Hindi)
+    exp_m = re.search(r"(?i)\b(?:Use\s*by|Expiry|Exp\s*Date|Exp|अवसान\s*तिथि|समाप्ति\s*तिथि|उपयोग\s*की\s*अंतिम\s*तिथि)\s*[:.-]?\s*" + date_regex, norm_text)
     if exp_m:
         exp_date = exp_m.group(1).strip()
         conf = 0.90
 
-    bb_m = re.search(r"(?i)\b(?:Best\s*Before)\s*[:.-]?\s*([^\n,]+)", text)
+    # Best before (English & Hindi)
+    bb_m = re.search(r"(?i)\b(?:Best\s*Before|सर्वोत्तम\s*उपयोग)\s*[:.-]?\s*([^\n,]+)", norm_text)
     if bb_m:
         best_before = bb_m.group(1).strip()
         conf = 0.85
@@ -84,24 +157,25 @@ def extract_dates(text: str) -> Tuple[Optional[str], Optional[str], Optional[str
 
 def extract_consumer_care(text: str) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[float]]:
     """
-    Extracts consumer grievance phone, email, and care block.
+    Extracts consumer grievance phone, email, and care block in English and Hindi.
     """
+    norm_text = translate_devanagari_numerals(text)
     phone = None
     email = None
     care_block = None
     conf = None
 
-    phone_m = re.search(r"\b(1800[-\s]?\d{3}[-\s]?\d{3,4}|\+?91[-\s]?\d{10}|\b\d{3,5}[-\s]\d{6,8})\b", text)
+    phone_m = re.search(r"\b(1800[-\s]?\d{3}[-\s]?\d{3,4}|\+?91[-\s]?\d{10}|\b\d{3,5}[-\s]\d{6,8})\b", norm_text)
     if phone_m:
         phone = phone_m.group(1).strip()
         conf = 0.92
 
-    email_m = re.search(r"\b([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)\b", text)
+    email_m = re.search(r"\b([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)\b", norm_text)
     if email_m:
         email = email_m.group(1).strip()
         conf = 0.95
 
-    care_m = re.search(r"(?i)(?:Consumer\s*Care|Customer\s*Care|Helpline|Grievance\s*Cell)\s*[:.-]?\s*([^\n]+(?:\n[^\n]+)?)", text)
+    care_m = re.search(r"(?i)(?:Consumer\s*Care|Customer\s*Care|Helpline|Grievance\s*Cell|उपभोक्ता\s*सेवा|ग्राहक\s*सेवा|शिकायत\s*निवारण)\s*[:.-]?\s*([^\n]+(?:\n[^\n]+)?)", norm_text)
     if care_m:
         care_block = care_m.group(0).strip()
         conf = 0.88
@@ -113,36 +187,37 @@ def extract_consumer_care(text: str) -> Tuple[Optional[str], Optional[str], Opti
 
 def extract_manufacturer_and_address(text: str) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str], Optional[float]]:
     """
-    Extracts manufacturer, packer, importer name, and address.
+    Extracts manufacturer, packer, importer name, and address in English and Hindi.
     """
+    norm_text = translate_devanagari_numerals(text)
     mfg_name = None
     packer_name = None
     importer_name = None
     address = None
     conf = None
 
-    lines = [line.strip() for line in text.split("\n") if line.strip()]
+    lines = [line.strip() for line in norm_text.split("\n") if line.strip()]
 
     for i, line in enumerate(lines):
-        if re.search(r"(?i)\b(?:Mfg\s*by|Manufactured\s*by|Mfd\s*by)\b", line):
-            mfg_name = re.sub(r"(?i)\b(?:Mfg\s*by|Manufactured\s*by|Mfd\s*by)\s*[:.-]?", "", line).strip()
+        if re.search(r"(?i)\b(?:Mfg\s*by|Manufactured\s*by|Mfd\s*by|द्वारा\s*निर्मित|निर्माता)\b", line):
+            mfg_name = re.sub(r"(?i)\b(?:Mfg\s*by|Manufactured\s*by|Mfd\s*by|द्वारा\s*निर्मित|निर्माता)\s*[:.-]?", "", line).strip()
             if not mfg_name and i + 1 < len(lines):
                 mfg_name = lines[i + 1]
             conf = 0.88
 
-        elif re.search(r"(?i)\b(?:Packed\s*by|Pkd\s*by)\b", line):
-            packer_name = re.sub(r"(?i)\b(?:Packed\s*by|Pkd\s*by)\s*[:.-]?", "", line).strip()
+        elif re.search(r"(?i)\b(?:Packed\s*by|Pkd\s*by|द्वारा\s*पैक|पैकर)\b", line):
+            packer_name = re.sub(r"(?i)\b(?:Packed\s*by|Pkd\s*by|द्वारा\s*पैक|पैकर)\s*[:.-]?", "", line).strip()
             if not packer_name and i + 1 < len(lines):
                 packer_name = lines[i + 1]
             conf = 0.88
 
-        elif re.search(r"(?i)\b(?:Imported\s*by|Imp\s*by)\b", line):
-            importer_name = re.sub(r"(?i)\b(?:Imported\s*by|Imp\s*by)\s*[:.-]?", "", line).strip()
+        elif re.search(r"(?i)\b(?:Imported\s*by|Imp\s*by|आयातकर्ता)\b", line):
+            importer_name = re.sub(r"(?i)\b(?:Imported\s*by|Imp\s*by|आयातकर्ता)\s*[:.-]?", "", line).strip()
             if not importer_name and i + 1 < len(lines):
                 importer_name = lines[i + 1]
             conf = 0.88
 
-        if re.search(r"(?i)\b(?:Plot|Street|Road|Estate|Phase|Sector|Industrial\s*Area|Pin\s*Code|Pincode|\b\d{6}\b)\b", line):
+        if re.search(r"(?i)\b(?:Plot|Street|Road|Estate|Phase|Sector|Industrial\s*Area|Pin\s*Code|Pincode|पता|पिन\s*कोड|\b\d{6}\b)\b", line):
             if not address:
                 address = line
             else:
@@ -154,10 +229,11 @@ def extract_manufacturer_and_address(text: str) -> Tuple[Optional[str], Optional
 
 def extract_unit_sale_price(text: str) -> Tuple[Optional[str], Optional[float]]:
     """
-    Extracts Unit Sale Price (USP).
+    Extracts Unit Sale Price (USP) in English and Hindi.
     """
-    p = r"(?i)\b(?:USP|Unit\s*Sale\s*Price)\s*[:.-]?\s*(?:Rs\.?|₹)?\s*(\d+(?:\.\d{1,2})?\s*(?:/|per)\s*(?:g|kg|ml|l|item|piece|N|u))\b"
-    m = re.search(p, text)
+    norm_text = translate_devanagari_numerals(text)
+    p = r"(?i)\b(?:USP|Unit\s*Sale\s*Price|प्रति\s*इकाई\s*मूल्य|इकाई\s*मूल्य)\s*[:.-]?\s*(?:Rs\.?|₹|रु\.?)?\s*(\d+(?:\.\d{1,2})?\s*(?:/|per|प्रति)\s*(?:g|kg|ml|l|item|piece|N|u|ग्राम|किग्रा|मिली|लीटर))\b"
+    m = re.search(p, norm_text)
     if m:
         return f"Rs. {m.group(1).strip()}", 0.90
     return None, None
@@ -165,16 +241,17 @@ def extract_unit_sale_price(text: str) -> Tuple[Optional[str], Optional[float]]:
 
 def extract_origin(text: str) -> Tuple[Optional[str], bool, Optional[float]]:
     """
-    Extracts Country of Origin and is_imported boolean.
+    Extracts Country of Origin and is_imported boolean in English and Hindi.
     """
-    p = r"(?i)\b(?:Country\s*of\s*Origin|Made\s*in|Origin)\s*[:.-]?\s*([A-Za-z ]+)"
-    m = re.search(p, text)
+    norm_text = translate_devanagari_numerals(text)
+    p = r"(?i)\b(?:Country\s*of\s*Origin|Made\s*in|Origin|मूल\s*देश|उत्पत्ति\s*देश|उत्पादक\s*देश)\s*[:.-]?\s*([A-Za-z\u0900-\u097F ]+)"
+    m = re.search(p, norm_text)
     if m:
         country = m.group(1).strip()
-        is_imported = country.lower() not in ("india", "bharat", "domestic")
+        is_imported = country.lower() not in ("india", "bharat", "domestic", "भारत", "स्वदेशी")
         return country, is_imported, 0.92
 
-    if re.search(r"(?i)\b(?:Imported\s*by|Importer)\b", text):
+    if re.search(r"(?i)\b(?:Imported\s*by|Importer|आयातकर्ता)\b", norm_text):
         return None, True, 0.80
 
     return None, False, None
@@ -182,16 +259,17 @@ def extract_origin(text: str) -> Tuple[Optional[str], bool, Optional[float]]:
 
 def extract_commodity_name(text: str) -> Tuple[Optional[str], Optional[float]]:
     """
-    Extracts commodity name (Product/Item line or first prominent header).
+    Extracts commodity name in English and Hindi.
     """
-    p = r"(?i)\b(?:Product|Item|Commodity)\s*[:.-]?\s*([^\n]+)"
-    m = re.search(p, text)
+    norm_text = translate_devanagari_numerals(text)
+    p = r"(?i)\b(?:Product|Item|Commodity|उत्पाद|सामग्री)\s*[:.-]?\s*([^\n]+)"
+    m = re.search(p, norm_text)
     if m:
         return m.group(1).strip(), 0.90
 
-    lines = [line.strip() for line in text.split("\n") if line.strip()]
+    lines = [line.strip() for line in norm_text.split("\n") if line.strip()]
     for line in lines[:3]:
-        if not re.search(r"(?i)^(?:MRP|Net|Mfd|Exp|Batch|Pkg|Use|Toll)", line) and len(line) > 3:
+        if not re.search(r"(?i)^(?:MRP|Net|Mfd|Exp|Batch|Pkg|Use|Toll|अ\.?खु\.?मू|शुद्ध|निर्माण)", line) and len(line) > 3:
             return line, 0.70
 
     return None, None
@@ -201,13 +279,18 @@ def extract_declaration_from_ocr(
     raw_text: str, tokens_data: Optional[List[Dict[str, Any]]] = None
 ) -> Tuple[Dict[str, Any], Dict[str, float]]:
     """
-    Deterministic extraction pipeline converting raw OCR text into structured LMPC 2011 declarations.
+    Deterministic extraction pipeline converting raw OCR text into structured LMPC 2011 declarations
+    with bilingual English/Hindi Indic awareness.
     """
     extracted_fields: Dict[str, Any] = {}
     field_confidences: Dict[str, float] = {}
 
     if not raw_text or not raw_text.strip():
         return extracted_fields, field_confidences
+
+    # Language/Script detection
+    script_lang = detect_script_language(raw_text)
+    extracted_fields["_language_detected"] = script_lang
 
     # 1. Commodity Name
     comm_name, comm_conf = extract_commodity_name(raw_text)
@@ -299,4 +382,3 @@ def extract_declaration_from_ocr(
     extracted_fields["is_imported"] = is_imp
 
     return extracted_fields, field_confidences
-

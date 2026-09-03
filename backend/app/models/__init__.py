@@ -11,6 +11,9 @@ from app.models.violation import Violation
 from app.models.evidence import Evidence
 from app.models.report import Report
 from app.models.audit_log import AuditLog
+from app.models.inspection_batch import InspectionBatch
+from app.models.enforcement_notice import EnforcementNotice
+from app.models.gravimetric_test import GravimetricTest
 
 __all__ = [
     "Base",
@@ -26,4 +29,7 @@ __all__ = [
     "Evidence",
     "Report",
     "AuditLog",
+    "InspectionBatch",
+    "EnforcementNotice",
+    "GravimetricTest",
 ]

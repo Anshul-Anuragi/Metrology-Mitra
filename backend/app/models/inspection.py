@@ -11,7 +11,10 @@ if TYPE_CHECKING:
     from app.models.audit_log import AuditLog
     from app.models.compliance_check import ComplianceCheck
     from app.models.declaration import Declaration
+    from app.models.enforcement_notice import EnforcementNotice
     from app.models.evidence import Evidence
+    from app.models.gravimetric_test import GravimetricTest
+    from app.models.inspection_batch import InspectionBatch
     from app.models.inspection_image import InspectionImage
     from app.models.product import Product
     from app.models.report import Report
@@ -34,6 +37,12 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         nullable=True,
         index=True,
     )
+    batch_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("inspection_batches.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
 
     # Location & Enforcement Metadata
     store_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
@@ -42,6 +51,14 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     state: Mapped[str | None] = mapped_column(String(100), nullable=True, index=True)
     gps_latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
     gps_longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    geo_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
+
+    # Language / Script perception
+    language_detected: Mapped[str | None] = mapped_column(String(50), nullable=True)
+
+    # Offline synchronization provenance (Phase 2.5)
+    offline_client_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    synced_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Inspection lifecycle & verdict
     status: Mapped[InspectionStatus] = mapped_column(
@@ -74,6 +91,7 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     reviewed_by_user: Mapped["User | None"] = relationship("User", foreign_keys=[reviewed_by_id])
     finalized_by_user: Mapped["User | None"] = relationship("User", foreign_keys=[finalized_by_id])
     product: Mapped["Product | None"] = relationship("Product", back_populates="inspections")
+    batch: Mapped["InspectionBatch | None"] = relationship("InspectionBatch", back_populates="inspections")
     images: Mapped[List["InspectionImage"]] = relationship(
         "InspectionImage", back_populates="inspection", cascade="all, delete-orphan"
     )
@@ -95,7 +113,14 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     audit_logs: Mapped[List["AuditLog"]] = relationship(
         "AuditLog", back_populates="inspection", cascade="all, delete-orphan"
     )
+    enforcement_notices: Mapped[List["EnforcementNotice"]] = relationship(
+        "EnforcementNotice", back_populates="inspection", cascade="all, delete-orphan"
+    )
+    gravimetric_tests: Mapped[List["GravimetricTest"]] = relationship(
+        "GravimetricTest", back_populates="inspection", cascade="all, delete-orphan"
+    )
 
 
 # Composite index for querying inspections by date & status
-Index("idx_inspections_created_at", Inspection.created_at)
+Index("ix_inspections_status_created_at", Inspection.status, Inspection.created_at.desc())
+Index("ix_inspections_state_district", Inspection.state, Inspection.district)

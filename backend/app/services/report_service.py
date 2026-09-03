@@ -256,6 +256,8 @@ def _build_pdf_report(
 
     # 4. Compliance Rule Matrix
     story.append(Paragraph("2. STATUTORY COMPLIANCE EVALUATION MATRIX", section_heading))
+    story.append(Paragraph("<i>18 encoded compliance checks based on selected provisions of the Legal Metrology (Packaged Commodities) Rules, 2011 and applicable amendments.</i>", ParagraphStyle("MatrixSub", parent=body_style, fontSize=7, leading=9, textColor=colors.HexColor("#4A5568"))))
+    story.append(Spacer(1, 4))
     check_rows = [
         [
             Paragraph("<b>Rule Code</b>", body_bold),

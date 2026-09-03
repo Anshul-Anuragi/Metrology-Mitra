@@ -169,6 +169,7 @@ async def create_inspection(
     inspection = Inspection(
         inspector_id=current_user.id,
         product_id=inspection_in.product_id,
+        batch_id=inspection_in.batch_id,
         store_name=inspection_in.store_name,
         store_address=inspection_in.store_address,
         district=inspection_in.district,
@@ -546,6 +547,9 @@ async def process_inspection_image_ocr(
             declaration.field_confidences = curr_conf
             declaration.is_human_verified = False
 
+    if extracted_fields.get("_language_detected"):
+        inspection.language_detected = extracted_fields["_language_detected"]
+
     await log_audit_event(
         db=db,
         inspection_id=inspection_id,
@@ -553,7 +557,12 @@ async def process_inspection_image_ocr(
         action="OCR_PROCESSED",
         entity_type="OCRResult",
         entity_id=ocr_result.id,
-        metadata_json={"image_id": str(image_id), "engine": ocr_res_data.engine, "confidence": ocr_res_data.confidence},
+        metadata_json={
+            "image_id": str(image_id),
+            "engine": ocr_res_data.engine,
+            "confidence": ocr_res_data.confidence,
+            "language_detected": inspection.language_detected,
+        },
     )
 
     await db.commit()

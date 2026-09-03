@@ -5,7 +5,9 @@ from app.core.enums import UserRole
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
 
 if TYPE_CHECKING:
+    from app.models.gravimetric_test import GravimetricTest
     from app.models.inspection import Inspection
+    from app.models.inspection_batch import InspectionBatch
     from app.models.report import Report
 
 
@@ -29,4 +31,6 @@ class User(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         foreign_keys="[Inspection.inspector_id]",
         cascade="all, delete-orphan",
     )
+    batches: Mapped[List["InspectionBatch"]] = relationship("InspectionBatch", back_populates="created_by")
     reports: Mapped[List["Report"]] = relationship("Report", back_populates="generator")
+    gravimetric_tests: Mapped[List["GravimetricTest"]] = relationship("GravimetricTest", back_populates="created_by")
