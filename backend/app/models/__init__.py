@@ -14,6 +14,10 @@ from app.models.audit_log import AuditLog
 from app.models.inspection_batch import InspectionBatch
 from app.models.enforcement_notice import EnforcementNotice
 from app.models.gravimetric_test import GravimetricTest
+from app.models.packer_registration import PackerRegistration
+from app.models.seizure import SeizureRecord, SeizureItem
+from app.models.company import Company, NominatedDirector
+from app.models.dossier import InvestigationDossier, DossierInspection
 
 __all__ = [
     "Base",
@@ -32,4 +36,11 @@ __all__ = [
     "InspectionBatch",
     "EnforcementNotice",
     "GravimetricTest",
+    "PackerRegistration",
+    "SeizureRecord",
+    "SeizureItem",
+    "Company",
+    "NominatedDirector",
+    "InvestigationDossier",
+    "DossierInspection",
 ]

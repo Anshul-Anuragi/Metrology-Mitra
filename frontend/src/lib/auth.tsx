@@ -67,7 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       // Role-based routing
       if (userData.role === 'INSPECTOR') {
-        router.push('/inspections');
+        router.push('/inspector');
       } else {
         router.push('/analytics');
       }

@@ -20,6 +20,8 @@ if TYPE_CHECKING:
     from app.models.report import Report
     from app.models.user import User
     from app.models.violation import Violation
+    from app.models.dossier import DossierInspection
+
 
 
 class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
@@ -86,12 +88,19 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     )
     finalized_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
+    # Corporate & Seizure linkages (Phase 2.7 & 2.8)
+    company_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("companies.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+
     # Relationships
-    inspector: Mapped["User"] = relationship("User", foreign_keys=[inspector_id], back_populates="inspections")
+    inspector: Mapped["User"] = relationship("User", foreign_keys=[inspector_id], back_populates="inspections", lazy="selectin")
+
     reviewed_by_user: Mapped["User | None"] = relationship("User", foreign_keys=[reviewed_by_id])
     finalized_by_user: Mapped["User | None"] = relationship("User", foreign_keys=[finalized_by_id])
     product: Mapped["Product | None"] = relationship("Product", back_populates="inspections")
     batch: Mapped["InspectionBatch | None"] = relationship("InspectionBatch", back_populates="inspections")
+    company: Mapped["Company | None"] = relationship("Company", back_populates="inspections")
     images: Mapped[List["InspectionImage"]] = relationship(
         "InspectionImage", back_populates="inspection", cascade="all, delete-orphan"
     )
@@ -119,6 +128,13 @@ class Inspection(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     gravimetric_tests: Mapped[List["GravimetricTest"]] = relationship(
         "GravimetricTest", back_populates="inspection", cascade="all, delete-orphan"
     )
+    seizure_records: Mapped[List["SeizureRecord"]] = relationship(
+        "SeizureRecord", back_populates="inspection"
+    )
+    dossier_links: Mapped[List["DossierInspection"]] = relationship(
+        "DossierInspection", back_populates="inspection", cascade="all, delete-orphan", lazy="selectin"
+    )
+
 
 
 # Composite index for querying inspections by date & status

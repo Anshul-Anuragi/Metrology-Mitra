@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from app.models.inspection import Inspection
     from app.models.inspection_batch import InspectionBatch
     from app.models.report import Report
+    from app.models.dossier import InvestigationDossier
+
 
 
 class User(Base, UUIDPrimaryKeyMixin, TimestampMixin):
@@ -34,3 +36,10 @@ class User(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     batches: Mapped[List["InspectionBatch"]] = relationship("InspectionBatch", back_populates="created_by")
     reports: Mapped[List["Report"]] = relationship("Report", back_populates="generator")
     gravimetric_tests: Mapped[List["GravimetricTest"]] = relationship("GravimetricTest", back_populates="created_by")
+    managed_dossiers: Mapped[List["InvestigationDossier"]] = relationship(
+        "InvestigationDossier",
+        back_populates="lead_supervisor",
+        foreign_keys="[InvestigationDossier.lead_supervisor_id]",
+        lazy="selectin",
+    )
+

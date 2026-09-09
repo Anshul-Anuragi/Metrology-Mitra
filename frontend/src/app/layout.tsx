@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/lib/auth';
-import Navbar from '@/components/Navbar';
+import AppShell from '@/components/AppShell';
 
 export const metadata: Metadata = {
-  title: 'MetrologyMitra — Legal Metrology Compliance Inspection',
+  title: 'MetrologyMitra — Legal Metrology Inspection Intelligence (SIH26034)',
   description: 'Automated compliance inspection of packaged commodities under Legal Metrology (Packaged Commodities) Rules, 2011',
 };
 
@@ -15,17 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+      <body className="bg-slate-50 text-slate-900 min-h-screen">
         <AuthProvider>
-          <Navbar />
-          <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+          <AppShell>
             {children}
-          </main>
-          <footer className="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-            <p>
-              © {new Date().getFullYear()} Legal Metrology Packaged Commodities Compliance System (SIH26034) • Department of Consumer Affairs, Government of India
-            </p>
-          </footer>
+          </AppShell>
         </AuthProvider>
       </body>
     </html>

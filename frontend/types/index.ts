@@ -72,6 +72,11 @@ export interface Declaration {
   raw_extractions?: Record<string, any> | null;
   digital_listing_data?: Record<string, any> | null;
   measurement_data?: Record<string, any> | null;
+  package_type?: string;
+  exemption_applied?: string | null;
+  exemption_rationale?: string | null;
+  multi_piece_count?: number | null;
+  combination_items?: Record<string, any>[] | null;
   is_human_verified: boolean;
   created_at: string;
   updated_at: string;
@@ -170,9 +175,13 @@ export interface Inspection {
   state?: string | null;
   gps_latitude?: number | null;
   gps_longitude?: number | null;
+  geo_verified?: boolean;
+  synced_at?: string | null;
+  offline_client_id?: string | null;
   language_detected?: string | null;
   status: InspectionStatus;
   overall_result: ComplianceResult;
+  statutory_verdict?: ComplianceResult | null;
   started_at?: string | null;
   completed_at?: string | null;
   reviewed_by_id?: string | null;
@@ -516,7 +525,12 @@ export interface ExemptionEvaluationRequest {
   package_type: string;
   declared_net_quantity_value?: number;
   declared_net_quantity_unit?: string;
+  commodity_category?: string;
+  is_agricultural_farm_produce?: boolean;
   is_institutional_consumer?: boolean;
+  has_institutional_marking?: boolean;
+  is_fast_food_takeout?: boolean;
+  is_tobacco_product?: boolean;
   multi_piece_count?: number;
   combination_items?: Record<string, any>[];
 }
@@ -524,11 +538,14 @@ export interface ExemptionEvaluationRequest {
 export interface ExemptionEvaluationResponse {
   package_type: string;
   is_exempt: boolean;
+  assessment_status: string;
   exemption_rule?: string | null;
   exempt_mandatory_declarations: string[];
   applicable_special_rules: string[];
   statutory_citations: string[];
   rationale: string;
+  missing_statutory_facts?: string[];
+  statutory_conditions?: string[];
   source_legislation: string;
   source_version: string;
   effective_from: string;
@@ -581,3 +598,390 @@ export interface OfflineSyncBatchResponse {
   synced_records: Record<string, any>[];
   synced_at: string;
 }
+
+// Phase 2.6: Rule 27 Pre-Packer Registry
+export interface PackerRegistration {
+  id: string;
+  registration_number: string;
+  entity_name: string;
+  registered_address: string;
+  jurisdiction_level: string;
+  state: string;
+  issuing_authority: string;
+  registered_categories: string[];
+  valid_from: string;
+  valid_to?: string | null;
+  is_active: boolean;
+  certificate_sha256?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface RegistrationVerifyRequest {
+  registration_number?: string;
+  entity_name?: string;
+  state?: string;
+  commodity_category?: string;
+}
+
+export interface RegistrationVerifyResponse {
+  verification_status: string;
+  registration_number?: string | null;
+  matched_entity_name?: string | null;
+  registered_address?: string | null;
+  jurisdiction_level?: string | null;
+  state?: string | null;
+  is_active: boolean;
+  valid_from?: string | null;
+  valid_to?: string | null;
+  is_compliant: boolean;
+  statutory_citation: string;
+  rationale: string;
+  disclaimer: string;
+}
+
+// Phase 2.7: Section 15 Seizures & Panchnama
+export interface SeizureItem {
+  id: string;
+  seizure_id: string;
+  commodity_name: string;
+  brand_name?: string | null;
+  batch_lot_number?: string | null;
+  declared_net_quantity?: string | null;
+  total_packages_seized: number;
+  sample_packages_taken: number;
+  sample_seal_tag_number?: string | null;
+  mrp?: string | null;
+}
+
+export interface SeizureRecordCreate {
+  inspection_id?: string;
+  batch_id?: string;
+  premises_name: string;
+  premises_address: string;
+  seizure_date?: string;
+  statutory_grounds?: string;
+  witness_1: { name: string; address: string; phone?: string };
+  witness_2: { name: string; address: string; phone?: string };
+  custody_location?: string;
+  items: Array<{
+    commodity_name: string;
+    brand_name?: string;
+    batch_lot_number?: string;
+    declared_net_quantity?: string;
+    total_packages_seized: number;
+    sample_packages_taken?: number;
+    sample_seal_tag_number?: string;
+    mrp?: string;
+  }>;
+  officer_remarks?: string;
+}
+
+export interface SeizureRecord {
+  id: string;
+  seizure_memo_number: string;
+  inspection_id?: string | null;
+  batch_id?: string | null;
+  premises_name: string;
+  premises_address: string;
+  seizure_date: string;
+  statutory_grounds: string;
+  inspecting_officer_id: string;
+  witness_1_name: string;
+  witness_1_address: string;
+  witness_1_phone?: string | null;
+  witness_2_name: string;
+  witness_2_address: string;
+  witness_2_phone?: string | null;
+  custody_location: string;
+  status: string;
+  sha256_seal_hash?: string | null;
+  officer_remarks?: string | null;
+  items: SeizureItem[];
+  created_at: string;
+  updated_at: string;
+  disclaimer?: string;
+}
+
+// Phase 2.8: Section 49 Corporate Liability
+export interface NominatedDirector {
+  id: string;
+  company_id: string;
+  director_name: string;
+  din: string;
+  designation: string;
+  form_i_notice_date: string;
+  form_i_reference?: string | null;
+  effective_from: string;
+  effective_to?: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Company {
+  id: string;
+  cin: string;
+  company_name: string;
+  registered_office: string;
+  state: string;
+  email?: string | null;
+  phone?: string | null;
+  is_active: boolean;
+  nominated_directors: NominatedDirector[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Section49LiabilityAssessment {
+  company_id?: string | null;
+  company_name: string;
+  cin?: string | null;
+  statutory_basis: string;
+  has_nominated_director: boolean;
+  nominated_director?: NominatedDirector | null;
+  liability_determination: string;
+  notice_recipient_name: string;
+  notice_recipient_designation: string;
+  rationale: string;
+  disclaimer: string;
+}
+
+// Phase 2.9: Operational Case Intelligence, Evidence Completeness & Supervisor Triage
+export type EvidenceFacetStatus = 'COMPLETE' | 'PARTIAL' | 'MISSING' | 'NOT_APPLICABLE';
+export type PriorityLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+export type ActionRecommendationCategory = 'EVIDENCE_COLLECTION' | 'VERIFICATION' | 'LEGAL_WORKFLOW' | 'SUPERVISORY_ACTION';
+
+export interface EvidenceFacet {
+  name: string;
+  facet_code: string;
+  status: EvidenceFacetStatus;
+  score: number;
+  weight: number;
+  is_required: boolean;
+  is_applicable: boolean;
+  evidence_present: string[];
+  evidence_missing: string[];
+  actionable_gap?: string | null;
+}
+
+export interface EvidenceGap {
+  code: string;
+  title: string;
+  description: string;
+  severity: ViolationSeverity;
+  action: string;
+  facet_code: string;
+  is_blocking: boolean;
+}
+
+export interface EvidenceCompleteness {
+  score: number;
+  status: string;
+  facets: EvidenceFacet[];
+  gaps: EvidenceGap[];
+  disclaimer: string;
+}
+
+export interface PriorityFactor {
+  code: string;
+  description: string;
+  points_contributed: number;
+  severity: string;
+}
+
+export interface CasePriority {
+  score: number;
+  level: PriorityLevel;
+  factors: PriorityFactor[];
+  summary: string;
+  disclaimer: string;
+}
+
+export interface ActionRecommendation {
+  code: string;
+  title: string;
+  description: string;
+  priority: PriorityLevel;
+  category: ActionRecommendationCategory;
+  is_advisory: boolean;
+  related_rule?: string | null;
+  action_label: string;
+}
+
+export interface CaseIntelligenceResponse {
+  inspection_id: string;
+  evidence_completeness: EvidenceCompleteness;
+  case_priority: CasePriority;
+  recommendations: ActionRecommendation[];
+  legal_context: {
+    overall_result: string;
+    inspection_status: string;
+    store_name?: string | null;
+    district?: string | null;
+    state?: string | null;
+    is_finalized: boolean;
+  };
+  disclaimer: string;
+}
+
+export interface SupervisorTriageItem {
+  inspection_id: string;
+  created_at: string;
+  store_name?: string | null;
+  district?: string | null;
+  state?: string | null;
+  inspector_name?: string | null;
+  inspector_id?: string | null;
+  entity_name?: string | null;
+  commodity_name?: string | null;
+  overall_result: ComplianceResult;
+  status: InspectionStatus;
+  evidence_completeness_score: number;
+  priority_score: number;
+  priority_level: PriorityLevel;
+  unresolved_review_count: number;
+  violation_count: number;
+  max_violation_severity?: string | null;
+  primary_attention_reason: string;
+  has_repeat_offence_history: boolean;
+}
+
+export interface SupervisorTriageResponse {
+  total_items: number;
+  items: SupervisorTriageItem[];
+  priority_counts: Record<string, number>;
+  disclaimer: string;
+}
+
+// --- Phase 3.0: Market Surveillance Investigation Dossiers ---
+export type DossierStatus =
+  | 'ACTIVE'
+  | 'EVALUATION'
+  | 'NOTICE_REVIEW'
+  | 'COMPOUNDING_REVIEW'
+  | 'CLOSED';
+
+export type DossierPriority = 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT';
+
+export interface DossierInspection {
+  id: string;
+  dossier_id: string;
+  inspection_id: string;
+  added_by_id: string;
+  relevance_notes?: string | null;
+  added_at: string;
+  inspection?: Inspection | null;
+  added_by?: User | null;
+}
+
+export interface InvestigationDossier {
+  id: string;
+  dossier_number: string;
+  title: string;
+  description?: string | null;
+  target_entity_name?: string | null;
+  company_id?: string | null;
+  status: DossierStatus;
+  priority: DossierPriority;
+  lead_supervisor_id: string;
+  tags: string[];
+  metadata: Record<string, any>;
+  created_at: string;
+  updated_at: string;
+  closed_at?: string | null;
+  lead_supervisor?: User | null;
+  company?: Company | null;
+  inspections: DossierInspection[];
+}
+
+export interface InvestigationDossierCreate {
+  title: string;
+  description?: string | null;
+  target_entity_name?: string | null;
+  company_id?: string | null;
+  priority?: DossierPriority;
+  tags?: string[];
+  metadata?: Record<string, any>;
+}
+
+export interface InvestigationDossierUpdate {
+  title?: string | null;
+  description?: string | null;
+  target_entity_name?: string | null;
+  company_id?: string | null;
+  status?: DossierStatus | null;
+  priority?: DossierPriority | null;
+  tags?: string[] | null;
+  metadata?: Record<string, any> | null;
+}
+
+export interface DossierSummaryCounts {
+  total_inspections: number;
+  compliant_count: number;
+  non_compliant_count: number;
+  needs_review_count: number;
+  pending_count: number;
+  total_violations: number;
+  critical_violations: number;
+  high_violations: number;
+  medium_violations: number;
+  low_violations: number;
+}
+
+export interface ObservedFindingSummary {
+  rule_code: string;
+  rule_name: string;
+  affected_inspection_count: number;
+  severity_levels: string[];
+  observation_label: string;
+}
+
+export interface RecordedSeizureSummary {
+  total_seizure_records: number;
+  total_seized_quantity: number;
+  seizure_items_count: number;
+  description: string;
+}
+
+export interface DossierNominatedDirectorReview {
+  director_name: string;
+  din: string;
+  designation: string;
+  form_i_notice_date?: string | null;
+  form_i_reference?: string | null;
+  effective_from: string;
+  effective_to?: string | null;
+  is_active: boolean;
+  statutory_role_note: string;
+}
+
+export interface DossierTimelineEvent {
+  timestamp: string;
+  event_type: string;
+  description: string;
+  actor_id?: string | null;
+  inspection_id?: string | null;
+}
+
+export interface DossierSynthesisResponse {
+  dossier_id: string;
+  dossier_number: string;
+  title: string;
+  target_entity_name?: string | null;
+  company_id?: string | null;
+  status: DossierStatus;
+  priority: DossierPriority;
+  summary_counts: DossierSummaryCounts;
+  observed_findings: ObservedFindingSummary[];
+  recorded_seizure_summary: RecordedSeizureSummary;
+  districts_covered: string[];
+  states_covered: string[];
+  premises_count: number;
+  batches_count: number;
+  evidence_completeness_avg?: number | null;
+  nominated_directors_review: DossierNominatedDirectorReview[];
+  timeline_events: DossierTimelineEvent[];
+  advisory_disclaimer: string;
+}
+

@@ -32,6 +32,21 @@ import {
   GeoValidationResponse,
   OfflineSyncBatchRequest,
   OfflineSyncBatchResponse,
+  PackerRegistration,
+  RegistrationVerifyRequest,
+  RegistrationVerifyResponse,
+  SeizureRecord,
+  SeizureRecordCreate,
+  Company,
+  NominatedDirector,
+  Section49LiabilityAssessment,
+  CaseIntelligenceResponse,
+  SupervisorTriageResponse,
+  InvestigationDossier,
+  InvestigationDossierCreate,
+  InvestigationDossierUpdate,
+  DossierInspection,
+  DossierSynthesisResponse,
 } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
@@ -97,6 +112,19 @@ export const api = {
   },
 
   listInspections: async (params?: {
+    skip?: number;
+    limit?: number;
+    status_filter?: string;
+    result_filter?: string;
+    state_filter?: string;
+    district_filter?: string;
+    search?: string;
+  }): Promise<Inspection[]> => {
+    const res = await apiClient.get<Inspection[]>('/inspections/', { params });
+    return res.data;
+  },
+
+  getInspections: async (params?: {
     skip?: number;
     limit?: number;
     status_filter?: string;
@@ -433,5 +461,154 @@ export const api = {
   syncOfflineInspections: async (data: OfflineSyncBatchRequest): Promise<OfflineSyncBatchResponse> => {
     const res = await apiClient.post<OfflineSyncBatchResponse>('/provenance/sync-offline', data);
     return res.data;
+  },
+
+  // --- Phase 2.6: Rule 27 Pre-Packer Registry ---
+  getPackerRegistrations: async (params?: { q?: string; state?: string; active_only?: boolean }): Promise<PackerRegistration[]> => {
+    const res = await apiClient.get<PackerRegistration[]>('/registrations', { params });
+    return res.data;
+  },
+
+  createPackerRegistration: async (data: Partial<PackerRegistration>): Promise<PackerRegistration> => {
+    const res = await apiClient.post<PackerRegistration>('/registrations', data);
+    return res.data;
+  },
+
+  verifyPackerRegistration: async (data: RegistrationVerifyRequest): Promise<RegistrationVerifyResponse> => {
+    const res = await apiClient.post<RegistrationVerifyResponse>('/registrations/verify', data);
+    return res.data;
+  },
+
+  // --- Phase 2.7: Section 15 Seizures & Panchnama ---
+  getSeizureRecords: async (params?: { inspection_id?: string; status_filter?: string }): Promise<SeizureRecord[]> => {
+    const res = await apiClient.get<SeizureRecord[]>('/seizures', { params });
+    return res.data;
+  },
+
+  createSeizureRecord: async (data: SeizureRecordCreate): Promise<SeizureRecord> => {
+    const res = await apiClient.post<SeizureRecord>('/seizures', data);
+    return res.data;
+  },
+
+  getSeizureRecord: async (seizureId: string): Promise<SeizureRecord> => {
+    const res = await apiClient.get<SeizureRecord>(`/seizures/${seizureId}`);
+    return res.data;
+  },
+
+  downloadPanchnamaPdf: async (seizureId: string, filename: string): Promise<void> => {
+    const res = await apiClient.get(`/seizures/${seizureId}/panchnama-pdf`, {
+      responseType: 'blob',
+    });
+    const blob = new Blob([res.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  },
+
+  // --- Phase 2.8: Section 49 Corporate Liability ---
+  getCompanies: async (params?: { q?: string; state?: string }): Promise<Company[]> => {
+    const res = await apiClient.get<Company[]>('/companies', { params });
+    return res.data;
+  },
+
+  createCompany: async (data: Partial<Company>): Promise<Company> => {
+    const res = await apiClient.post<Company>('/companies', data);
+    return res.data;
+  },
+
+  lookupCorporateLiability: async (q: string): Promise<Section49LiabilityAssessment> => {
+    const res = await apiClient.get<Section49LiabilityAssessment>('/companies/liability/lookup', {
+      params: { q },
+    });
+    return res.data;
+  },
+
+  // --- Phase 2.9: Operational Case Intelligence & Supervisor Triage ---
+  getCaseIntelligence: async (inspectionId: string): Promise<CaseIntelligenceResponse> => {
+    const res = await apiClient.get<CaseIntelligenceResponse>(`/inspections/${inspectionId}/intelligence`);
+    return res.data;
+  },
+
+  getSupervisorTriage: async (params?: {
+    priority_level?: string;
+    status_filter?: string;
+    result_filter?: string;
+    min_priority_score?: number;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<SupervisorTriageResponse> => {
+    const res = await apiClient.get<SupervisorTriageResponse>('/inspections/triage', { params });
+    return res.data;
+  },
+
+  // --- Phase 3.0: Market Surveillance Investigation Dossiers ---
+  getDossiers: async (params?: {
+    status?: string;
+    priority?: string;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<InvestigationDossier[]> => {
+    const res = await apiClient.get<InvestigationDossier[]>('/dossiers/', { params });
+    return res.data;
+  },
+
+  getDossier: async (id: string): Promise<InvestigationDossier> => {
+    const res = await apiClient.get<InvestigationDossier>(`/dossiers/${id}`);
+    return res.data;
+  },
+
+  createDossier: async (data: InvestigationDossierCreate): Promise<InvestigationDossier> => {
+    const res = await apiClient.post<InvestigationDossier>('/dossiers/', data);
+    return res.data;
+  },
+
+  updateDossier: async (id: string, data: InvestigationDossierUpdate): Promise<InvestigationDossier> => {
+    const res = await apiClient.patch<InvestigationDossier>(`/dossiers/${id}`, data);
+    return res.data;
+  },
+
+  linkDossierInspection: async (
+    dossierId: string,
+    data: { inspection_id: string; relevance_notes?: string }
+  ): Promise<DossierInspection> => {
+    const res = await apiClient.post<DossierInspection>(`/dossiers/${dossierId}/inspections`, data);
+    return res.data;
+  },
+
+  unlinkDossierInspection: async (
+    dossierId: string,
+    inspectionId: string
+  ): Promise<{ success: boolean; message: string }> => {
+    const res = await apiClient.delete<{ success: boolean; message: string }>(
+      `/dossiers/${dossierId}/inspections/${inspectionId}`
+    );
+    return res.data;
+  },
+
+  getDossierSynthesis: async (id: string): Promise<DossierSynthesisResponse> => {
+    const res = await apiClient.get<DossierSynthesisResponse>(`/dossiers/${id}/synthesis`);
+    return res.data;
+  },
+
+  downloadDossierPdf: async (dossierId: string, filename: string): Promise<void> => {
+    const res = await apiClient.get(`/dossiers/${dossierId}/pdf`, {
+      responseType: 'blob',
+    });
+    const blob = new Blob([res.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
   },
 };

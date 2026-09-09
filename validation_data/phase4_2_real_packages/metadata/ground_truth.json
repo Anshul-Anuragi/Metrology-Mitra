@@ -1,0 +1,846 @@
+[
+  {
+    "image_id": "IMG-REAL-001",
+    "filename": "IMG_20260904_230429.jpg",
+    "relative_path": "compliant/IMG_20260904_230429.jpg",
+    "category": "compliant",
+    "package_type": "JAR",
+    "primary_commodity": "Peanut Butter",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Nutritional spread jar back label. Shows commodity name, manufacturer name, facility address, net quantity (1 kg / 35.2 oz), and consumer care details. Front panel MRP and dates are on lid/side.",
+    "image_quality_notes": "Cylindrical curvature and moderate camera blur (Laplacian variance ~135). Text dense and small.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.9,
+    "review_reasons_expected": [
+      "BLUR_OBSCURES_DECLARATION",
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Single angle photograph of multi-panel package; declarations present across container require complete multi-surface review."
+  },
+  {
+    "image_id": "IMG-REAL-002",
+    "filename": "IMG_20260904_230450.jpg",
+    "relative_path": "compliant/IMG_20260904_230450.jpg",
+    "category": "compliant",
+    "package_type": "JAR",
+    "primary_commodity": "Peanut Butter",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Peanut butter jar side panel showing ingredients list (Roasted Peanuts 90%), allergen warning, and storage instructions.",
+    "image_quality_notes": "Moderate camera blur and slight tilt. Dark packaging background.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "INSUFFICIENT_PHYSICAL_EVIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Side panel angle of Peanut Butter jar."
+  },
+  {
+    "image_id": "IMG-REAL-003",
+    "filename": "IMG_20260904_230516.jpg",
+    "relative_path": "compliant/IMG_20260904_230516.jpg",
+    "category": "compliant",
+    "package_type": "JAR",
+    "primary_commodity": "Peanut Butter",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Manufacturing unit address and corporate office details (Gurugram) with FSSAI license numbers.",
+    "image_quality_notes": "Curvature of cylindrical container causes edge distortion and focal falloff.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Manufacturing address detail angle."
+  },
+  {
+    "image_id": "IMG-REAL-004",
+    "filename": "IMG_20260904_230628.jpg",
+    "relative_path": "compliant/IMG_20260904_230628.jpg",
+    "category": "compliant",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Cosmetic Serum",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Personal care bottle front display showing brand, product name, and net quantity (30 ml / 1.01 fl oz).",
+    "image_quality_notes": "Sharp foreground, subtle specular reflection on bottle curve.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.9,
+    "review_reasons_expected": [
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "PDP angle; statutory price and manufacturer declarations located on back panel."
+  },
+  {
+    "image_id": "IMG-REAL-005",
+    "filename": "IMG_20260904_231232.jpg",
+    "relative_path": "compliant/IMG_20260904_231232.jpg",
+    "category": "compliant",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Food / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Multi-pack flexible packaging pouch with bilingual English and Hindi declarations.",
+    "image_quality_notes": "Surface wrinkling, specular reflection on flexible film pouch causing OCR contrast degradation.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "GLARE_OBSCURES_TEXT"
+    ],
+    "notes": "Primary entry for byte-identical duplicate IMG-REAL-015 in multilingual category."
+  },
+  {
+    "image_id": "IMG-REAL-006",
+    "filename": "IMG_20260904_230632.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230632.jpg",
+    "category": "difficult_ocr",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Cosmetic Serum",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Back label with barcode 8906127101120, ingredients list, manufacturer details, and consumer care phone/email.",
+    "image_quality_notes": "Extremely fine font print (<1mm) on curved bottle surface, optical blur variance ~162.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Barcode successfully decoded by ZXing; fine chemical ingredient text creates high OCR token confusion."
+  },
+  {
+    "image_id": "IMG-REAL-007",
+    "filename": "IMG_20260904_230637.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230637.jpg",
+    "category": "difficult_ocr",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Cosmetic Serum",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": false,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Partial edge view of cosmetic bottle showing manufacturing unit segment and barcode 8906127101120.",
+    "image_quality_notes": "Severe angular perspective distortion and partial cutoff of statutory text.",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.75,
+    "review_reasons_expected": [
+      "PARTIAL_OCCLUSION",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Severely cropped field of view; cannot establish compliance without adjacent panels."
+  },
+  {
+    "image_id": "IMG-REAL-008",
+    "filename": "IMG_20260904_230644.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230644.jpg",
+    "category": "difficult_ocr",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Cosmetic Serum",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Ingredient listing panel with complex chemical compounds (Lactic acid, Sodium PCA, Glycolic acid).",
+    "image_quality_notes": "Small font printed on narrow cylindrical bottle; character fragmentation in OCR.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Chemical ingredients panel; mandatory declarations spread across other panels."
+  },
+  {
+    "image_id": "IMG-REAL-009",
+    "filename": "IMG_20260904_230731.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230731.jpg",
+    "category": "difficult_ocr",
+    "package_type": "TUBE",
+    "primary_commodity": "Skin Cleanser / Lotion",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": false
+    },
+    "expected_observations": "Tube crimp and back panel with barcode 8909106061781, inverted orientation text, MRP \u20b9450, net quantity 150ml.",
+    "image_quality_notes": "Packaging text printed upside down relative to camera orientation; low OCR confidence (0.25).",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "AMBIGUOUS_NUMERIC_VALUE"
+    ],
+    "notes": "Rotational inversion causes Tesseract to read lines backward or in reverse sequence."
+  },
+  {
+    "image_id": "IMG-REAL-010",
+    "filename": "IMG_20260904_230754.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230754.jpg",
+    "category": "difficult_ocr",
+    "package_type": "CARTON",
+    "primary_commodity": "Healthcare Product",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": false,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": false,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": false
+    },
+    "expected_observations": "Carton flap dot-matrix / inkjet stamp showing batch number, manufacturing date (MAY 2025), and expiry date (APR 2027).",
+    "image_quality_notes": "Extremely severe optical blur (variance 77.5 < 350 FAIL threshold). Low contrast dot-matrix printing.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "BLUR_OBSCURES_DECLARATION",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Quality gate correctly flags RETAKE_RECOMMENDED due to severe blur."
+  },
+  {
+    "image_id": "IMG-REAL-011",
+    "filename": "IMG_20260904_230758.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230758.jpg",
+    "category": "difficult_ocr",
+    "package_type": "CARTON",
+    "primary_commodity": "Healthcare Product",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Carton side panel showing storage conditions, cautionary text, and manufacturer details.",
+    "image_quality_notes": "Severe blur (score 92.4); fine print text partially illegible.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "BLUR_OBSCURES_DECLARATION",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Carton panel with statutory cautions; requires retake under better lighting."
+  },
+  {
+    "image_id": "IMG-REAL-012",
+    "filename": "IMG_20260904_230818.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_230818.jpg",
+    "category": "difficult_ocr",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Anti-Dandruff Shampoo",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Bottle front/side marketing claims and product description (Reduces Dandruff Without Drying Hair).",
+    "image_quality_notes": "Curved plastic bottle, shallow depth of field, blur score 143.8.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "BLUR_OBSCURES_DECLARATION",
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Front claims panel; back panel holds statutory declarations."
+  },
+  {
+    "image_id": "IMG-REAL-013",
+    "filename": "IMG_20260904_231012.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_231012.jpg",
+    "category": "difficult_ocr",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Personal Care Bottle",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Back label printed upside down and distorted around curved plastic container.",
+    "image_quality_notes": "Inverted orientation, low OCR confidence (~0.32), motion blur.",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.7,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Primary entry for byte-identical duplicate IMG-REAL-023 in needs_review category."
+  },
+  {
+    "image_id": "IMG-REAL-014",
+    "filename": "IMG_20260904_231206.jpg",
+    "relative_path": "difficult_ocr/IMG_20260904_231206.jpg",
+    "category": "difficult_ocr",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Snack / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Foil wrapper pouch with glossy metallic finish. Statutorily fully labeled.",
+    "image_quality_notes": "High specular glare reflection on metallic packaging film; blur score 426 (WARNING). Tesseract returned 0 text due to metallic reflection.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "GLARE_OBSCURES_TEXT",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Classic foil/metallic reflection failure mode for conventional OCR engines."
+  },
+  {
+    "image_id": "IMG-REAL-015",
+    "filename": "IMG_20260904_231232.jpg",
+    "relative_path": "multilingual/IMG_20260904_231232.jpg",
+    "category": "multilingual",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Food / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Bilingual Hindi/English packaging film. Statutorily compliant packaging.",
+    "image_quality_notes": "Flexible pouch wrinkles, specular reflections degrade standard OCR tokenization.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "UNRESOLVED_LANGUAGE"
+    ],
+    "notes": "Exact byte duplicate of IMG-REAL-005 in compliant directory."
+  },
+  {
+    "image_id": "IMG-REAL-016",
+    "filename": "IMG_20260904_231235.jpg",
+    "relative_path": "multilingual/IMG_20260904_231235.jpg",
+    "category": "multilingual",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Food / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Alternate view of bilingual package showing Devanagari script declarations alongside English text.",
+    "image_quality_notes": "Specular glare on laminated film (glare ratio ~3.2%); standard OCR fails to segment characters.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "GLARE_OBSCURES_TEXT",
+      "UNRESOLVED_LANGUAGE"
+    ],
+    "notes": "Demonstrates necessity of adaptive binarization for multi-script flexible packaging."
+  },
+  {
+    "image_id": "IMG-REAL-017",
+    "filename": "IMG_20260904_230707.jpg",
+    "relative_path": "needs_review/IMG_20260904_230707.jpg",
+    "category": "needs_review",
+    "package_type": "CARTON",
+    "primary_commodity": "Toilet Soap Bar",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Soap wrapper panel showing manufacturer (Hindustan Unilever Ltd, Mumbai) and barcode 8901030795589.",
+    "image_quality_notes": "Moderate blur (score 129.4). Only one carton face visible; net quantity and price on other panels.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "INSUFFICIENT_PHYSICAL_EVIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Physical evidence on this single photo does not show MRP or Net Qty, warranting review."
+  },
+  {
+    "image_id": "IMG-REAL-018",
+    "filename": "IMG_20260904_230723.jpg",
+    "relative_path": "needs_review/IMG_20260904_230723.jpg",
+    "category": "needs_review",
+    "package_type": "TUBE",
+    "primary_commodity": "Skin Cleanser / Lotion",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Tube back panel showing MRP \u20b9450/-, USP \u20b93.00/ml, Net Qty 150ml, and Barcode 8909106061781.",
+    "image_quality_notes": "Blur score 141.9, slight perspective tilt. Inkjet numbers partially fragmented in OCR.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "AMBIGUOUS_NUMERIC_VALUE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Statutory price and net quantity clearly present to human eye, but fragmented OCR tokens prevent autonomous validation."
+  },
+  {
+    "image_id": "IMG-REAL-019",
+    "filename": "IMG_20260904_230824.jpg",
+    "relative_path": "needs_review/IMG_20260904_230824.jpg",
+    "category": "needs_review",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Anti-Dandruff Shampoo",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Back label with directions for use, key active ingredients, manufacturer address, and consumer helpline.",
+    "image_quality_notes": "Blur score 186.7; curved bottle creates barrel distortion on text lines.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "BLUR_OBSCURES_DECLARATION",
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Batch/MRP stamp is printed on bottom of bottle, not visible in this angle."
+  },
+  {
+    "image_id": "IMG-REAL-020",
+    "filename": "IMG_20260904_230841.jpg",
+    "relative_path": "needs_review/IMG_20260904_230841.jpg",
+    "category": "needs_review",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Anti-Dandruff Shampoo",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": false,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Extreme close-up of lower manufacturing address block.",
+    "image_quality_notes": "Severe blur (208.8) and cropped out-of-focus framing; OCR extracts only 33 characters.",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.7,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "PARTIAL_OCCLUSION"
+    ],
+    "notes": "Incomplete partial detail photo; cannot substantiate full legal compliance."
+  },
+  {
+    "image_id": "IMG-REAL-021",
+    "filename": "IMG_20260904_230850.jpg",
+    "relative_path": "needs_review/IMG_20260904_230850.jpg",
+    "category": "needs_review",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Anti-Dandruff Shampoo",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Overhead perspective of shampoo bottle lying flat.",
+    "image_quality_notes": "Uneven lighting and severe motion blur (276.9); text unreadable by Tesseract (0 chars).",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.75,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Quality gate correctly alerts retake recommended."
+  },
+  {
+    "image_id": "IMG-REAL-022",
+    "filename": "IMG_20260904_230942.jpg",
+    "relative_path": "needs_review/IMG_20260904_230942.jpg",
+    "category": "needs_review",
+    "package_type": "POUCH",
+    "primary_commodity": "Nutritional Supplement / Snack",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Nutrition product back panel with MRP \u20b91,499/-, USP \u20b94.88/g, Net quantity 307g, and customer care line.",
+    "image_quality_notes": "Blur score 213.1; small font text partially captured by OCR.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "AMBIGUOUS_NUMERIC_VALUE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Human verification confirms valid MRP and USP declarations; requires human officer review."
+  },
+  {
+    "image_id": "IMG-REAL-023",
+    "filename": "IMG_20260904_231012.jpg",
+    "relative_path": "needs_review/IMG_20260904_231012.jpg",
+    "category": "needs_review",
+    "package_type": "BOTTLE",
+    "primary_commodity": "Personal Care Bottle",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Back label printed upside down and distorted around curved plastic container.",
+    "image_quality_notes": "Inverted orientation, low OCR confidence (~0.32), motion blur.",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.7,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "BLUR_OBSCURES_DECLARATION"
+    ],
+    "notes": "Exact byte duplicate of IMG-REAL-013 in difficult_ocr category."
+  },
+  {
+    "image_id": "IMG-REAL-024",
+    "filename": "IMG_20260904_231221.jpg",
+    "relative_path": "needs_review/IMG_20260904_231221.jpg",
+    "category": "needs_review",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Snack / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Flexible packaging pouch showing Net Quantity and bilingual storage warnings (\u0920\u0902\u0921\u0940 \u0914\u0930 \u0938\u0942\u0916\u0940 \u091c\u0917\u0939 \u092a\u0930 \u0930\u0916\u0947\u0902).",
+    "image_quality_notes": "Wrinkled packaging film, optical reflections degrade OCR segmentation (93 chars).",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "LOW_OCR_CONFIDENCE",
+      "GLARE_OBSCURES_TEXT"
+    ],
+    "notes": "Bilingual packaging pouch."
+  },
+  {
+    "image_id": "IMG-REAL-025",
+    "filename": "IMG_20260904_231224.jpg",
+    "relative_path": "needs_review/IMG_20260904_231224.jpg",
+    "category": "needs_review",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Snack / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Alternate angle of flexible food pouch.",
+    "image_quality_notes": "Blur score 311.8; specular reflection causes Tesseract to return 0 characters.",
+    "ground_truth_legal_label": "KNOWN_COMPLIANT",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.8,
+    "review_reasons_expected": [
+      "GLARE_OBSCURES_TEXT",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Severe reflection and low text contrast on packaging film."
+  },
+  {
+    "image_id": "IMG-REAL-026",
+    "filename": "IMG_20260904_231340.jpg",
+    "relative_path": "needs_review/IMG_20260904_231340.jpg",
+    "category": "needs_review",
+    "package_type": "POUCH",
+    "primary_commodity": "Packaged Snack / Confectionery",
+    "languages_visible": [
+      "ENG",
+      "HIN"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": true,
+      "mrp": true,
+      "manufacturing_date": true,
+      "consumer_care": true
+    },
+    "expected_observations": "Close-up of pouch corner showing customer care website / email snippet.",
+    "image_quality_notes": "Partial detail framing, blur score 385.2, OCR extracts only 17 chars.",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.7,
+    "review_reasons_expected": [
+      "PARTIAL_OCCLUSION",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Partial detail shot without full panel context."
+  },
+  {
+    "image_id": "IMG-REAL-027",
+    "filename": "IMG_20260904_230923.jpg",
+    "relative_path": "non_compliant/IMG_20260904_230923.jpg",
+    "category": "non_compliant",
+    "package_type": "POUCH",
+    "primary_commodity": "Nutritional Supplement / Snack",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": true,
+      "manufacturer_name": true,
+      "address": true,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": true
+    },
+    "expected_observations": "Brand narrative panel (Wellversed) with consumer care email and phone. Mandatory MRP, Net Quantity, and Dates are missing from this specific photographed surface.",
+    "image_quality_notes": "Fair lighting, blur score 142.4; OCR extracts 512 characters with high confidence (0.84).",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "INSUFFICIENT_PHYSICAL_EVIDENCE"
+    ],
+    "notes": "Absence of MRP and Net Quantity on photographed surface is a factual observation. Because this photograph captures only a single panel of a multi-panel flexible pouch, package-level legality cannot be conclusively established without inspecting all surfaces. Reclassified as AMBIGUOUS under non-judicial principles."
+  },
+  {
+    "image_id": "IMG-REAL-028",
+    "filename": "IMG_20260904_230934.jpg",
+    "relative_path": "non_compliant/IMG_20260904_230934.jpg",
+    "category": "non_compliant",
+    "package_type": "POUCH",
+    "primary_commodity": "Nutritional Supplement / Snack",
+    "languages_visible": [
+      "ENG"
+    ],
+    "expected_visible_declarations": {
+      "commodity_name": false,
+      "manufacturer_name": false,
+      "address": false,
+      "net_quantity": false,
+      "mrp": false,
+      "manufacturing_date": false,
+      "consumer_care": false
+    },
+    "expected_observations": "Package edge / seal margin showing numerical sequence 4082000500052. Missing primary statutory declarations on this angle.",
+    "image_quality_notes": "Severe blur (159.8) and tight crop of seam margin. Low OCR confidence (0.38).",
+    "ground_truth_legal_label": "AMBIGUOUS",
+    "expected_system_behavior": "NEEDS_REVIEW",
+    "legal_status_confidence": 0.85,
+    "review_reasons_expected": [
+      "PARTIAL_OCCLUSION",
+      "LOW_OCR_CONFIDENCE"
+    ],
+    "notes": "Package border crop missing statutory text on photographed seam. Single angle insufficient to substantiate package-level violation. Reclassified as AMBIGUOUS under non-judicial principles."
+  }
+]

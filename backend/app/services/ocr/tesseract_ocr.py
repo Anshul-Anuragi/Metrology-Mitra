@@ -15,11 +15,27 @@ class TesseractOCRProvider(OCRProvider):
     """
     def __init__(self, lang: str = "eng", psm: int = 3, oem: int = 3):
         self._lang = lang
+    def __init__(self, lang: Optional[str] = None, psm: int = 3, oem: int = 3):
+        if lang is not None:
+            self._lang = lang
+        else:
+            try:
+                available = pytesseract.get_languages()
+                if "hin" in available:
+                    self._lang = "eng+hin"
+                else:
+                    self._lang = "eng"
+            except Exception:
+                self._lang = "eng"
         self.config = f"--oem {oem} --psm {psm}"
 
     @property
     def name(self) -> str:
         return "tesseract-ocr-5"
+
+    @property
+    def language(self) -> str:
+        return self._lang
 
     @property
     def supported_languages(self) -> List[str]:

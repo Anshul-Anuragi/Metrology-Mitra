@@ -26,14 +26,19 @@ async def evaluate_exemption_rules(
     current_user: User = Depends(get_current_user),
 ):
     """
-    Evaluates statutory exemptions under Rule 26 (<= 10g small packages, > 50kg bulk, institutional consumer)
+    Evaluates statutory exemptions under Rule 26 (<= 10g small packages, agricultural bulk > 50kg, institutional consumer)
     and special packaging rules (Rules 21 & 22).
     """
     return evaluate_statutory_exemption(
         package_type=request.package_type,
         net_quantity_value=request.declared_net_quantity_value,
         net_quantity_unit=request.declared_net_quantity_unit,
+        commodity_category=request.commodity_category,
+        is_agricultural_farm_produce=request.is_agricultural_farm_produce,
         is_institutional_consumer=request.is_institutional_consumer,
+        has_institutional_marking=request.has_institutional_marking,
+        is_fast_food_takeout=request.is_fast_food_takeout,
+        is_tobacco_product=request.is_tobacco_product,
         multi_piece_count=request.multi_piece_count,
         combination_items=request.combination_items,
     )
@@ -71,7 +76,12 @@ async def apply_exemption_to_inspection(
         package_type=request.package_type,
         net_quantity_value=request.declared_net_quantity_value,
         net_quantity_unit=request.declared_net_quantity_unit,
+        commodity_category=request.commodity_category,
+        is_agricultural_farm_produce=request.is_agricultural_farm_produce,
         is_institutional_consumer=request.is_institutional_consumer,
+        has_institutional_marking=request.has_institutional_marking,
+        is_fast_food_takeout=request.is_fast_food_takeout,
+        is_tobacco_product=request.is_tobacco_product,
         multi_piece_count=request.multi_piece_count,
         combination_items=request.combination_items,
     )
@@ -82,7 +92,7 @@ async def apply_exemption_to_inspection(
         db.add(decl)
 
     decl.package_type = eval_resp.package_type
-    decl.exemption_applied = eval_resp.exemption_rule
+    decl.exemption_applied = eval_resp.exemption_rule if eval_resp.is_exempt else None
     decl.exemption_rationale = eval_resp.rationale
     decl.multi_piece_count = request.multi_piece_count
     decl.combination_items = request.combination_items

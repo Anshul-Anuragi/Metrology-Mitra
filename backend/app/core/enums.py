@@ -80,3 +80,19 @@ class RuleType(str, enum.Enum):
     EXPIRY_DATE_CHECK = "EXPIRY_DATE_CHECK"
     CUSTOM_LOGIC = "CUSTOM_LOGIC"
 
+
+class DossierStatus(str, enum.Enum):
+    ACTIVE = "ACTIVE"
+    EVALUATION = "EVALUATION"
+    NOTICE_REVIEW = "NOTICE_REVIEW"
+    COMPOUNDING_REVIEW = "COMPOUNDING_REVIEW"
+    CLOSED = "CLOSED"
+
+
+class DossierPriority(str, enum.Enum):
+    LOW = "LOW"
+    NORMAL = "NORMAL"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
+
+

@@ -57,40 +57,40 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 text-white shadow-xl">
+    <div className="bg-white/85 backdrop-blur-md border border-slate-200/90 rounded-3xl p-6 text-slate-900 shadow-sm space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <div>
-          <h3 className="text-base font-semibold text-white flex items-center gap-2">
-            <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            Reference-Assisted Numeral Height Assistant
+            <span>Reference-Assisted Numeral Height Assistant</span>
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Rule 7 & Schedule II Table 1 Principal Display Panel (PDP) Numeral Height Assessment
+          <p className="text-xs text-slate-500 mt-0.5">
+            Rule 7 &amp; Schedule II Table 1 Principal Display Panel (PDP) Numeral Height Assessment
           </p>
         </div>
-        <span className="px-2.5 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-semibold rounded-full uppercase tracking-wider">
+        <span className="px-2.5 py-1 bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold rounded-full uppercase tracking-wider">
           Decision-Support Prototype
         </span>
       </div>
 
       {/* Mandatory Statutory Prototype Notice */}
-      <div className="bg-amber-950/40 border border-amber-500/30 rounded-lg p-3 text-amber-300 text-xs mb-4 flex items-start gap-2">
-        <svg className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-4 text-amber-900 text-xs flex items-start gap-2.5 shadow-xs">
+        <svg className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <strong>Statutory Compliance Guardrail:</strong> Uncalibrated camera images cannot provide certified physical millimeter dimensions. Without reference scale calibration, optical estimation is strictly advisory and outputs <span className="font-semibold text-amber-200">REVIEW</span> for manual physical gauge verification by the inspecting officer.
+          <strong>Statutory Compliance Guardrail:</strong> Uncalibrated camera images cannot provide certified physical millimeter dimensions. Without reference scale calibration, optical estimation is strictly advisory and outputs <span className="font-bold text-amber-950">REVIEW</span> for manual physical gauge verification by the inspecting officer.
         </div>
       </div>
 
       {/* Form Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* PDP Area */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1">
+          <label className="block text-xs font-semibold text-slate-700 mb-1">
             Principal Display Panel (PDP) Area ($A$ in cm²)
           </label>
           <input
@@ -99,16 +99,16 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
             max="10000"
             value={pdpArea}
             onChange={(e) => setPdpArea(parseFloat(e.target.value) || 1)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-hidden focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/20 transition-all"
           />
-          <div className="text-[11px] text-slate-400 mt-1">
-            Schedule II Tier: Min Height = <strong className="text-indigo-300">{currentThreshold.toFixed(1)} mm</strong>
+          <div className="text-[11px] text-slate-500 mt-1 font-medium">
+            Schedule II Tier: Min Height = <strong className="text-indigo-700">{currentThreshold.toFixed(1)} mm</strong>
           </div>
         </div>
 
         {/* Pixel Height */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1">
+          <label className="block text-xs font-semibold text-slate-700 mb-1">
             Measured Numeral Bounding Box (Pixels)
           </label>
           <input
@@ -117,9 +117,9 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
             max="2000"
             value={pixelHeight}
             onChange={(e) => setPixelHeight(parseFloat(e.target.value) || 1)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-hidden focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/20 transition-all"
           />
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 mt-1 font-medium">
             Raw optical numeral height on captured sensor
           </div>
         </div>
@@ -127,15 +127,15 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
         {/* Reference Scale Calibration */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-slate-300">
+            <label className="text-xs font-semibold text-slate-700">
               Reference Scale Calibration
             </label>
-            <label className="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer">
+            <label className="flex items-center gap-1.5 text-xs text-slate-600 font-medium cursor-pointer">
               <input
                 type="checkbox"
                 checked={isCalibrated}
                 onChange={(e) => setIsCalibrated(e.target.checked)}
-                className="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"
+                className="rounded border-slate-300 text-indigo-600 focus:ring-0"
               />
               Calibrated Scale Present
             </label>
@@ -148,13 +148,13 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
                 min="0.001"
                 value={pixelScale}
                 onChange={(e) => setPixelScale(parseFloat(e.target.value) || 0.08)}
-                className="w-1/2 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+                className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-hidden focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/20 transition-all"
                 placeholder="mm / px"
               />
               <select
                 value={scaleSource}
                 onChange={(e) => setScaleSource(e.target.value)}
-                className="w-1/2 bg-slate-950 border border-slate-800 rounded-lg px-2 py-2 text-xs text-slate-300 focus:outline-none focus:border-indigo-500"
+                className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs text-slate-700 focus:bg-white focus:outline-hidden focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/20 transition-all"
               >
                 <option value="REFERENCE_OBJECT">Reference Object (Coin/Card)</option>
                 <option value="AR_MARKER">AR / Grid Target</option>
@@ -162,7 +162,7 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
               </select>
             </div>
           ) : (
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-amber-400">
+            <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-2.5 text-xs text-amber-900 font-medium">
               No calibrated scale. Measurement will record as unverified image estimation.
             </div>
           )}
@@ -170,40 +170,44 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
 
         {/* Blown/Moulded Package Type */}
         <div className="flex flex-col justify-center">
-          <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+          <label className="flex items-center gap-2 text-xs text-slate-700 font-medium cursor-pointer">
             <input
               type="checkbox"
               checked={isBlownOrMoulded}
               onChange={(e) => setIsBlownOrMoulded(e.target.checked)}
-              className="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"
+              className="rounded border-slate-300 text-indigo-600 focus:ring-0"
             />
-            Blown, formed, moulded, or perforated container (Schedule II Higher Tier)
+            <span>Blown, formed, moulded, or perforated container</span>
           </label>
-          <div className="text-[11px] text-slate-500 mt-1">
+          <div className="text-[11px] text-slate-500 mt-1 font-medium">
             Applies higher statutory minimum heights per Rule 7 Schedule II Table 1
           </div>
         </div>
       </div>
 
       {/* Live Estimation Preview */}
-      <div className="bg-slate-950/80 border border-slate-800 rounded-lg p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
         <div>
-          <div className="text-xs text-slate-400">Live Statutory Assessment:</div>
-          <div className="text-sm font-semibold text-white mt-0.5 flex items-center gap-2">
+          <div className="text-xs font-semibold text-slate-500">Live Statutory Assessment:</div>
+          <div className="text-sm font-bold text-slate-900 mt-0.5 flex items-center gap-2">
             <span>
-              Estimated Physical Height: {estimatedPhysicalHeight !== null ? `${estimatedPhysicalHeight.toFixed(2)} mm` : 'Uncalibrated (Scale Required)'}
+              Estimated Physical Height:{' '}
+              {estimatedPhysicalHeight !== null
+                ? `${estimatedPhysicalHeight.toFixed(2)} mm`
+                : 'Uncalibrated (Scale Required)'}
             </span>
-            <span className="text-slate-500">|</span>
-            <span className="text-indigo-300">
+            <span className="text-slate-400 font-normal">|</span>
+            <span className="text-indigo-700">
               Prescribed Statutory Min: {currentThreshold.toFixed(1)} mm
             </span>
           </div>
         </div>
 
         <button
+          type="button"
           onClick={handleCalculateAndSave}
           disabled={loading}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg transition disabled:opacity-50 shrink-0"
+          className="px-4 py-2 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-bold rounded-xl transition shadow-xs disabled:opacity-50 shrink-0 cursor-pointer"
         >
           {loading ? 'Evaluating...' : 'Record & Link Evidence'}
         </button>
@@ -211,18 +215,19 @@ export const MeasurementAssistant: React.FC<MeasurementAssistantProps> = ({
 
       {/* Evaluated Result Badge */}
       {measurementResult && (
-        <div className={`p-3 rounded-lg border text-xs ${
-          measurementResult.result === 'PASS'
-            ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
-            : 'bg-amber-950/60 border-amber-500/40 text-amber-300'
-        }`}>
-          <div className="font-semibold flex items-center gap-1.5">
+        <div
+          className={`p-3.5 rounded-2xl border text-xs shadow-xs ${
+            measurementResult.result === 'PASS'
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+              : 'bg-amber-50 border-amber-200 text-amber-900'
+          }`}
+        >
+          <div className="font-bold flex items-center gap-1.5">
             <span>Result: {measurementResult.result}</span>
-            <span className="text-slate-400 font-normal">({measurementResult.reason})</span>
+            <span className="text-slate-600 font-medium">({measurementResult.reason})</span>
           </div>
         </div>
       )}
     </div>
   );
 };
-

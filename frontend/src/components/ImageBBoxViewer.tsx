@@ -63,22 +63,22 @@ export default function ImageBBoxViewer({
   const bboxItems = evidenceItems.filter((ev) => ev.bounding_box && ev.bounding_box.width > 0);
 
   return (
-    <div className="bg-slate-900 rounded-xl overflow-hidden shadow-lg border border-slate-700 flex flex-col h-full">
+    <div className="bg-white/85 backdrop-blur-md rounded-2xl overflow-hidden shadow-xs border border-slate-200/90 flex flex-col h-full">
       {/* Viewer Toolbar */}
-      <div className="bg-slate-800/90 px-4 py-2.5 border-b border-slate-700 flex justify-between items-center text-xs text-slate-300">
+      <div className="bg-slate-50/90 px-4 py-3 border-b border-slate-200/80 flex justify-between items-center text-xs text-slate-700">
         <div className="flex items-center gap-2">
-          <Layers className="h-4 w-4 text-sky-400" />
-          <span className="font-semibold text-white">Visual Evidence & OCR Bounding Boxes</span>
-          <span className="bg-slate-700 text-slate-300 px-2 py-0.5 rounded text-[11px]">
+          <Layers className="h-4 w-4 text-sky-600" />
+          <span className="font-bold text-slate-900">Visual Evidence &amp; OCR Bounding Boxes</span>
+          <span className="bg-slate-200/80 text-slate-700 font-semibold px-2 py-0.5 rounded-full text-[10px] font-mono">
             {bboxItems.length} regions detected
           </span>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setShowBoxes(!showBoxes)}
-            className={`px-2.5 py-1 rounded flex items-center gap-1 transition-colors ${
-              showBoxes ? 'bg-sky-600 text-white' : 'bg-slate-700 text-slate-400'
+            className={`px-3 py-1 rounded-xl flex items-center gap-1.5 text-xs font-bold transition-colors cursor-pointer shadow-xs ${
+              showBoxes ? 'bg-sky-700 text-white' : 'bg-slate-200/80 text-slate-700 hover:bg-slate-300'
             }`}
             title="Toggle Bounding Boxes"
           >
@@ -87,21 +87,21 @@ export default function ImageBBoxViewer({
           </button>
           <button
             onClick={() => setZoomLevel((z) => Math.min(z + 0.25, 2.5))}
-            className="p-1.5 rounded bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+            className="p-1.5 rounded-xl bg-slate-200/80 hover:bg-slate-300 text-slate-700 transition-colors cursor-pointer"
             title="Zoom In"
           >
             <ZoomIn className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => setZoomLevel((z) => Math.max(z - 0.25, 0.75))}
-            className="p-1.5 rounded bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+            className="p-1.5 rounded-xl bg-slate-200/80 hover:bg-slate-300 text-slate-700 transition-colors cursor-pointer"
             title="Zoom Out"
           >
             <ZoomOut className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={() => setZoomLevel(1)}
-            className="p-1.5 rounded bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+            className="p-1.5 rounded-xl bg-slate-200/80 hover:bg-slate-300 text-slate-700 transition-colors cursor-pointer"
             title="Reset Zoom"
           >
             <RotateCcw className="h-3.5 w-3.5" />
@@ -204,7 +204,7 @@ export default function ImageBBoxViewer({
       </div>
 
       {/* Footer Info */}
-      <div className="bg-slate-800/80 px-4 py-2 border-t border-slate-700 flex justify-between text-[11px] text-slate-400">
+      <div className="bg-slate-50/90 px-4 py-2 border-t border-slate-200/80 flex justify-between text-[11px] font-mono text-slate-600">
         <span>Natural: {naturalDimensions ? `${naturalDimensions.width} × ${naturalDimensions.height}px` : 'Loading...'}</span>
         <span>Zoom: {Math.round(zoomLevel * 100)}%</span>
       </div>

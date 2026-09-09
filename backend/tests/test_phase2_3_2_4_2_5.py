@@ -20,7 +20,7 @@ from app.services.gravimetric_service import (
     get_statutory_mpe,
 )
 from app.services.provenance_service import compute_inspection_provenance_hash, verify_geocoordinates
-from app.services.rule_engine import _eval_mrp, _eval_usp, evaluate_inspection
+from app.services.rule_engine import _eval_mrp, _eval_usp, _eval_date, evaluate_inspection
 
 
 async def test_phase_2_3_gravimetric_mpe_engine():
@@ -51,7 +51,19 @@ async def test_phase_2_3_gravimetric_mpe_engine():
     mpe_1kg, _ = get_statutory_mpe(1.0, "kg")
     assert mpe_1kg == 0.015  # 1kg * 0.015 = 0.015kg (15g)
 
-    # 2. Test Passing Gravimetric Evaluation (mean >= Qn, 0 defectives)
+    # 2. Test Invalid / Missing Category Inputs -> NEEDS_REVIEW (Never invent MPE)
+    mpe_invalid, desc_invalid = get_statutory_mpe(-5.0, "g")
+    assert mpe_invalid == 0.0
+    assert "NEEDS_REVIEW" in desc_invalid
+
+    mpe_bad_unit, desc_bad_unit = get_statutory_mpe(100.0, "custom_boxes")
+    assert mpe_bad_unit == 0.0
+    assert "NEEDS_REVIEW" in desc_bad_unit
+
+    res_invalid_eval = evaluate_gravimetric_samples(-10.0, "g", [{"gross_weight": 5.0}])
+    assert res_invalid_eval["lot_decision"] == "NEEDS_REVIEW"
+
+    # 3. Test Passing Gravimetric Evaluation (mean >= Qn, 0 defectives)
     passing_samples = [
         {"unit_number": 1, "gross_weight": 515.0, "tare_weight": 10.0},  # net 505
         {"unit_number": 2, "gross_weight": 512.0, "tare_weight": 10.0},  # net 502
@@ -62,8 +74,9 @@ async def test_phase_2_3_gravimetric_mpe_engine():
     assert res_pass["sample_mean_net_quantity"] == 502.6667
     assert res_pass["defective_units_count"] == 0
     assert res_pass["double_mpe_defective_count"] == 0
+    assert "Decision-Support Record" in res_pass["disclaimer"]
 
-    # 3. Test Mean Deficit Rejection (mean < Qn)
+    # 4. Test Mean Deficit Rejection (mean < Qn)
     deficit_samples = [
         {"unit_number": 1, "gross_weight": 505.0, "tare_weight": 10.0},  # net 495
         {"unit_number": 2, "gross_weight": 504.0, "tare_weight": 10.0},  # net 494
@@ -73,7 +86,7 @@ async def test_phase_2_3_gravimetric_mpe_engine():
     assert res_deficit["lot_decision"] == "FAILED_MEAN_DEFICIT"
     assert res_deficit["sample_mean_net_quantity"] < 500.0
 
-    # 4. Test Critical Double-MPE Rejection (any single unit deficit > 2 * MPE -> immediate FAIL)
+    # 5. Test Critical Double-MPE Rejection (any single unit deficit > 2 * MPE -> immediate FAIL)
     # For 500g, MPE = 15g, Double MPE = 30g. Net weight 460g has deficit 40g > 30g
     critical_samples = [
         {"unit_number": 1, "gross_weight": 520.0, "tare_weight": 10.0},  # net 510
@@ -84,7 +97,7 @@ async def test_phase_2_3_gravimetric_mpe_engine():
     assert res_crit["lot_decision"] == "FAILED_CRITICAL_DOUBLE_MPE"
     assert res_crit["double_mpe_defective_count"] == 1
 
-    # 5. Test API Endpoints
+    # 6. Test API Endpoints
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         # Login
@@ -125,8 +138,8 @@ async def test_phase_2_3_gravimetric_mpe_engine():
 
 async def test_phase_2_4_statutory_exemptions_and_special_packages():
     """
-    Phase 2.4 Test: Tests Rule 26 statutory exemptions (<= 10g small packs, > 50kg bulk, institutional)
-    and special packaging provisions (Rules 21 & 22), verifying rule engine integration.
+    Phase 2.4 Test: Tests Rule 26 statutory exemptions (<= 10g small packs, agricultural bulk, institutional)
+    and special packaging provisions (Rules 21 & 22), verifying rule engine integration and fact-gating.
     """
     print("\nRunning test_phase_2_4_statutory_exemptions_and_special_packages...")
 
@@ -137,52 +150,103 @@ async def test_phase_2_4_statutory_exemptions_and_special_packages():
         net_quantity_unit="g",
     )
     assert ex_small.is_exempt is True
+    assert ex_small.assessment_status == "EXEMPTION_ELIGIBLE"
     assert ex_small.exemption_rule == "Rule 26(a)"
     assert "mrp" in ex_small.exempt_mandatory_declarations
     assert "unit_sale_price" in ex_small.exempt_mandatory_declarations
 
-    # 2. Institutional Consumer Exemption under Rule 26(c) & Rule 2(p)
-    ex_inst = evaluate_statutory_exemption(
+    # 2. Tobacco Small Package Proviso Check (Rule 26(a) proviso explicitly excludes tobacco)
+    ex_tobacco = evaluate_statutory_exemption(
+        package_type="SMALL_PACK",
+        net_quantity_value=8.0,
+        net_quantity_unit="g",
+        is_tobacco_product=True,
+    )
+    assert ex_tobacco.is_exempt is False
+    assert ex_tobacco.assessment_status == "NOT_EXEMPT"
+    assert "proviso" in ex_tobacco.rationale.lower()
+
+    # 3. Generic Package > 50kg without Agricultural Proof -> NEEDS_REVIEW (NOT automatically exempt)
+    ex_bulk_generic = evaluate_statutory_exemption(
+        package_type="AGRICULTURAL_BULK",
+        net_quantity_value=60.0,
+        net_quantity_unit="kg",
+        is_agricultural_farm_produce=False,
+    )
+    assert ex_bulk_generic.is_exempt is False
+    assert ex_bulk_generic.assessment_status == "NEEDS_REVIEW"
+    assert len(ex_bulk_generic.missing_statutory_facts) > 0
+
+    # 4. Verified Agricultural Farm Produce > 50kg -> EXEMPTION_ELIGIBLE
+    ex_bulk_agri = evaluate_statutory_exemption(
+        package_type="AGRICULTURAL_BULK",
+        net_quantity_value=60.0,
+        net_quantity_unit="kg",
+        is_agricultural_farm_produce=True,
+    )
+    assert ex_bulk_agri.is_exempt is True
+    assert ex_bulk_agri.assessment_status == "EXEMPTION_ELIGIBLE"
+    assert ex_bulk_agri.exemption_rule == "Rule 26(d)"
+
+    # 5. Institutional Package without complete facts -> NEEDS_REVIEW
+    ex_inst_incomplete = evaluate_statutory_exemption(
         package_type="INSTITUTIONAL",
         is_institutional_consumer=True,
+        has_institutional_marking=False,  # Missing marking
     )
-    assert ex_inst.is_exempt is True
-    assert "Rule 26(c)" in ex_inst.exemption_rule
-    assert "mrp" in ex_inst.exempt_mandatory_declarations
+    assert ex_inst_incomplete.is_exempt is False
+    assert ex_inst_incomplete.assessment_status == "NEEDS_REVIEW"
 
-    # 3. Multi-Piece Package under Rule 21
+    # 6. Institutional Package with full supporting facts -> EXEMPTION_ELIGIBLE
+    ex_inst_complete = evaluate_statutory_exemption(
+        package_type="INSTITUTIONAL",
+        is_institutional_consumer=True,
+        has_institutional_marking=True,
+    )
+    assert ex_inst_complete.is_exempt is True
+    assert ex_inst_complete.assessment_status == "EXEMPTION_ELIGIBLE"
+    assert "Rule 2(p)" in ex_inst_complete.exemption_rule
+
+    # 7. Multi-Piece Package under Rule 21 -> SPECIAL_PACKAGING_PROVISION (NOT a blanket exemption)
     ex_multi = evaluate_statutory_exemption(
         package_type="MULTI_PIECE",
         multi_piece_count=4,
     )
     assert ex_multi.is_exempt is False
-    assert "Rule 21 (Multi-Piece Packages)" in ex_multi.applicable_special_rules
+    assert ex_multi.assessment_status == "SPECIAL_PACKAGING_PROVISION"
 
-    # 4. Rule Engine Exemption Integration Check
-    # A small package declaration with missing MRP must PASS (not FAIL or REVIEW)
+    # 8. Combination Package under Rule 22 -> SPECIAL_PACKAGING_PROVISION (NOT a blanket exemption)
+    ex_comb = evaluate_statutory_exemption(
+        package_type="COMBINATION",
+        combination_items=[{"name": "Shampoo", "quantity": "100ml"}, {"name": "Conditioner", "quantity": "100ml"}],
+    )
+    assert ex_comb.is_exempt is False
+    assert ex_comb.assessment_status == "SPECIAL_PACKAGING_PROVISION"
+
+    # 9. Rule Engine Exemption Integration Check:
+    # A declaration with VERIFIED exemption_applied='Rule 26(a)' must PASS on MRP and USP
     mock_rule_mrp = LegalRule(rule_code="LMPC-R6-MRP", title="Maximum Retail Price", rule_type="MANDATORY")
-    mock_decl_small = Declaration(
+    mock_decl_verified_small = Declaration(
         package_type="SMALL_PACK",
         exemption_applied="Rule 26(a)",
         net_quantity="8 g",
-        mrp=None,  # No MRP
+        mrp=None,
     )
-    res_mrp, val, conf, reason = _eval_mrp(mock_decl_small, mock_rule_mrp)
+    res_mrp, _, _, reason_mrp = _eval_mrp(mock_decl_verified_small, mock_rule_mrp)
     assert res_mrp == CheckResult.PASS
-    assert "Exempt" in reason
+    assert "Exempt" in reason_mrp
 
-    # An institutional package declaration with missing USP must PASS
-    mock_rule_usp = LegalRule(rule_code="LMPC-R6-USP", title="Unit Sale Price", rule_type="MANDATORY")
-    mock_decl_inst = Declaration(
+    # A declaration with package_type="INSTITUTIONAL" but NO verified exemption_applied (e.g. facts missing)
+    # MUST NOT be granted an exemption pass
+    mock_decl_unverified_inst = Declaration(
         package_type="INSTITUTIONAL",
-        exemption_applied="Rule 26(c)",
-        unit_sale_price=None,
+        exemption_applied=None,  # Not verified
+        mrp=None,
     )
-    res_usp, val_u, conf_u, reason_u = _eval_usp(mock_decl_inst, mock_rule_usp)
-    assert res_usp == CheckResult.PASS
-    assert "Exempt" in reason_u
+    res_mrp_unverified, _, _, _ = _eval_mrp(mock_decl_unverified_inst, mock_rule_mrp)
+    assert res_mrp_unverified == CheckResult.REVIEW  # Demands ocular check, not exempt
 
-    # 5. Test API Endpoints
+    # 10. Test API Endpoints
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         login_res = await client.post("/api/v1/auth/login", json={"email": "sharma@doca.gov.in", "password": "password123"})
@@ -194,11 +258,13 @@ async def test_phase_2_4_statutory_exemptions_and_special_packages():
             "package_type": "SMALL_PACK",
             "declared_net_quantity_value": 5.0,
             "declared_net_quantity_unit": "g",
+            "is_tobacco_product": False,
         }, headers=headers)
         assert eval_res.status_code == 200
         assert eval_res.json()["is_exempt"] is True
+        assert eval_res.json()["assessment_status"] == "EXEMPTION_ELIGIBLE"
 
-        # Apply Exemption to an Inspection
+        # Apply Exemption to an Inspection with Full Facts
         insp_res = await client.post("/api/v1/inspections/", json={
             "store_name": "Metro Cash & Carry", "state": "Delhi", "district": "New Delhi"
         }, headers=headers)
@@ -207,9 +273,11 @@ async def test_phase_2_4_statutory_exemptions_and_special_packages():
         apply_res = await client.post(f"/api/v1/exemptions/apply/{insp_id}", json={
             "package_type": "INSTITUTIONAL",
             "is_institutional_consumer": True,
+            "has_institutional_marking": True,
         }, headers=headers)
         assert apply_res.status_code == 200
         assert apply_res.json()["package_type"] == "INSTITUTIONAL"
+        assert apply_res.json()["is_exempt"] is True
 
     print("PASS: test_phase_2_4_statutory_exemptions_and_special_packages")
 
@@ -306,4 +374,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-

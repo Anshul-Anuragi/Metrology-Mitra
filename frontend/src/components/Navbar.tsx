@@ -14,6 +14,9 @@ import {
   Boxes,
   Gavel,
   Scale,
+  Building2,
+  AlertOctagon,
+  Briefcase,
 } from 'lucide-react';
 import OfflineSyncBadge from '@/components/OfflineSyncBadge';
 
@@ -21,7 +24,7 @@ export default function Navbar() {
   const { user, logout, isInspector, isSupervisor } = useAuth();
   const pathname = usePathname();
 
-  if (!user && pathname === '/login') {
+  if (pathname === '/login') {
     return null;
   }
 
@@ -33,7 +36,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-3">
             <ShieldCheck className="h-8 w-8 text-sky-400" />
             <div>
-              <a href={isInspector ? '/inspections' : '/analytics'} className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+              <a href={isInspector ? '/inspector' : '/analytics'} className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
                 MetrologyMitra
                 <span className="text-xs bg-sky-500/20 text-sky-300 font-medium px-2 py-0.5 rounded border border-sky-400/30">
                   LMPC 2011
@@ -48,10 +51,23 @@ export default function Navbar() {
           {/* Navigation Links */}
           {user && (
             <nav className="hidden md:flex items-center space-x-2">
+              {isInspector && (
+                <a
+                  href="/inspector"
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                    pathname === '/inspector'
+                      ? 'bg-brand-800 text-white'
+                      : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                  }`}
+                >
+                  Desk
+                </a>
+              )}
+
               <a
-                href="/inspections"
+                href="/inspector/inspections"
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                  pathname === '/inspections'
+                  pathname === '/inspector/inspections' || pathname === '/inspections'
                     ? 'bg-brand-800 text-white'
                     : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
                 }`}
@@ -69,7 +85,7 @@ export default function Navbar() {
                 }`}
               >
                 <Boxes className="h-4 w-4" />
-                Lots & Batches
+                Lots
               </a>
 
               <a
@@ -81,7 +97,31 @@ export default function Navbar() {
                 }`}
               >
                 <Scale className="h-4 w-4" />
-                Net-Weight (MPE)
+                Net-Weight
+              </a>
+
+              <a
+                href="/registrations"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname === '/registrations'
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <Building2 className="h-4 w-4" />
+                Rule 27 Registry
+              </a>
+
+              <a
+                href="/seizures"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname === '/seizures'
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <AlertOctagon className="h-4 w-4" />
+                Seizures
               </a>
 
               <a
@@ -96,6 +136,18 @@ export default function Navbar() {
                 Enforcement
               </a>
 
+              <a
+                href="/dossiers"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  pathname.startsWith('/dossiers')
+                    ? 'bg-brand-800 text-white'
+                    : 'text-slate-200 hover:bg-brand-800/60 hover:text-white'
+                }`}
+              >
+                <Briefcase className="h-4 w-4" />
+                Dossiers
+              </a>
+
               {isInspector && (
                 <a
                   href="/inspections/new"
@@ -106,7 +158,7 @@ export default function Navbar() {
                   }`}
                 >
                   <PlusCircle className="h-4 w-4" />
-                  New Inspection
+                  New
                 </a>
               )}
 

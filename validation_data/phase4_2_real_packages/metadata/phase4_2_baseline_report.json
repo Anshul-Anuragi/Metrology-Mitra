@@ -1,0 +1,1916 @@
+{
+  "total_images": 28,
+  "total_unique_contents": 26,
+  "processed_count": 28,
+  "skipped_count": 0,
+  "ground_truth_distribution": {
+    "KNOWN_COMPLIANT": 21,
+    "AMBIGUOUS": 7
+  },
+  "categories_breakdown": {
+    "compliant": 5,
+    "difficult_ocr": 9,
+    "multilingual": 2,
+    "needs_review": 10,
+    "non_compliant": 2
+  },
+  "quality_status_breakdown": {
+    "FAIL": 22,
+    "WARNING": 6
+  },
+  "quality_gate_breakdown": {
+    "RETAKE_RECOMMENDED": 22,
+    "MANUAL_REVIEW": 6
+  },
+  "optical_gate_flagged_count": 28,
+  "legal_engine_evaluation_count": 28,
+  "execution_flow_breakdown": {
+    "OPTICAL_GATE_PLUS_LEGAL_ENGINE": 28,
+    "OPTICAL_GATE_ONLY": 0,
+    "LEGAL_ENGINE_WITHOUT_GATE": 0
+  },
+  "barcodes_detected_total": 6,
+  "barcode_detection_rate_percent": 21.43,
+  "ocr_text_extracted_count": 22,
+  "ocr_text_extraction_rate_percent": 78.57,
+  "overall_mean_ocr_confidence": 0.5357,
+  "field_extraction_counts": {
+    "commodity_name": 22,
+    "manufacturer_name": 2,
+    "address": 7,
+    "net_quantity": 4,
+    "mrp": 0,
+    "manufacturing_date": 0,
+    "consumer_care": 3
+  },
+  "field_extraction_rates_percent": {
+    "commodity_name": 78.57,
+    "manufacturer_name": 7.14,
+    "address": 25.0,
+    "net_quantity": 14.29,
+    "mrp": 0.0,
+    "manufacturing_date": 0.0,
+    "consumer_care": 10.71
+  },
+  "compliance_result_breakdown": {
+    "NEEDS_REVIEW": 28
+  },
+  "expected_review_reason_frequencies": {
+    "BLUR_OBSCURES_DECLARATION": 14,
+    "INSUFFICIENT_PHYSICAL_EVIDENCE": 9,
+    "LOW_OCR_CONFIDENCE": 16,
+    "GLARE_OBSCURES_TEXT": 5,
+    "PARTIAL_OCCLUSION": 4,
+    "AMBIGUOUS_NUMERIC_VALUE": 3,
+    "UNRESOLVED_LANGUAGE": 2
+  },
+  "observed_review_reason_frequencies": {
+    "BLUR_OBSCURES_DECLARATION": 22,
+    "INSUFFICIENT_PHYSICAL_EVIDENCE": 28,
+    "PARTIAL_OCCLUSION": 5,
+    "GLARE_OBSCURES_TEXT": 7,
+    "LOW_OCR_CONFIDENCE": 18
+  },
+  "review_reason_metrics": {
+    "mean_jaccard_similarity": 0.4851,
+    "micro_precision": 0.5125,
+    "micro_recall": 0.7736,
+    "micro_f1": 0.6165,
+    "total_matched_reasons": 41,
+    "total_observed_reasons": 80,
+    "total_expected_reasons": 53
+  },
+  "optical_gate_false_certainty_count": 0,
+  "legal_pipeline_false_certainty_count": 0,
+  "total_false_certainty_count": 0,
+  "legal_outcome_coverage": {
+    "applicable_unique_images": 26,
+    "applicable_path_images": 28,
+    "optical_gate_flagged_count": 26,
+    "optical_gate_flagged_coverage_percent": 100.0,
+    "gate_intercepted_count": 26,
+    "gate_intercepted_coverage_percent": 100.0,
+    "legal_engine_evaluated_count": 26,
+    "legal_engine_evaluation_coverage_percent": 100.0,
+    "compliant_cases_count": 0,
+    "compliant_coverage_percent": 0.0,
+    "non_compliant_cases_count": 0,
+    "non_compliant_coverage_percent": 0.0,
+    "needs_review_cases_count": 26,
+    "needs_review_coverage_percent": 100.0,
+    "classification_accuracy_note": "All 26 unique images evaluate to NEEDS_REVIEW due to incomplete single-surface evidence and optical degradation. This coverage metric reflects conservative safety routing coverage (100% triage safety) rather than positive COMPLIANT / NON_COMPLIANT classification accuracy."
+  },
+  "path_level_metrics": {
+    "total_images": 28,
+    "categories_breakdown": {
+      "compliant": 5,
+      "difficult_ocr": 9,
+      "multilingual": 2,
+      "needs_review": 10,
+      "non_compliant": 2
+    },
+    "quality_status_breakdown": {
+      "FAIL": 22,
+      "WARNING": 6
+    },
+    "quality_gate_breakdown": {
+      "RETAKE_RECOMMENDED": 22,
+      "MANUAL_REVIEW": 6
+    },
+    "optical_gate_flagged_count": 28,
+    "optical_gate_flagged_rate_percent": 100.0,
+    "gate_intercept_count": 28,
+    "gate_intercept_rate_percent": 100.0,
+    "legal_engine_evaluation_count": 28,
+    "legal_engine_evaluation_rate_percent": 100.0,
+    "execution_flow_breakdown": {
+      "OPTICAL_GATE_PLUS_LEGAL_ENGINE": 28,
+      "OPTICAL_GATE_ONLY": 0,
+      "LEGAL_ENGINE_WITHOUT_GATE": 0
+    },
+    "barcodes_detected_total": 6,
+    "images_with_barcodes_count": 6,
+    "barcode_detection_rate_percent": 21.43,
+    "ocr_text_extracted_count": 22,
+    "ocr_text_extraction_rate_percent": 78.57,
+    "overall_mean_ocr_confidence": 0.5357,
+    "field_extraction_counts": {
+      "commodity_name": 22,
+      "manufacturer_name": 2,
+      "address": 7,
+      "net_quantity": 4,
+      "mrp": 0,
+      "manufacturing_date": 0,
+      "consumer_care": 3
+    },
+    "field_extraction_rates_percent": {
+      "commodity_name": 78.57,
+      "manufacturer_name": 7.14,
+      "address": 25.0,
+      "net_quantity": 14.29,
+      "mrp": 0.0,
+      "manufacturing_date": 0.0,
+      "consumer_care": 10.71
+    },
+    "compliance_result_breakdown": {
+      "NEEDS_REVIEW": 28
+    },
+    "optical_gate_false_certainty_count": 0,
+    "legal_pipeline_false_certainty_count": 0,
+    "total_false_certainty_count": 0
+  },
+  "unique_image_metrics": {
+    "total_images": 26,
+    "categories_breakdown": {
+      "compliant": 5,
+      "difficult_ocr": 9,
+      "multilingual": 1,
+      "needs_review": 9,
+      "non_compliant": 2
+    },
+    "quality_status_breakdown": {
+      "FAIL": 21,
+      "WARNING": 5
+    },
+    "quality_gate_breakdown": {
+      "RETAKE_RECOMMENDED": 21,
+      "MANUAL_REVIEW": 5
+    },
+    "optical_gate_flagged_count": 26,
+    "optical_gate_flagged_rate_percent": 100.0,
+    "gate_intercept_count": 26,
+    "gate_intercept_rate_percent": 100.0,
+    "legal_engine_evaluation_count": 26,
+    "legal_engine_evaluation_rate_percent": 100.0,
+    "execution_flow_breakdown": {
+      "OPTICAL_GATE_PLUS_LEGAL_ENGINE": 26,
+      "OPTICAL_GATE_ONLY": 0,
+      "LEGAL_ENGINE_WITHOUT_GATE": 0
+    },
+    "barcodes_detected_total": 6,
+    "images_with_barcodes_count": 6,
+    "barcode_detection_rate_percent": 23.08,
+    "ocr_text_extracted_count": 21,
+    "ocr_text_extraction_rate_percent": 80.77,
+    "overall_mean_ocr_confidence": 0.5459,
+    "field_extraction_counts": {
+      "commodity_name": 21,
+      "manufacturer_name": 2,
+      "address": 7,
+      "net_quantity": 4,
+      "mrp": 0,
+      "manufacturing_date": 0,
+      "consumer_care": 3
+    },
+    "field_extraction_rates_percent": {
+      "commodity_name": 80.77,
+      "manufacturer_name": 7.69,
+      "address": 26.92,
+      "net_quantity": 15.38,
+      "mrp": 0.0,
+      "manufacturing_date": 0.0,
+      "consumer_care": 11.54
+    },
+    "compliance_result_breakdown": {
+      "NEEDS_REVIEW": 26
+    },
+    "optical_gate_false_certainty_count": 0,
+    "legal_pipeline_false_certainty_count": 0,
+    "total_false_certainty_count": 0
+  },
+  "duplicate_integrity_verification": [
+    {
+      "sha256_hash": "0498aedade251818dc3b6d7240fb5945e95b8c83fbc3f068d8c35e654774aceb",
+      "image_id_1": "IMG-REAL-005",
+      "relative_path_1": "compliant/IMG_20260904_231232.jpg",
+      "image_id_2": "IMG-REAL-015",
+      "relative_path_2": "multilingual/IMG_20260904_231232.jpg",
+      "is_identical_execution": true,
+      "result_1": "NEEDS_REVIEW",
+      "result_2": "NEEDS_REVIEW",
+      "reasons_1": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "reasons_2": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "sha256_hash": "b4e586cebb62ccde8640a560ae618e91e61b09aa17a24f65d713c3d5b27ce327",
+      "image_id_1": "IMG-REAL-013",
+      "relative_path_1": "difficult_ocr/IMG_20260904_231012.jpg",
+      "image_id_2": "IMG-REAL-023",
+      "relative_path_2": "needs_review/IMG_20260904_231012.jpg",
+      "is_identical_execution": true,
+      "result_1": "NEEDS_REVIEW",
+      "result_2": "NEEDS_REVIEW",
+      "reasons_1": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "reasons_2": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "image_id": "IMG-REAL-001",
+      "filename": "IMG_20260904_230429.jpg",
+      "relative_path": "compliant/IMG_20260904_230429.jpg",
+      "category": "compliant",
+      "sha256_hash": "b79eefd179b5047949a4d13a6696d8afa1f3737929c3ef416f6ff3975cbc13f5",
+      "package_type": "JAR",
+      "primary_commodity": "Peanut Butter",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 209.63,
+      "glare_ratio": 0.0014,
+      "barcodes_detected": [
+        "8904327602577"
+      ],
+      "ocr_character_count": 797,
+      "ocr_mean_confidence": 0.6697,
+      "extracted_fields": [
+        "commodity_name",
+        "manufacturer_name",
+        "address",
+        "net_quantity",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 9,
+      "compliance_checks_review": 8,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3482.0,
+      "notes": "Single angle photograph of multi-panel package; declarations present across container require complete multi-surface review.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-002",
+      "filename": "IMG_20260904_230450.jpg",
+      "relative_path": "compliant/IMG_20260904_230450.jpg",
+      "category": "compliant",
+      "sha256_hash": "ec45c3d956c23601dda7b4af9c13ec7ca5bed268c68a54e40733599c786170c7",
+      "package_type": "JAR",
+      "primary_commodity": "Peanut Butter",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 170.99,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [],
+      "ocr_character_count": 887,
+      "ocr_mean_confidence": 0.6974,
+      "extracted_fields": [
+        "commodity_name",
+        "net_quantity",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 6,
+      "compliance_checks_review": 11,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3702.49,
+      "notes": "Side panel angle of Peanut Butter jar.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-003",
+      "filename": "IMG_20260904_230516.jpg",
+      "relative_path": "compliant/IMG_20260904_230516.jpg",
+      "category": "compliant",
+      "sha256_hash": "c94f1f4633737d8f8c4d5b3972f4c341e0541e2c67c0363984e8c33156eed831",
+      "package_type": "JAR",
+      "primary_commodity": "Peanut Butter",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 205.57,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [],
+      "ocr_character_count": 761,
+      "ocr_mean_confidence": 0.6613,
+      "extracted_fields": [
+        "commodity_name",
+        "address",
+        "net_quantity",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 7,
+      "compliance_checks_review": 10,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3944.7,
+      "notes": "Manufacturing address detail angle.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-004",
+      "filename": "IMG_20260904_230628.jpg",
+      "relative_path": "compliant/IMG_20260904_230628.jpg",
+      "category": "compliant",
+      "sha256_hash": "3ba1813d572437c8a8ce559405a0881710a339d3aa7917354c1f9b8d3f2f2fe1",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Cosmetic Serum",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 123.93,
+      "glare_ratio": 0.0005,
+      "barcodes_detected": [],
+      "ocr_character_count": 901,
+      "ocr_mean_confidence": 0.61,
+      "extracted_fields": [
+        "commodity_name",
+        "address",
+        "consumer_care",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 4,
+      "compliance_checks_review": 13,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 4092.34,
+      "notes": "PDP angle; statutory price and manufacturer declarations located on back panel.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-005",
+      "filename": "IMG_20260904_231232.jpg",
+      "relative_path": "compliant/IMG_20260904_231232.jpg",
+      "category": "compliant",
+      "sha256_hash": "0498aedade251818dc3b6d7240fb5945e95b8c83fbc3f068d8c35e654774aceb",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Food / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 475.59,
+      "glare_ratio": 0.0297,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "GLARE_OBSCURES_TEXT"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 4623.66,
+      "notes": "Primary entry for byte-identical duplicate IMG-REAL-015 in multilingual category.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-006",
+      "filename": "IMG_20260904_230632.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230632.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "2ebad0e8467ccfd55c1f0c7ac9b071afc53930f12ed19a4d419f5953dc184512",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Cosmetic Serum",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 162.28,
+      "glare_ratio": 0.0003,
+      "barcodes_detected": [
+        "8906127101120"
+      ],
+      "ocr_character_count": 631,
+      "ocr_mean_confidence": 0.544,
+      "extracted_fields": [
+        "commodity_name",
+        "address",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "PARTIAL_OCCLUSION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 4,
+      "compliance_checks_review": 13,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3481.41,
+      "notes": "Barcode successfully decoded by ZXing; fine chemical ingredient text creates high OCR token confusion.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-007",
+      "filename": "IMG_20260904_230637.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230637.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "9b81956c30758faadc732880ef1e2e834970db53695f517f29c14a93d39a4b31",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Cosmetic Serum",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 158.75,
+      "glare_ratio": 0.0019,
+      "barcodes_detected": [
+        "8906127101120"
+      ],
+      "ocr_character_count": 50,
+      "ocr_mean_confidence": 0.5644,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "PARTIAL_OCCLUSION",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "unmatched_expected_reasons": [
+        "PARTIAL_OCCLUSION"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3128.73,
+      "notes": "Severely cropped field of view; cannot establish compliance without adjacent panels.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-008",
+      "filename": "IMG_20260904_230644.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230644.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "b96c6323dbab524e882077f61656f5a3b9a5bdd87487a1a961278caec8b59eaa",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Cosmetic Serum",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 138.26,
+      "glare_ratio": 0.0001,
+      "barcodes_detected": [],
+      "ocr_character_count": 648,
+      "ocr_mean_confidence": 0.6434,
+      "extracted_fields": [
+        "commodity_name",
+        "manufacturer_name",
+        "address",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 6,
+      "compliance_checks_review": 11,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3686.57,
+      "notes": "Chemical ingredients panel; mandatory declarations spread across other panels.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-009",
+      "filename": "IMG_20260904_230731.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230731.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "b2d9482bd2a411cad49117c54087b971a24e8d1b7ce97a429ee40e86474515a2",
+      "package_type": "TUBE",
+      "primary_commodity": "Skin Cleanser / Lotion",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 177.48,
+      "glare_ratio": 0.0004,
+      "barcodes_detected": [
+        "8909106061781"
+      ],
+      "ocr_character_count": 703,
+      "ocr_mean_confidence": 0.2512,
+      "extracted_fields": [
+        "commodity_name",
+        "net_quantity",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "AMBIGUOUS_NUMERIC_VALUE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "AMBIGUOUS_NUMERIC_VALUE"
+      ],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 6,
+      "compliance_checks_review": 11,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3532.06,
+      "notes": "Rotational inversion causes Tesseract to read lines backward or in reverse sequence.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-010",
+      "filename": "IMG_20260904_230754.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230754.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "11ab2216f1a41ee4c8870ae805632e2c05d9b6091a968addad7aa040e74c2f22",
+      "package_type": "CARTON",
+      "primary_commodity": "Healthcare Product",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 77.53,
+      "glare_ratio": 0.0027,
+      "barcodes_detected": [],
+      "ocr_character_count": 85,
+      "ocr_mean_confidence": 0.3507,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "PARTIAL_OCCLUSION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3230.71,
+      "notes": "Quality gate correctly flags RETAKE_RECOMMENDED due to severe blur.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-011",
+      "filename": "IMG_20260904_230758.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230758.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "40855ac7539e78665fc0829c75dad5d496b1a375448eace0e44402bae3d63b11",
+      "package_type": "CARTON",
+      "primary_commodity": "Healthcare Product",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 92.42,
+      "glare_ratio": 0.0024,
+      "barcodes_detected": [],
+      "ocr_character_count": 289,
+      "ocr_mean_confidence": 0.7589,
+      "extracted_fields": [
+        "commodity_name",
+        "address",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "unmatched_expected_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 4,
+      "compliance_checks_review": 13,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3224.25,
+      "notes": "Carton panel with statutory cautions; requires retake under better lighting.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-012",
+      "filename": "IMG_20260904_230818.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_230818.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "95bde3ea441ff581c2fb405b45946353018e22390a680d5a32fdc6cc5b26e199",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Anti-Dandruff Shampoo",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 143.85,
+      "glare_ratio": 0.0001,
+      "barcodes_detected": [],
+      "ocr_character_count": 656,
+      "ocr_mean_confidence": 0.537,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3515.31,
+      "notes": "Front claims panel; back panel holds statutory declarations.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-013",
+      "filename": "IMG_20260904_231012.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_231012.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "b4e586cebb62ccde8640a560ae618e91e61b09aa17a24f65d713c3d5b27ce327",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Personal Care Bottle",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 167.08,
+      "glare_ratio": 0.0002,
+      "barcodes_detected": [],
+      "ocr_character_count": 551,
+      "ocr_mean_confidence": 0.3207,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3639.48,
+      "notes": "Primary entry for byte-identical duplicate IMG-REAL-023 in needs_review category.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-014",
+      "filename": "IMG_20260904_231206.jpg",
+      "relative_path": "difficult_ocr/IMG_20260904_231206.jpg",
+      "category": "difficult_ocr",
+      "sha256_hash": "e0c99a0efb72ae15a986977fa351fb8aac81306ec56245e946e6ad1f04daad8e",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Snack / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 426.67,
+      "glare_ratio": 0.0026,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 6048.58,
+      "notes": "Classic foil/metallic reflection failure mode for conventional OCR engines.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-015",
+      "filename": "IMG_20260904_231232.jpg",
+      "relative_path": "multilingual/IMG_20260904_231232.jpg",
+      "category": "multilingual",
+      "sha256_hash": "0498aedade251818dc3b6d7240fb5945e95b8c83fbc3f068d8c35e654774aceb",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Food / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 475.59,
+      "glare_ratio": 0.0297,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "UNRESOLVED_LANGUAGE"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "UNRESOLVED_LANGUAGE"
+      ],
+      "unexpected_observed_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 4707.44,
+      "notes": "Exact byte duplicate of IMG-REAL-005 in compliant directory.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-016",
+      "filename": "IMG_20260904_231235.jpg",
+      "relative_path": "multilingual/IMG_20260904_231235.jpg",
+      "category": "multilingual",
+      "sha256_hash": "0f5cc7bb7d984ce97b983283a51509d03873eaaf9bcad669bbd390cba6bff3b7",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Food / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 439.56,
+      "glare_ratio": 0.032,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "UNRESOLVED_LANGUAGE"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "GLARE_OBSCURES_TEXT"
+      ],
+      "unmatched_expected_reasons": [
+        "UNRESOLVED_LANGUAGE"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 4409.67,
+      "notes": "Demonstrates necessity of adaptive binarization for multi-script flexible packaging.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-017",
+      "filename": "IMG_20260904_230707.jpg",
+      "relative_path": "needs_review/IMG_20260904_230707.jpg",
+      "category": "needs_review",
+      "sha256_hash": "6d2f902b8c274f1292a8ac45c6392c101d9c4dc062157e4bd21e57c5c19578ba",
+      "package_type": "CARTON",
+      "primary_commodity": "Toilet Soap Bar",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 129.41,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [
+        "8901030795589"
+      ],
+      "ocr_character_count": 221,
+      "ocr_mean_confidence": 0.6905,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3322.56,
+      "notes": "Physical evidence on this single photo does not show MRP or Net Qty, warranting review.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-018",
+      "filename": "IMG_20260904_230723.jpg",
+      "relative_path": "needs_review/IMG_20260904_230723.jpg",
+      "category": "needs_review",
+      "sha256_hash": "27e655359c6dc78236a349d7d0139e95be871a73d1ad13b2e032474a46da4f42",
+      "package_type": "TUBE",
+      "primary_commodity": "Skin Cleanser / Lotion",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 141.88,
+      "glare_ratio": 0.002,
+      "barcodes_detected": [
+        "8909106061781"
+      ],
+      "ocr_character_count": 316,
+      "ocr_mean_confidence": 0.4876,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "AMBIGUOUS_NUMERIC_VALUE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "unmatched_expected_reasons": [
+        "AMBIGUOUS_NUMERIC_VALUE"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3424.99,
+      "notes": "Statutory price and net quantity clearly present to human eye, but fragmented OCR tokens prevent autonomous validation.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-019",
+      "filename": "IMG_20260904_230824.jpg",
+      "relative_path": "needs_review/IMG_20260904_230824.jpg",
+      "category": "needs_review",
+      "sha256_hash": "e86a6770975100f2a934c6b9ff68d9d2d981f2f83d9d5867d9b9ce4fba70cbf5",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Anti-Dandruff Shampoo",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 186.68,
+      "glare_ratio": 0.0019,
+      "barcodes_detected": [],
+      "ocr_character_count": 861,
+      "ocr_mean_confidence": 0.5414,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3482.71,
+      "notes": "Batch/MRP stamp is printed on bottom of bottle, not visible in this angle.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-020",
+      "filename": "IMG_20260904_230841.jpg",
+      "relative_path": "needs_review/IMG_20260904_230841.jpg",
+      "category": "needs_review",
+      "sha256_hash": "1ac23801a8e8772bfb9dfc388e2c06385ddc57d6aa3032687ff55e347e0e1e0f",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Anti-Dandruff Shampoo",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 208.78,
+      "glare_ratio": 0.0001,
+      "barcodes_detected": [],
+      "ocr_character_count": 33,
+      "ocr_mean_confidence": 0.305,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "PARTIAL_OCCLUSION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "PARTIAL_OCCLUSION"
+      ],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3235.28,
+      "notes": "Incomplete partial detail photo; cannot substantiate full legal compliance.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-021",
+      "filename": "IMG_20260904_230850.jpg",
+      "relative_path": "needs_review/IMG_20260904_230850.jpg",
+      "category": "needs_review",
+      "sha256_hash": "cebd0759b1a47d6bec862772169ac52f6fe208d5f0e44f48cef83a2470f7137f",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Anti-Dandruff Shampoo",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 276.92,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 5287.86,
+      "notes": "Quality gate correctly alerts retake recommended.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-022",
+      "filename": "IMG_20260904_230942.jpg",
+      "relative_path": "needs_review/IMG_20260904_230942.jpg",
+      "category": "needs_review",
+      "sha256_hash": "cd7a5de30679eac45b7e4fb4a89abbc8a32b6c5cdc543fa340db2c5154ca76c3",
+      "package_type": "POUCH",
+      "primary_commodity": "Nutritional Supplement / Snack",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 213.09,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [],
+      "ocr_character_count": 78,
+      "ocr_mean_confidence": 0.6324,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "AMBIGUOUS_NUMERIC_VALUE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "unmatched_expected_reasons": [
+        "AMBIGUOUS_NUMERIC_VALUE"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3232.43,
+      "notes": "Human verification confirms valid MRP and USP declarations; requires human officer review.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-023",
+      "filename": "IMG_20260904_231012.jpg",
+      "relative_path": "needs_review/IMG_20260904_231012.jpg",
+      "category": "needs_review",
+      "sha256_hash": "b4e586cebb62ccde8640a560ae618e91e61b09aa17a24f65d713c3d5b27ce327",
+      "package_type": "BOTTLE",
+      "primary_commodity": "Personal Care Bottle",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 167.08,
+      "glare_ratio": 0.0002,
+      "barcodes_detected": [],
+      "ocr_character_count": 551,
+      "ocr_mean_confidence": 0.3207,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3666.22,
+      "notes": "Exact byte duplicate of IMG-REAL-013 in difficult_ocr category.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-024",
+      "filename": "IMG_20260904_231221.jpg",
+      "relative_path": "needs_review/IMG_20260904_231221.jpg",
+      "category": "needs_review",
+      "sha256_hash": "6dcbf9f9ed5059c035ebaa9534a6585e13e307cd871d47404d914003ea4dc349",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Snack / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 459.4,
+      "glare_ratio": 0.0175,
+      "barcodes_detected": [],
+      "ocr_character_count": 93,
+      "ocr_mean_confidence": 0.7141,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "LOW_OCR_CONFIDENCE",
+        "GLARE_OBSCURES_TEXT"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "GLARE_OBSCURES_TEXT"
+      ],
+      "unmatched_expected_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unexpected_observed_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3113.62,
+      "notes": "Bilingual packaging pouch.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-025",
+      "filename": "IMG_20260904_231224.jpg",
+      "relative_path": "needs_review/IMG_20260904_231224.jpg",
+      "category": "needs_review",
+      "sha256_hash": "26a1c0a5c77a7d64722de5c94d6265e05de52c0921b646c7f7315e1068ffa617",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Snack / Confectionery",
+      "ground_truth_label": "KNOWN_COMPLIANT",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 311.77,
+      "glare_ratio": 0.0071,
+      "barcodes_detected": [],
+      "ocr_character_count": 0,
+      "ocr_mean_confidence": null,
+      "extracted_fields": [],
+      "expected_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 2,
+      "compliance_checks_review": 15,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 5097.32,
+      "notes": "Severe reflection and low text contrast on packaging film.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-026",
+      "filename": "IMG_20260904_231340.jpg",
+      "relative_path": "needs_review/IMG_20260904_231340.jpg",
+      "category": "needs_review",
+      "sha256_hash": "6fba21076ad3039e0c589eb4248f58963186b59dfef9269777af5fbbedc74d9b",
+      "package_type": "POUCH",
+      "primary_commodity": "Packaged Snack / Confectionery",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "WARNING",
+      "quality_gate_decision": "MANUAL_REVIEW",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 385.24,
+      "glare_ratio": 0.0343,
+      "barcodes_detected": [],
+      "ocr_character_count": 17,
+      "ocr_mean_confidence": 0.256,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "PARTIAL_OCCLUSION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "PARTIAL_OCCLUSION"
+      ],
+      "unexpected_observed_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 2796.54,
+      "notes": "Partial detail shot without full panel context.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "GLARE_OBSCURES_TEXT",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-027",
+      "filename": "IMG_20260904_230923.jpg",
+      "relative_path": "non_compliant/IMG_20260904_230923.jpg",
+      "category": "non_compliant",
+      "sha256_hash": "961d46af95868d5da09dd41bdb3e3e2d6299fff89f2edde1923896d2f09b554c",
+      "package_type": "POUCH",
+      "primary_commodity": "Nutritional Supplement / Snack",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 142.42,
+      "glare_ratio": 0.0,
+      "barcodes_detected": [],
+      "ocr_character_count": 512,
+      "ocr_mean_confidence": 0.8439,
+      "extracted_fields": [
+        "commodity_name",
+        "address",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "unmatched_expected_reasons": [],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 4,
+      "compliance_checks_review": 13,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3622.33,
+      "notes": "Absence of MRP and Net Quantity on photographed surface is a factual observation. Because this photograph captures only a single panel of a multi-panel flexible pouch, package-level legality cannot be conclusively established without inspecting all surfaces. Reclassified as AMBIGUOUS under non-judicial principles.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-028",
+      "filename": "IMG_20260904_230934.jpg",
+      "relative_path": "non_compliant/IMG_20260904_230934.jpg",
+      "category": "non_compliant",
+      "sha256_hash": "cadc1aa0a4b6fcf10010dcc21bc5e778f6ed85726dcf82530fe6b985a6029a35",
+      "package_type": "POUCH",
+      "primary_commodity": "Nutritional Supplement / Snack",
+      "ground_truth_label": "AMBIGUOUS",
+      "expected_system_behavior": "NEEDS_REVIEW",
+      "actual_system_result": "NEEDS_REVIEW",
+      "optical_quality_status": "FAIL",
+      "quality_gate_decision": "RETAKE_RECOMMENDED",
+      "is_gate_flagged": true,
+      "is_legal_evaluated": true,
+      "execution_flow_stage": "OPTICAL_GATE_PLUS_LEGAL_ENGINE",
+      "blur_score": 159.85,
+      "glare_ratio": 0.0001,
+      "barcodes_detected": [],
+      "ocr_character_count": 16,
+      "ocr_mean_confidence": 0.385,
+      "extracted_fields": [
+        "commodity_name",
+        "is_imported"
+      ],
+      "expected_review_reasons": [
+        "PARTIAL_OCCLUSION",
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "observed_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "matched_review_reasons": [
+        "LOW_OCR_CONFIDENCE"
+      ],
+      "unmatched_expected_reasons": [
+        "PARTIAL_OCCLUSION"
+      ],
+      "unexpected_observed_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ],
+      "compliance_checks_total": 17,
+      "compliance_checks_pass": 3,
+      "compliance_checks_review": 14,
+      "compliance_checks_fail": 0,
+      "optical_gate_false_certainty": false,
+      "legal_pipeline_false_certainty": false,
+      "is_false_certainty": false,
+      "processing_time_ms": 3274.92,
+      "notes": "Package border crop missing statutory text on photographed seam. Single angle insufficient to substantiate package-level violation. Reclassified as AMBIGUOUS under non-judicial principles.",
+      "is_gate_intercepted": true,
+      "assigned_review_reasons": [
+        "BLUR_OBSCURES_DECLARATION",
+        "LOW_OCR_CONFIDENCE",
+        "INSUFFICIENT_PHYSICAL_EVIDENCE"
+      ]
+    }
+  ],
+  "gate_intercept_count": 28,
+  "false_certainty_count": 0,
+  "review_reason_frequencies": {
+    "BLUR_OBSCURES_DECLARATION": 22,
+    "INSUFFICIENT_PHYSICAL_EVIDENCE": 28,
+    "PARTIAL_OCCLUSION": 5,
+    "GLARE_OBSCURES_TEXT": 7,
+    "LOW_OCR_CONFIDENCE": 18
+  }
+}

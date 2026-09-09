@@ -1,6 +1,6 @@
 import enum
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from PIL import Image, ImageFilter, ImageStat
@@ -54,6 +54,9 @@ class ImageQualityResult:
     is_acceptable: bool
     guidance_message: str
     actionable_reasons: List[str]
+    root_cause_categories: List[str] = field(default_factory=list)
+    recoverability: str = "PROCESSING_RECOVERABLE"
+    actionable_inspector_directives: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -72,6 +75,9 @@ class ImageQualityResult:
             "is_acceptable": self.is_acceptable,
             "guidance_message": self.guidance_message,
             "actionable_reasons": self.actionable_reasons,
+            "root_cause_categories": self.root_cause_categories,
+            "recoverability": self.recoverability,
+            "actionable_inspector_directives": self.actionable_inspector_directives,
         }
 
 
@@ -116,6 +122,25 @@ def _compute_exposure_mean(gray_img: Image.Image) -> float:
     return float(stat.mean[0]) if stat.mean else 128.0
 
 
+def compute_resolution_aware_blur_thresholds(
+    width: int, height: int
+) -> Tuple[float, float]:
+    """
+    Computes resolution-scaled Laplacian variance blur thresholds.
+    NOTE: These thresholds are engineering heuristics to accommodate high-resolution
+    smartphone captures (where pixel-level Laplacian variance scales inversely with
+    increasing sensor resolution / lens roll-off), and do NOT constitute statutory requirements.
+    """
+    megapixels = (width * height) / 1_000_000.0
+    if megapixels <= 2.0:
+        return BLUR_THRESHOLD_FAIL, BLUR_THRESHOLD_WARNING
+
+    scale_factor = (2.0 / megapixels) ** 0.5
+    fail_threshold = max(140.0, round(BLUR_THRESHOLD_FAIL * scale_factor, 1))
+    warning_threshold = BLUR_THRESHOLD_WARNING
+    return fail_threshold, warning_threshold
+
+
 def assess_image_quality(image_path: Path) -> ImageQualityResult:
     """
     Deterministic pre-flight optical diagnostic assessment & Quality Gate for packaging photographs:
@@ -141,10 +166,11 @@ def assess_image_quality(image_path: Path) -> ImageQualityResult:
         else:
             res_status = QualityStatus.PASS
 
-        # 2. Blur Check
-        if blur_score < BLUR_THRESHOLD_FAIL:
+        # 2. Blur Check (resolution-aware heuristic)
+        effective_blur_fail, effective_blur_warning = compute_resolution_aware_blur_thresholds(width, height)
+        if blur_score < effective_blur_fail:
             blur_status = QualityStatus.FAIL
-        elif blur_score < BLUR_THRESHOLD_WARNING:
+        elif blur_score < effective_blur_warning:
             blur_status = QualityStatus.WARNING
         else:
             blur_status = QualityStatus.PASS
@@ -169,11 +195,11 @@ def assess_image_quality(image_path: Path) -> ImageQualityResult:
 
         if blur_status == QualityStatus.FAIL:
             reasons.append(
-                f"Image is significantly blurred (Sharpness Score: {blur_score:.1f} < {BLUR_THRESHOLD_FAIL:.0f}). Small statutory text and dates may be unreadable."
+                f"Image is significantly blurred (Sharpness Score: {blur_score:.1f} < {effective_blur_fail:.0f}). Small statutory text and dates may be unreadable."
             )
         elif blur_status == QualityStatus.WARNING:
             reasons.append(
-                f"Moderate blur detected (Sharpness Score: {blur_score:.1f}). Hold camera steady under good lighting."
+                f"Moderate blur detected (Sharpness Score: {blur_score:.1f} < {effective_blur_warning:.0f}). Hold camera steady under good lighting."
             )
 
         if glare_status == QualityStatus.FAIL:
@@ -196,6 +222,44 @@ def assess_image_quality(image_path: Path) -> ImageQualityResult:
             else:
                 reasons.append(f"Image is overly bright/washed out (Mean luminance: {exposure_mean:.1f}/255).")
 
+        # Root Cause Disaggregation & Recoverability
+        root_causes: List[str] = []
+        directives: List[str] = []
+
+        if glare_status == QualityStatus.FAIL:
+            root_causes.append("SPECULAR_GLARE")
+            directives.append("Tilt package 15-20° away from direct light/flash to eliminate specular reflection across declarations.")
+        elif glare_status == QualityStatus.WARNING or glare_detected:
+            root_causes.append("SPECULAR_REFLECTION")
+            directives.append("Adjust capture angle slightly to shift glare spot away from statutory declaration text.")
+
+        if blur_score < 100.0:
+            root_causes.append("SEVERE_DEFOCUS")
+            directives.append("Severe defocus detected. Tap camera screen to focus lens directly on statutory text before capturing.")
+        elif blur_status == QualityStatus.FAIL:
+            root_causes.append("MOTION_BLUR")
+            directives.append("Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print.")
+        elif blur_status == QualityStatus.WARNING:
+            root_causes.append("MODERATE_BLUR")
+            directives.append("Hold camera steady and ensure package is well-lit.")
+
+        if exposure_status == QualityStatus.WARNING:
+            if exposure_mean < EXPOSURE_UNDEREXPOSED:
+                root_causes.append("LOW_CONTRAST")
+                directives.append("Increase ambient illumination or reposition light source to heighten text contrast.")
+            else:
+                root_causes.append("OVEREXPOSURE")
+                directives.append("Reduce ambient brightness or turn off flash to prevent washed-out text.")
+
+        if res_status == QualityStatus.FAIL:
+            root_causes.append("INSUFFICIENT_RESOLUTION")
+            directives.append(f"Move camera closer to package to capture at least {MIN_WIDTH_PX}x{MIN_HEIGHT_PX}px.")
+
+        if len(root_causes) > 1:
+            root_causes.append("MULTIPLE_DEFECTS")
+        elif not root_causes:
+            root_causes.append("NONE")
+
         # Quality Gate Classification
         if blur_status == QualityStatus.FAIL or glare_status == QualityStatus.FAIL or res_status == QualityStatus.FAIL:
             gate_decision = QualityGateDecision.RETAKE_RECOMMENDED
@@ -213,6 +277,13 @@ def assess_image_quality(image_path: Path) -> ImageQualityResult:
             is_acceptable = True
             guidance_msg = f"Optimal photograph quality (Sharpness: {blur_score:.1f}, Glare: {glare_ratio * 100:.1f}%, Resolution: {width}x{height}px). Ready for automated analysis."
 
+        if blur_score < 100.0 or res_status == QualityStatus.FAIL or glare_ratio >= GLARE_RATIO_FAIL:
+            recoverability = "CAPTURE_RETAKE_REQUIRED"
+        elif not is_acceptable:
+            recoverability = "PROCESSING_RECOVERABLE"
+        else:
+            recoverability = "READY"
+
         return ImageQualityResult(
             width=width,
             height=height,
@@ -229,4 +300,7 @@ def assess_image_quality(image_path: Path) -> ImageQualityResult:
             is_acceptable=is_acceptable,
             guidance_message=guidance_msg,
             actionable_reasons=reasons,
+            root_cause_categories=root_causes,
+            recoverability=recoverability,
+            actionable_inspector_directives=directives,
         )

@@ -14,7 +14,7 @@ export default function HomePage() {
       if (!user) {
         router.push('/login');
       } else if (isInspector) {
-        router.push('/inspections');
+        router.push('/inspector');
       } else if (isSupervisor) {
         router.push('/analytics');
       }

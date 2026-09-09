@@ -55,3 +55,13 @@ async def root():
         "docs_url": "/docs",
         "api_v1": settings.API_V1_STR,
     }
+
+
+@app.get("/health", tags=["Health"])
+async def root_health():
+    return {
+        "status": "online",
+        "project": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "environment": settings.ENVIRONMENT,
+    }

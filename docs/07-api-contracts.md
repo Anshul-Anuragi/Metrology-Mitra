@@ -46,10 +46,10 @@
 - `POST /inspections/{inspection_id}/finalize` — Permanently lock inspection into `COMPLETED` and enforce backend mutation locks.
 - `GET /inspections/{inspection_id}/audit` — Retrieve chronological audit trail for the inspection.
 
-### 8. Batch / Lot Inspections & Schedule IV Sampling (`/api/v1/batches`)
+### 8. Batch / Lot Inspections & Statistical Sampling (`/api/v1/batches`)
 - `POST /batches/` — Create new multi-sample lot inspection session.
 - `GET /batches/` — List batch inspection lots with status filters.
-- `GET /batches/{batch_id}` — Get batch details, Schedule IV statistical sampling assessment summary (label declarations protocol), and attached sample package records. *(Clearly separates digital declaration sampling from physical gravimetric weighing under Rule 24)*.
+- `GET /batches/{batch_id}` — Get batch details, Rule 19 + Fifth Schedule statistical sampling assessment summary (label declarations protocol), and attached sample package records. *(Separates digital declaration sampling from physical gravimetric weighing under Rule 19 + Sixth Schedule)*.
 - `POST /batches/{batch_id}/inspections/{inspection_id}` — Attach an existing inspection to a batch.
 - `GET /batches/{batch_id}/export-bundle` — Download offline legal filing ZIP bundle containing all inspection records, images, and SHA-256 evidence manifest (`manifest.json`).
 
@@ -81,7 +81,7 @@
 - `GET /analytics/failing-rules` — Top statutory rules causing inspection failure or non-compliance (`limit=1..100`).
 
 ### 13. Physical Metrology & Gravimetric Testing (`/api/v1/gravimetric`)
-- `POST /gravimetric/tests` — Create and statistically evaluate physical scale sample weights against Rule 24 and Schedule IV Table 2 MPE tolerances. Returns individual errors, mean deficit, defective count, and lot decision (`PASSED_MPE`, `FAILED_MEAN_DEFICIT`, `FAILED_EXCESSIVE_DEFECTIVES`, `FAILED_CRITICAL_DOUBLE_MPE`).
+- `POST /gravimetric/tests` — Create and statistically evaluate physical scale sample weights against First Schedule MPE tolerances and Rule 19 + Sixth Schedule testing methodology. Returns individual errors, mean deficit, defective count, Seventh Schedule reporting fields, and lot decision (`PASSED_MPE`, `FAILED_MEAN_DEFICIT`, `FAILED_EXCESSIVE_DEFECTIVES`, `FAILED_CRITICAL_DOUBLE_MPE`).
 - `GET /gravimetric/tests/{test_id}` — Get gravimetric test detail and MPE description.
 - `GET /gravimetric/tests/{test_id}/pdf` — Download official Gravimetric Net-Quantity Verification Memo PDF with SHA-256 digital integrity hash.
 
@@ -92,4 +92,38 @@
 ### 15. Field Geofence & Offline Provenance (`/api/v1/provenance`)
 - `POST /provenance/geovalidate` — Validates field officer GPS coordinates against Indian administrative boundaries (6°N–38°N, 68°E–98°E).
 - `POST /provenance/sync-offline` — Ingests, validates, creates inspection cases, and computes SHA-256 provenance hashes for offline drafted field inspections.
-- **Authorization:** `SUPERVISOR` & `ADMIN` only (`403 Forbidden` for `INSPECTOR`, `401 Unauthorized` for unauthenticated).
+
+### 16. Rule 27 Pre-Packer Registry (`/api/v1/registrations`)
+- `POST /registrations/` — Register a pre-packer/manufacturer/importer with registration number, address, jurisdiction, state, and validity dates.
+- `GET /registrations/` — List pre-packer registrations with search filter `q` and `state`.
+- `GET /registrations/{registration_id}` — Get single registration record.
+- `POST /registrations/verify` — Stateless statutory verification of registration number or entity name under Rule 27 (`REGISTERED_VALID`, `EXPIRED`, `UNREGISTERED_VIOLATION`, `NEEDS_REVIEW`).
+
+### 17. Section 15 Seizures & Panchnama (`/api/v1/seizures`)
+- `POST /seizures/` — Execute and record a statutory search, seizure, and Panchnama with 2 mandatory independent witnesses, itemized inventory, and SHA-256 evidence seal.
+- `GET /seizures/` — List seizure records with optional `inspection_id` and `status_filter`.
+- `GET /seizures/{seizure_id}` — Get seizure record and itemized commodity breakdown.
+- `GET /seizures/{seizure_id}/panchnama-pdf` — Download official printable Form VI Seizure Memo / Panchnama PDF.
+
+### 18. Section 49 Corporate Liability (`/api/v1/companies`)
+- `POST /companies/` — Register corporate entity (CIN, company name, registered office, state) and optional nominated directors.
+- `GET /companies/` — List registered corporate entities.
+- `GET /companies/{company_id}` — Get company details and nominated directors on record.
+- `POST /companies/{company_id}/directors` — Add Section 49(2) Form I nominated Director to company record.
+- `GET /companies/liability/lookup` — Evaluates corporate liability under Section 49 and determines whether statutory notice lies against the Section 49(2) Nominated Director or Section 49(1) persons in charge.
+
+### 19. Operational Case Intelligence & Supervisor Triage (`/api/v1/inspections`)
+- `GET /inspections/{inspection_id}/intelligence` — Computes dynamic Evidence Completeness Index (0–100%) across 6 facets, actionable evidence gaps, Case Priority Score (0–100, `LOW`/`MEDIUM`/`HIGH`/`CRITICAL`), and non-binding advisory next steps (`is_advisory = True`).
+- `GET /inspections/triage` — Supervisor/Admin prioritized triage queue with search, priority filters, min-score filtering, and summary metrics.
+
+### 20. Market Surveillance Investigation Dossiers (`/api/v1/dossiers`)
+- `POST /dossiers/` — Create new investigation dossier (`status: ACTIVE`, `priority: NORMAL`, title, optional target entity, company ID, tags). *(Supervisor/Admin only)*.
+- `GET /dossiers/` — List dossiers with status, priority, and text search filtering. *(Inspectors access scoped to dossiers containing their authored inspections)*.
+- `GET /dossiers/{dossier_id}` — Get composite dossier details with linked inspections, lead supervisor, and associated company. *(Inspectors access scoped)*.
+- `PATCH /dossiers/{dossier_id}` — Update dossier metadata, title, description, tags, priority, or workflow status (`ACTIVE`, `EVALUATION`, `NOTICE_REVIEW`, `COMPOUNDING_REVIEW`, `CLOSED`). *(Supervisor/Admin only)*.
+- `POST /dossiers/{dossier_id}/inspections` — Link an inspection to a dossier with relevance notes. Does NOT alter the underlying inspection or its legal result. *(Supervisor/Admin only)*.
+- `DELETE /dossiers/{dossier_id}/inspections/{inspection_id}` — Unlink an inspection from a dossier. Deletes association record only; underlying inspection, violations, evidence, and seizures remain 100% intact. *(Supervisor/Admin only)*.
+- `GET /dossiers/{dossier_id}/synthesis` — Factual cross-inspection synthesis: verdict counts (`COMPLIANT`, `NON_COMPLIANT`, `NEEDS_REVIEW`, `PENDING`), territorial footprint (districts, states, unique premises, batches), observed finding patterns with non-judicial labels, aggregated Section 15 seizure quantities, Section 49 nominated director review, and chronological audit timeline. *(Read-only, strictly non-judicial)*.
+- `GET /dossiers/{dossier_id}/pdf` — Stream consolidated investigation dossier summary PDF (ReportLab generated) with 14 mandatory sections, SHA-256 evidence digests, and statutory non-judicial disclaimers. *(Inspectors access scoped to their dossiers)*.
+- `DELETE /dossiers/{dossier_id}` — Delete investigation dossier container. Cascades only to associative dossier links (`dossier_inspections`); underlying inspections, violations, evidence, and seizures remain 100% intact. *(Admin only, returns HTTP 204 No Content)*.
+

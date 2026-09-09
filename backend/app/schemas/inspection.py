@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 from app.core.enums import ComplianceResult, ImageType, InspectionStatus
 from app.schemas.declaration import DeclarationResponse
 from app.schemas.product import ProductResponse
@@ -75,6 +75,12 @@ class InspectionResponse(BaseModel):
     finalized_at: datetime | None = None
     created_at: datetime
     updated_at: datetime
+
+    @computed_field
+    @property
+    def statutory_verdict(self) -> ComplianceResult | None:
+        """Canonical statutory verdict alias mapping directly to overall_result."""
+        return self.overall_result
 
 
 class InspectionDetailResponse(InspectionResponse):

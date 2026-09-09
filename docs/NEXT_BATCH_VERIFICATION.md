@@ -1,51 +1,26 @@
 # Master Development Batch Verification Report — MetrologyMitra
 **Problem Statement ID:** SIH26034  
 **Project Official Name:** MetrologyMitra  
-**Verification Date:** 2026-09-03  
-**Batch Scope:** Phase 2.3 (Rule 24 & Schedule IV Gravimetric MPE Testing) + Phase 2.4 (Rule 26 Statutory Exemptions & Special Packaging) + Phase 2.5 (Field Geofence & Offline Sync Provenance)  
+**Verification Date:** 2026-09-04  
+**Batch Scope:** Legal Dataset Audit & Statutory Correction Batch (Rules 18, 19, 20, 21, 22, 23, 24, 26, 27, First Schedule MPE, Fifth Schedule Sampling)  
 **Status:** ALL PHASES IMPLEMENTED & VERIFIED PASS  
 
 ---
 
-## 1. Batch Execution Status
-- **Phase 2.3 (Rule 24 & Schedule IV Gravimetric Net-Quantity & MPE Verification Engine):** **PASS**
-- **Phase 2.4 (Rule 26 Statutory Exemptions & Special Package Provisions):** **PASS**
-- **Phase 2.5 (Field Geofence Verification, Offline Sync Queue & Inspection Provenance):** **PASS**
+## 1. Legal Dataset Audit Status
+- **Official Dataset:** Official SIH Legal Metrology Dataset (Legal Metrology Act, 2009 & Legal Metrology (Packaged Commodities) Rules, 2011 as amended).
+- **Rule 18 Audit:** Neutral reference-price mismatch evaluation (`CheckResult.REVIEW`, never auto-inferring tampering) — **PASS**
+- **Rule 19 & Fifth/Sixth Schedule Audit:** Sampling tiers (<4000 $\to$ 32, >4000 $\to$ 80), sample mean $\bar{x} \ge Q_n$, double-MPE zero tolerance, physical scale separation — **PASS**
+- **Rule 21 & 22 Special Packaging Provisions:** Multi-piece and Combination packages categorized as special packaging rules rather than blanket exemptions — **PASS**
+- **Rule 24 Wholesale Declarations:** Wholesale bulk package declarations distinguished from retail packages — **PASS**
+- **Rule 26 Statutory Exemptions & Provisos:** Accurate subclause alignment: 26(a) $\le 10\text{g/ml}$ + 10g-20g proviso + tobacco exclusion, 26(b) fast food, 26(c) DPCO formulations, 26(d) agricultural farm produce $>50\text{kg}$ with strict non-farm bulk gating to `NEEDS_REVIEW` — **PASS**
+- **Rule 27 Pre-Packer Registry:** Statutory basis (₹500 fee, 90-day application period, Director/Controller registration), unverified external registry returns `UNVERIFIED` / `NEEDS_REVIEW` — **PASS**
+- **First Schedule MPE:** Exact boundary validation across all mass (50g to >15000g), length (m, cm, mm), area (sq_m, sq_cm), and count (N, units) tiers — **PASS**
 - **Overall Batch Status:** **PASS**
 
 ---
 
-## 2. Capabilities Implemented
-
-### A. Phase 2.3: Rule 24 & Schedule IV Gravimetric MPE Testing
-- **Statutory Table 2 MPE Evaluation:** Deterministic lookup and verification of Maximum Permissible Error (MPE) thresholds across all net quantity ranges ($Q_n \le 50\text{g}$, $50\text{--}100\text{g}$, $100\text{--}200\text{g}$, $300\text{--}500\text{g}$, $1\text{--}10\text{kg}$, $>15\text{kg}$).
-- **Multi-Sample Scale Weights:** Interactive tare/gross physical scale logging for sample packages with calculation of net weight, mean net content ($\bar{x}$), and standard deviation ($s$).
-- **Statistical Lot Rejection Rules:** Mean deficit rejection ($\bar{x} < Q_n$), excessive negative defectives rejection ($> \text{Table 1 allowable limits}$), and immediate critical rejection on single double-MPE negative errors ($> 2\times\text{MPE}$).
-- **Statutory Memo PDF:** Official printable ReportLab PDF with SHA-256 digital integrity hash.
-
-### B. Phase 2.4: Rule 26 Statutory Exemptions & Special Packaging
-- **Rule 26(a) Small Package Exemption:** Packages $\le 10\text{g}$ or $\le 10\text{ml}$ are exempt from retail MRP, unit sale price, and manufacturing/packing dates.
-- **Rule 26(b) Agricultural Bulk:** Packages $> 50\text{kg}$ are exempt from retail declaration requirements.
-- **Rule 26(c) & Rule 2(p) Institutional Consumer:** Packages for direct institutional consumption are exempt from retail MRP declarations.
-- **Rules 21 & 22:** Multi-piece package individual piece counts and combination package multi-commodity rules.
-- **Deterministic Rule Engine Integration:** Integrated into `_eval_mrp`, `_eval_date`, and `_eval_usp`, ensuring exempt packages produce `PASS` with statutory legal citations rather than false violations.
-
-### C. Phase 2.5: Field Geofence & Offline Sync Provenance
-- **GPS Jurisdiction Boundary Checking:** Validates coordinates against Indian administrative boundaries (6°N–38°N, 68°E–98°E).
-- **Next.js Offline Client Queue:** Local storage queue with online/offline badge and one-click sync button in the navbar.
-- **Tamper-Evident Provenance Chaining:** SHA-256 hash chaining of inspector identity, geolocation anchor, and timestamp.
-
----
-
-## 3. Database Schema Changes & Alembic Migration
-- **Alembic Revision:** `0005_gravimetric_and_exemptions`
-- **Revises:** `0004_batch_and_enforcement` $\to$ `0003_regulatory_intelligence` $\to$ `0002_audit_logs` $\to$ `0001_initial_schema`
-- **New Table (1):** `gravimetric_tests`
-- **Altered Tables (2):** `declarations` (`package_type`, `exemption_applied`, `exemption_rationale`, `multi_piece_count`, `combination_items`), `inspections` (`offline_client_id`, `synced_at`, `geo_verified`).
-
----
-
-## 4. Test Harness Execution Results
+## 2. Test Harness Execution Results
 
 ```
 =======================================================
@@ -55,9 +30,13 @@ AUTOMATED TEST SUITES EXECUTION:
 3. tests/test_phase1_7_1_8_1_9.py ................. PASS (7/7 modules)
 4. tests/test_phase2_0_2_1_2_2.py ................. PASS (4/4 test suites)
 5. tests/test_phase2_3_2_4_2_5.py ................. PASS (3/3 test suites, 100%)
-   - Schedule IV Table 2 MPE & Lot Decision Engine
-   - Rule 26 Statutory Exemptions & Rule Engine Integration
-   - Geofence Boundary Check & Offline Batch Sync
-6. Next.js Production Build (npm run build) ....... PASS (11/11 routes compiled, 0 errors)
+6. tests/test_phase2_6_2_7_2_8.py ................. PASS (3/3 test suites, 100%)
+7. tests/test_official_legal_dataset_audit.py ..... PASS (5/5 audit suites, 100%)
+   - Rule 18 Neutral Reference MRP Evaluation
+   - Rules 19, 21 & Fifth Schedule Sampling Tiers (32 vs 80)
+   - First Schedule MPE Boundaries (Mass, Length, Area, Count)
+   - Rule 26 Statutory Exemptions, Provisos & Fact-Gating
+   - Rule 27 Statutory Registration Context
+8. Next.js Production Build (npm run build) ....... PASS (13/13 routes compiled, 0 errors)
 =======================================================
 ```

@@ -49,6 +49,21 @@ from app.schemas.measurement import (
     MeasurementInput,
     MeasurementResponse,
 )
+from app.schemas.dossier import (
+    DossierInspectionCreate,
+    DossierInspectionResponse,
+    InvestigationDossierCreate,
+    InvestigationDossierUpdate,
+    InvestigationDossierResponse,
+    InvestigationDossierDetailResponse,
+    DossierSynthesisResponse,
+    DossierSummaryCounts,
+    ObservedFindingSummary,
+    RecordedSeizureSummary,
+    DossierNominatedDirectorReview,
+    DossierTimelineEvent,
+)
+
 
 __all__ = [
     "APIResponse",
@@ -104,4 +119,17 @@ __all__ = [
     "DigitalListingCrossCheckResponse",
     "MeasurementInput",
     "MeasurementResponse",
+    "DossierInspectionCreate",
+    "DossierInspectionResponse",
+    "InvestigationDossierCreate",
+    "InvestigationDossierUpdate",
+    "InvestigationDossierResponse",
+    "InvestigationDossierDetailResponse",
+    "DossierSynthesisResponse",
+    "DossierSummaryCounts",
+    "ObservedFindingSummary",
+    "RecordedSeizureSummary",
+    "DossierNominatedDirectorReview",
+    "DossierTimelineEvent",
 ]
+

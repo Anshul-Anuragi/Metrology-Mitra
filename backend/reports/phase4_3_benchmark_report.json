@@ -1,0 +1,1455 @@
+{
+  "benchmark_phase": "Phase 4.3 \u2014 Evidence-Driven Perception Robustness",
+  "total_images_benchmarked": 28,
+  "source_data_non_mutation_verified": true,
+  "false_certainty_count": 0,
+  "variant_generation": {
+    "average_variants_per_image": 3.82,
+    "total_variants_generated": 107
+  },
+  "ocr_stability_metrics": {
+    "baseline_total_tokens": 1903,
+    "multi_variant_total_tokens": 3976,
+    "multi_variant_stable_tokens": 866,
+    "mean_token_stability_ratio": 0.1626,
+    "token_yield_gain_percent": 108.93
+  },
+  "declaration_fusion_metrics": {
+    "baseline_total_fields": 75,
+    "multi_variant_total_fields": 51,
+    "confirmed_fields_count": 26,
+    "probable_fields_count": 13,
+    "conflicting_fields_count": 12,
+    "field_yield_gain_percent": -32.0
+  },
+  "barcode_quorum_metrics": {
+    "images_with_barcodes": 8,
+    "images_catalog_matched": 0,
+    "detection_rate_percent": 28.57
+  },
+  "review_governance_metrics": {
+    "images_requiring_human_review": 26,
+    "human_review_rate_percent": 92.86,
+    "zero_false_certainty_pass": true
+  },
+  "failure_mode_taxonomy": {
+    "IMAGE_QUALITY_FAILURE": 22,
+    "OCR_FAILURE": 5,
+    "BARCODE_FAILURE": 1
+  },
+  "root_cause_disaggregation": {
+    "MODERATE_BLUR": 14,
+    "MOTION_BLUR": 12,
+    "SEVERE_DEFOCUS": 2
+  },
+  "recoverability_breakdown": {
+    "counts": {
+      "READY": 14,
+      "PROCESSING_RECOVERABLE": 12,
+      "CAPTURE_RETAKE_REQUIRED": 2
+    },
+    "processing_recoverable_percent": 42.86,
+    "capture_retake_required_percent": 7.14
+  },
+  "records": [
+    {
+      "image_id": "IMG-REAL-001",
+      "filename": "IMG_20260904_230429.jpg",
+      "category": "compliant",
+      "raw_sha256": "b79eefd179b5047949a4d13a6696d8afa1f3737929c3ef416f6ff3975cbc13f5",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 803,
+      "baseline_confidence": 0.7015,
+      "baseline_barcodes": [
+        "8904327602577"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "manufacturer_name",
+        "address",
+        "net_quantity",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 230,
+      "p43_stable_tokens": 86,
+      "p43_stability_ratio": 0.3739,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.6649,
+      "p43_quorum_barcodes": [
+        "8904327602577"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 3,
+      "p43_confirmed_fields": 2,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 13,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Divergent values detected for statutory field 'address' across preprocessing variants: ['ia sett floor, plot no.\u20149, sssat, bay, sector ~ 32, gurugram, lic.no. | 0824999000) 79, haryana 122001, | 602577', 'bay, sector ~ 32, gurugram, s : 16.40. 1182 490 9000; 4), haryana 122001. ., gilgo4327 \"602577 q', 'vate second floor, plot no.\u2014?, sgt, s no. 14/2, palitana road, near tcd farm, = tj aig', 'innohouse second floor, plot no, ia, sector ~ 32 gurugram, 50 oh 1\u0965/ paltana road, near tcd farm, \u0939\u0915 nehwra~ 244290 dist bhewmaga gujarat india, 904327']"
+      ],
+      "token_count_gain": 89,
+      "field_count_gain": -2,
+      "processing_time_ms": 20804.7,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-002",
+      "filename": "IMG_20260904_230450.jpg",
+      "category": "compliant",
+      "raw_sha256": "ec45c3d956c23601dda7b4af9c13ec7ca5bed268c68a54e40733599c786170c7",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 863,
+      "baseline_confidence": 0.7189,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "net_quantity",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 202,
+      "p43_stable_tokens": 112,
+      "p43_stability_ratio": 0.5545,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.7633,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 1,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 15,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 171.0 < 175). Small statutory text and dates may be unreadable.)",
+        "Divergent Net Quantity numeric readings detected across variants.",
+        "Divergent values detected for statutory field 'net_quantity' across preprocessing variants: ['0 g', '0.0349 g']"
+      ],
+      "token_count_gain": 49,
+      "field_count_gain": -2,
+      "processing_time_ms": 24593.3,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-003",
+      "filename": "IMG_20260904_230516.jpg",
+      "category": "compliant",
+      "raw_sha256": "c94f1f4633737d8f8c4d5b3972f4c341e0541e2c67c0363984e8c33156eed831",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 823,
+      "baseline_confidence": 0.6702,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "manufacturer_name",
+        "address",
+        "net_quantity",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 307,
+      "p43_stable_tokens": 91,
+      "p43_stability_ratio": 0.2964,
+      "p43_primary_variant": "SHARPENED",
+      "p43_mean_confidence": 0.617,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 5,
+      "p43_confirmed_fields": 4,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 11,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Divergent values detected for statutory field 'manufacturer_name' across preprocessing variants: ['|', 'expiry', '= gad']"
+      ],
+      "token_count_gain": 143,
+      "field_count_gain": -2,
+      "processing_time_ms": 27301.4,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-004",
+      "filename": "IMG_20260904_230628.jpg",
+      "category": "compliant",
+      "raw_sha256": "3ba1813d572437c8a8ce559405a0881710a339d3aa7917354c1f9b8d3f2f2fe1",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 776,
+      "baseline_confidence": 0.6054,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "manufacturer_name",
+        "address",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 333,
+      "p43_stable_tokens": 80,
+      "p43_stability_ratio": 0.2402,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.6327,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 5,
+      "p43_confirmed_fields": 2,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 2,
+      "p43_missing_fields": 11,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 123.9 < 175). Small statutory text and dates may be unreadable.)",
+        "Divergent values detected for statutory field 'consumer_care_email' across preprocessing variants: ['helio@mywishcare.com', 'kelio@mywishcare.con']",
+        "Divergent values detected for statutory field 'consumer_care_phone' across preprocessing variants: ['591-83368332', '91-8336833230', '+91-8336833230', '191-83368332']"
+      ],
+      "token_count_gain": 156,
+      "field_count_gain": -1,
+      "processing_time_ms": 24554.7,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-005",
+      "filename": "IMG_20260904_231232.jpg",
+      "category": "compliant",
+      "raw_sha256": "0498aedade251818dc3b6d7240fb5945e95b8c83fbc3f068d8c35e654774aceb",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 10,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.6875,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 10,
+      "field_count_gain": 0,
+      "processing_time_ms": 17799.6,
+      "failure_mode_tag": "OCR_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-006",
+      "filename": "IMG_20260904_230632.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "2ebad0e8467ccfd55c1f0c7ac9b071afc53930f12ed19a4d419f5953dc184512",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 615,
+      "baseline_confidence": 0.6586,
+      "baseline_barcodes": [
+        "8906127101120"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "address",
+        "net_quantity",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 230,
+      "p43_stable_tokens": 57,
+      "p43_stability_ratio": 0.2478,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.6351,
+      "p43_quorum_barcodes": [
+        "8906127101120"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 4,
+      "p43_confirmed_fields": 2,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 12,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 162.3 < 175). Small statutory text and dates may be unreadable.)",
+        "Divergent values detected for statutory field 'consumer_care' across preprocessing variants: ['customer care bcc. tive\\nad kolkata -700002. in', 'customer care execi tive\\nwad kolkata -700002. in', 'customer care 2 tive\u2019\\nad kolkata -700002. in', 'phone: 91-8336833230, email: n/a']"
+      ],
+      "token_count_gain": 95,
+      "field_count_gain": -2,
+      "processing_time_ms": 23262.4,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-007",
+      "filename": "IMG_20260904_230637.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "9b81956c30758faadc732880ef1e2e834970db53695f517f29c14a93d39a4b31",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 54,
+      "baseline_confidence": 0.5493,
+      "baseline_barcodes": [
+        "8906127101120"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 53,
+      "p43_stable_tokens": 3,
+      "p43_stability_ratio": 0.0566,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.44,
+      "p43_quorum_barcodes": [
+        "8906127101120"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 1,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 15,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 158.8 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 38,
+      "field_count_gain": -1,
+      "processing_time_ms": 19577.4,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-008",
+      "filename": "IMG_20260904_230644.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "b96c6323dbab524e882077f61656f5a3b9a5bdd87487a1a961278caec8b59eaa",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 719,
+      "baseline_confidence": 0.627,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "manufacturer_name",
+        "address",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 305,
+      "p43_stable_tokens": 68,
+      "p43_stability_ratio": 0.223,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.613,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 6,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 3,
+      "p43_conflicting_fields": 2,
+      "p43_missing_fields": 10,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 138.3 < 175). Small statutory text and dates may be unreadable.)",
+        "Divergent values detected for statutory field 'address' across preprocessing variants: ['plot no. 28, 29, sector 0, |, sharidwar - 249403, ew delhi - 110017, 28, bt. road, kolkata, 28, 81 road kolkata \u2014\u2019', 'mat mo. 26, 29, sector 1b lif raniwur, haridwar - 249403, 28 bt road kolkata / \u201cys 9', 'plot no. 28, 29, sector 1b, | \u201cnap % 0, aridwar - 249403, ew delhi - 110017, 28, bt. road, kolkata - 700002, in', '\u201cplot no. 28, 29, sector \u00a9, \u2018haridwar - 249403, new delhi - 110017, 28, b.t. road kolkata, 28, 81. road kolkata']",
+        "Divergent values detected for statutory field 'consumer_care' across preprocessing variants: ['customer care execi tive\\n28, bt. ruad kolkata -70u002, in \u00a9', \"customer care mi hd\\n28, 81 read kolkata -/' l, wn\"]"
+      ],
+      "token_count_gain": 165,
+      "field_count_gain": 2,
+      "processing_time_ms": 24899.4,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-009",
+      "filename": "IMG_20260904_230731.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "b2d9482bd2a411cad49117c54087b971a24e8d1b7ce97a429ee40e86474515a2",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 712,
+      "baseline_confidence": 0.4077,
+      "baseline_barcodes": [
+        "8909106061781"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "address",
+        "consumer_care_phone",
+        "consumer_care",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 452,
+      "p43_stable_tokens": 47,
+      "p43_stability_ratio": 0.104,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.3936,
+      "p43_quorum_barcodes": [
+        "8909106061781"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 4,
+      "p43_confirmed_fields": 2,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 12,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Divergent values detected for statutory field 'address' across preprocessing variants: ['gee 110\u09650\u0965100 33s 340320, moos 1000300\u09654 3100080701118 \u0965\u0965408707', '1180 onigod 44s 340438 39\u00b0 2 qy, 700119\u0965085 515005 *', '190090\u0965 9000 909 \u09650 um \u09650\u096504 1090 \u0965\u0965\u0965 \u09650110)01:']"
+      ],
+      "token_count_gain": 319,
+      "field_count_gain": -1,
+      "processing_time_ms": 24319.5,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-010",
+      "filename": "IMG_20260904_230754.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "11ab2216f1a41ee4c8870ae805632e2c05d9b6091a968addad7aa040e74c2f22",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 87,
+      "baseline_confidence": 0.4124,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 38,
+      "p43_stable_tokens": 5,
+      "p43_stability_ratio": 0.1316,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.4642,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 77.5 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 21,
+      "field_count_gain": -2,
+      "processing_time_ms": 19895.6,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "SEVERE_DEFOCUS"
+      ],
+      "recoverability": "CAPTURE_RETAKE_REQUIRED",
+      "inspector_directives": [
+        "Severe defocus detected. Tap camera screen to focus lens directly on statutory text before capturing."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-011",
+      "filename": "IMG_20260904_230758.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "40855ac7539e78665fc0829c75dad5d496b1a375448eace0e44402bae3d63b11",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 291,
+      "baseline_confidence": 0.8045,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "address",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 74,
+      "p43_stable_tokens": 30,
+      "p43_stability_ratio": 0.4054,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.787,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 2,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 14,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 92.4 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 19,
+      "field_count_gain": -1,
+      "processing_time_ms": 20419.3,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "SEVERE_DEFOCUS"
+      ],
+      "recoverability": "CAPTURE_RETAKE_REQUIRED",
+      "inspector_directives": [
+        "Severe defocus detected. Tap camera screen to focus lens directly on statutory text before capturing."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-012",
+      "filename": "IMG_20260904_230818.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "95bde3ea441ff581c2fb405b45946353018e22390a680d5a32fdc6cc5b26e199",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 621,
+      "baseline_confidence": 0.5811,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 301,
+      "p43_stable_tokens": 42,
+      "p43_stability_ratio": 0.1395,
+      "p43_primary_variant": "LOCAL_CONTRAST_ENHANCED",
+      "p43_mean_confidence": 0.5222,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 143.8 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 179,
+      "field_count_gain": -2,
+      "processing_time_ms": 24507.6,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-013",
+      "filename": "IMG_20260904_231012.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "b4e586cebb62ccde8640a560ae618e91e61b09aa17a24f65d713c3d5b27ce327",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 533,
+      "baseline_confidence": 0.4246,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 275,
+      "p43_stable_tokens": 27,
+      "p43_stability_ratio": 0.0982,
+      "p43_primary_variant": "LOCAL_CONTRAST_ENHANCED",
+      "p43_mean_confidence": 0.4089,
+      "p43_quorum_barcodes": [
+        "8904004401011"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 2,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 14,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 167.1 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 162,
+      "field_count_gain": 0,
+      "processing_time_ms": 21512.9,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-014",
+      "filename": "IMG_20260904_231206.jpg",
+      "category": "difficult_ocr",
+      "raw_sha256": "e0c99a0efb72ae15a986977fa351fb8aac81306ec56245e946e6ad1f04daad8e",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 0,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.0,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 0,
+      "field_count_gain": 0,
+      "processing_time_ms": 26385.0,
+      "failure_mode_tag": "OCR_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-015",
+      "filename": "IMG_20260904_231232.jpg",
+      "category": "multilingual",
+      "raw_sha256": "0498aedade251818dc3b6d7240fb5945e95b8c83fbc3f068d8c35e654774aceb",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 10,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.6875,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 10,
+      "field_count_gain": 0,
+      "processing_time_ms": 16835.0,
+      "failure_mode_tag": "OCR_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-016",
+      "filename": "IMG_20260904_231235.jpg",
+      "category": "multilingual",
+      "raw_sha256": "0f5cc7bb7d984ce97b983283a51509d03873eaaf9bcad669bbd390cba6bff3b7",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 7,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.52,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 1,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 15,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": false,
+      "p43_review_reasons": [],
+      "token_count_gain": 7,
+      "field_count_gain": 1,
+      "processing_time_ms": 17946.8,
+      "failure_mode_tag": "OCR_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-017",
+      "filename": "IMG_20260904_230707.jpg",
+      "category": "needs_review",
+      "raw_sha256": "6d2f902b8c274f1292a8ac45c6392c101d9c4dc062157e4bd21e57c5c19578ba",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 221,
+      "baseline_confidence": 0.6905,
+      "baseline_barcodes": [
+        "8901030795589"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 87,
+      "p43_stable_tokens": 17,
+      "p43_stability_ratio": 0.1954,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.6755,
+      "p43_quorum_barcodes": [
+        "8901030795589"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 1,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 15,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 129.4 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 48,
+      "field_count_gain": -1,
+      "processing_time_ms": 18664.9,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-018",
+      "filename": "IMG_20260904_230723.jpg",
+      "category": "needs_review",
+      "raw_sha256": "27e655359c6dc78236a349d7d0139e95be871a73d1ad13b2e032474a46da4f42",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 429,
+      "baseline_confidence": 0.675,
+      "baseline_barcodes": [
+        "8909106061781"
+      ],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "country_of_origin",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 215,
+      "p43_stable_tokens": 63,
+      "p43_stability_ratio": 0.293,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.6586,
+      "p43_quorum_barcodes": [
+        "0929126061781",
+        "8909106061781"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 2,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 14,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 141.9 < 175). Small statutory text and dates may be unreadable.)",
+        "Conflicting barcode symbologies detected across image derivatives",
+        "Divergent values detected for statutory field 'net_quantity' across preprocessing variants: ['og', 'ol']"
+      ],
+      "token_count_gain": 123,
+      "field_count_gain": -1,
+      "processing_time_ms": 20156.8,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-019",
+      "filename": "IMG_20260904_230824.jpg",
+      "category": "needs_review",
+      "raw_sha256": "e86a6770975100f2a934c6b9ff68d9d2d981f2f83d9d5867d9b9ce4fba70cbf5",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 720,
+      "baseline_confidence": 0.5528,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 226,
+      "p43_stable_tokens": 31,
+      "p43_stability_ratio": 0.1372,
+      "p43_primary_variant": "LOCAL_CONTRAST_ENHANCED",
+      "p43_mean_confidence": 0.515,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 89,
+      "field_count_gain": -2,
+      "processing_time_ms": 23699.2,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-020",
+      "filename": "IMG_20260904_230841.jpg",
+      "category": "needs_review",
+      "raw_sha256": "1ac23801a8e8772bfb9dfc388e2c06385ddc57d6aa3032687ff55e347e0e1e0f",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 64,
+      "baseline_confidence": 0.4537,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 63,
+      "p43_stable_tokens": 1,
+      "p43_stability_ratio": 0.0159,
+      "p43_primary_variant": "LOCAL_CONTRAST_ENHANCED",
+      "p43_mean_confidence": 0.2906,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 47,
+      "field_count_gain": -2,
+      "processing_time_ms": 19763.1,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-021",
+      "filename": "IMG_20260904_230850.jpg",
+      "category": "needs_review",
+      "raw_sha256": "cebd0759b1a47d6bec862772169ac52f6fe208d5f0e44f48cef83a2470f7137f",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 0,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.0,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 0,
+      "field_count_gain": 0,
+      "processing_time_ms": 27482.9,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-022",
+      "filename": "IMG_20260904_230942.jpg",
+      "category": "needs_review",
+      "raw_sha256": "cd7a5de30679eac45b7e4fb4a89abbc8a32b6c5cdc543fa340db2c5154ca76c3",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 132,
+      "baseline_confidence": 0.4918,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "mrp",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 31,
+      "p43_stable_tokens": 2,
+      "p43_stability_ratio": 0.0645,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.6152,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 2,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 14,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Divergent values detected for statutory field 'mrp' across preprocessing variants: [449.0, 149.0]"
+      ],
+      "token_count_gain": 3,
+      "field_count_gain": -1,
+      "processing_time_ms": 19834.8,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-023",
+      "filename": "IMG_20260904_231012.jpg",
+      "category": "needs_review",
+      "raw_sha256": "b4e586cebb62ccde8640a560ae618e91e61b09aa17a24f65d713c3d5b27ce327",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 533,
+      "baseline_confidence": 0.4246,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 275,
+      "p43_stable_tokens": 27,
+      "p43_stability_ratio": 0.0982,
+      "p43_primary_variant": "LOCAL_CONTRAST_ENHANCED",
+      "p43_mean_confidence": 0.4089,
+      "p43_quorum_barcodes": [
+        "8904004401011"
+      ],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 2,
+      "p43_confirmed_fields": 1,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 14,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 167.1 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 162,
+      "field_count_gain": 0,
+      "processing_time_ms": 21142.8,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-024",
+      "filename": "IMG_20260904_231221.jpg",
+      "category": "needs_review",
+      "raw_sha256": "6dcbf9f9ed5059c035ebaa9534a6585e13e307cd871d47404d914003ea4dc349",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 137,
+      "baseline_confidence": 0.7948,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "net_quantity",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 77,
+      "p43_stable_tokens": 9,
+      "p43_stability_ratio": 0.1169,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.7099,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 3,
+      "p43_confirmed_fields": 2,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 13,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": false,
+      "p43_review_reasons": [],
+      "token_count_gain": 48,
+      "field_count_gain": 0,
+      "processing_time_ms": 15215.2,
+      "failure_mode_tag": "BARCODE_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-025",
+      "filename": "IMG_20260904_231224.jpg",
+      "category": "needs_review",
+      "raw_sha256": "26a1c0a5c77a7d64722de5c94d6265e05de52c0921b646c7f7315e1068ffa617",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 0,
+      "baseline_confidence": null,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 0,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.0,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 0,
+      "field_count_gain": 0,
+      "processing_time_ms": 29843.2,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-026",
+      "filename": "IMG_20260904_231340.jpg",
+      "category": "needs_review",
+      "raw_sha256": "6fba21076ad3039e0c589eb4248f58963186b59dfef9269777af5fbbedc74d9b",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 18,
+      "baseline_confidence": 0.298,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 39,
+      "p43_stable_tokens": 0,
+      "p43_stability_ratio": 0.0,
+      "p43_primary_variant": "CONTRAST_NORMALIZED",
+      "p43_mean_confidence": 0.2913,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 0,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 16,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "INSUFFICIENT",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [],
+      "token_count_gain": 34,
+      "field_count_gain": -2,
+      "processing_time_ms": 21267.8,
+      "failure_mode_tag": "OCR_FAILURE",
+      "root_cause_categories": [
+        "MODERATE_BLUR"
+      ],
+      "recoverability": "READY",
+      "inspector_directives": [
+        "Hold camera steady and ensure package is well-lit."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-027",
+      "filename": "IMG_20260904_230923.jpg",
+      "category": "non_compliant",
+      "raw_sha256": "961d46af95868d5da09dd41bdb3e3e2d6299fff89f2edde1923896d2f09b554c",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 502,
+      "baseline_confidence": 0.8853,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "commodity_name",
+        "address",
+        "consumer_care_phone",
+        "consumer_care_email",
+        "consumer_care",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 108,
+      "p43_stable_tokens": 63,
+      "p43_stability_ratio": 0.5833,
+      "p43_primary_variant": "SHARPENED",
+      "p43_mean_confidence": 0.8349,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 6,
+      "p43_confirmed_fields": 5,
+      "p43_probable_fields": 0,
+      "p43_conflicting_fields": 1,
+      "p43_missing_fields": 10,
+      "p43_has_conflicts": true,
+      "p43_overall_quality": "MODERATE",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 142.4 < 175). Small statutory text and dates may be unreadable.)",
+        "Divergent values detected for statutory field 'consumer_care_email' across preprocessing variants: ['support@wellversed.in', 'support@weliversed.in']"
+      ],
+      "token_count_gain": 31,
+      "field_count_gain": -1,
+      "processing_time_ms": 22722.6,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    },
+    {
+      "image_id": "IMG-REAL-028",
+      "filename": "IMG_20260904_230934.jpg",
+      "category": "non_compliant",
+      "raw_sha256": "cadc1aa0a4b6fcf10010dcc21bc5e778f6ed85726dcf82530fe6b985a6029a35",
+      "baseline_variants_count": 1,
+      "baseline_char_count": 18,
+      "baseline_confidence": 0.71,
+      "baseline_barcodes": [],
+      "baseline_extracted_fields": [
+        "_language_detected",
+        "is_imported"
+      ],
+      "p43_variants_generated": [
+        "NORMALIZED_ORIGINAL",
+        "CONTRAST_NORMALIZED",
+        "LOCAL_CONTRAST_ENHANCED",
+        "SHARPENED"
+      ],
+      "p43_total_tokens": 28,
+      "p43_stable_tokens": 5,
+      "p43_stability_ratio": 0.1786,
+      "p43_primary_variant": "NORMALIZED_ORIGINAL",
+      "p43_mean_confidence": 0.4601,
+      "p43_quorum_barcodes": [],
+      "p43_catalog_matched": false,
+      "p43_fused_fields_total": 1,
+      "p43_confirmed_fields": 0,
+      "p43_probable_fields": 1,
+      "p43_conflicting_fields": 0,
+      "p43_missing_fields": 15,
+      "p43_has_conflicts": false,
+      "p43_overall_quality": "DEGRADED",
+      "p43_requires_human_review": true,
+      "p43_review_reasons": [
+        "Optical quality gating flagged image: gate_decision=RETAKE_RECOMMENDED (Image is significantly blurred (Sharpness Score: 159.8 < 175). Small statutory text and dates may be unreadable.)"
+      ],
+      "token_count_gain": 26,
+      "field_count_gain": -1,
+      "processing_time_ms": 18201.6,
+      "failure_mode_tag": "IMAGE_QUALITY_FAILURE",
+      "root_cause_categories": [
+        "MOTION_BLUR"
+      ],
+      "recoverability": "PROCESSING_RECOVERABLE",
+      "inspector_directives": [
+        "Hold camera steady or rest hands on a flat surface to eliminate motion blur on fine statutory print."
+      ]
+    }
+  ]
+}

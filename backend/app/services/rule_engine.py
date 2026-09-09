@@ -115,13 +115,17 @@ def _eval_net_quantity(decl: Optional[Declaration], rule: LegalRule) -> Tuple[Ch
 
 
 def _eval_mrp(decl: Optional[Declaration], rule: LegalRule) -> Tuple[CheckResult, str, Optional[float], str]:
-    if decl and (getattr(decl, "package_type", None) in ("SMALL_PACK", "INSTITUTIONAL", "AGRICULTURAL_BULK") or getattr(decl, "exemption_applied", None) in ("Rule 26(a)", "Rule 26(b)", "Rule 26(c)", "Rule 26(c) / Rule 2(p)")):
-        ex_name = getattr(decl, "exemption_applied", None) or getattr(decl, "package_type", "Rule 26 Exemption")
+    valid_mrp_exemptions = (
+        "Rule 26(a)", "Rule 26(a) Proviso 1", "Rule 26(b)", "Rule 26(c)",
+        "Rule 26(d)", "Rule 2(p) / Rule 3", "Rule 2(p)", "Rule 26(c) / Rule 2(p)"
+    )
+    if decl and getattr(decl, "exemption_applied", None) in valid_mrp_exemptions:
+        ex_name = getattr(decl, "exemption_applied", "Statutory Exemption")
         return (
             CheckResult.PASS,
             decl.mrp or "EXEMPT",
             1.0,
-            f"Exempt from retail MRP declaration under {ex_name} of LMPC Rules, 2011.",
+            f"Exempt from retail MRP declaration under verified {ex_name} of LMPC Rules, 2011.",
         )
 
     if not decl or not decl.mrp or not decl.mrp.strip():
@@ -160,12 +164,13 @@ def _eval_mrp(decl: Optional[Declaration], rule: LegalRule) -> Tuple[CheckResult
 
 
 def _eval_date(decl: Optional[Declaration], rule: LegalRule) -> Tuple[CheckResult, str, Optional[float], str]:
-    if decl and (getattr(decl, "package_type", None) == "SMALL_PACK" or getattr(decl, "exemption_applied", None) == "Rule 26(a)"):
+    valid_date_exemptions = ("Rule 26(a)", "Rule 26(a) Proviso 1", "Rule 26(b)", "Rule 26(d)")
+    if decl and getattr(decl, "exemption_applied", None) in valid_date_exemptions:
         return (
             CheckResult.PASS,
             "EXEMPT",
             1.0,
-            "Exempt from manufacturing/packing date declaration under Rule 26(a) (Small package <= 10g/ml exemption).",
+            f"Exempt from manufacturing/packing date declaration under verified {decl.exemption_applied}.",
         )
 
     date_val = None
@@ -286,13 +291,17 @@ def _eval_origin(decl: Optional[Declaration], rule: LegalRule) -> Tuple[CheckRes
 
 
 def _eval_usp(decl: Optional[Declaration], rule: LegalRule) -> Tuple[CheckResult, str, Optional[float], str]:
-    if decl and (getattr(decl, "package_type", None) in ("SMALL_PACK", "INSTITUTIONAL", "AGRICULTURAL_BULK") or getattr(decl, "exemption_applied", None) in ("Rule 26(a)", "Rule 26(b)", "Rule 26(c)", "Rule 26(c) / Rule 2(p)")):
-        ex_name = getattr(decl, "exemption_applied", None) or getattr(decl, "package_type", "Rule 26 Exemption")
+    valid_usp_exemptions = (
+        "Rule 26(a)", "Rule 26(a) Proviso 1", "Rule 26(b)", "Rule 26(c)",
+        "Rule 26(d)", "Rule 2(p) / Rule 3", "Rule 2(p)", "Rule 26(c) / Rule 2(p)"
+    )
+    if decl and getattr(decl, "exemption_applied", None) in valid_usp_exemptions:
+        ex_name = getattr(decl, "exemption_applied", "Statutory Exemption")
         return (
             CheckResult.PASS,
             decl.unit_sale_price or "EXEMPT",
             1.0,
-            f"Exempt from unit sale price declaration under {ex_name} of LMPC Rules, 2011.",
+            f"Exempt from unit sale price declaration under verified {ex_name} of LMPC Rules, 2011.",
         )
 
     if not decl or not decl.unit_sale_price or not decl.unit_sale_price.strip():

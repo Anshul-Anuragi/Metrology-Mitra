@@ -42,21 +42,21 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 text-white shadow-xl">
+    <div className="bg-white/85 backdrop-blur-md border border-slate-200/90 rounded-3xl p-6 text-slate-900 shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
         <div>
-          <h3 className="text-base font-semibold text-white flex items-center gap-2">
-            <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
             E-Commerce Digital Marketplace Cross-Check
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Rule 6(10) Mandatory Declarations & Physical Package Cross-Verification
+          <p className="text-xs text-slate-500 mt-0.5">
+            Rule 6(10) Mandatory Declarations &amp; Physical Package Cross-Verification
           </p>
         </div>
-        <span className="px-2.5 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-semibold rounded-full uppercase tracking-wider">
+        <span className="px-2.5 py-1 bg-purple-50 text-purple-700 border border-purple-200 text-[10px] font-bold rounded-full uppercase tracking-wider">
           Rule 6(10) E-Commerce
         </span>
       </div>
@@ -65,7 +65,7 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
       <form onSubmit={handleCrossCheck} className="space-y-4 mb-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Marketplace Listing Title / Commodity
             </label>
             <input
@@ -73,12 +73,12 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.title || ''}
               onChange={(e) => setListingData({ ...listingData, title: e.target.value })}
               placeholder="e.g. Premium Basmati Rice 1kg"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Listed Selling Price / MRP (₹)
             </label>
             <input
@@ -87,12 +87,12 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.price !== undefined ? listingData.price : ''}
               onChange={(e) => setListingData({ ...listingData, price: parseFloat(e.target.value) || undefined })}
               placeholder="e.g. 240.00"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Listed Net Quantity
             </label>
             <input
@@ -100,12 +100,12 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.net_quantity || ''}
               onChange={(e) => setListingData({ ...listingData, net_quantity: e.target.value })}
               placeholder="e.g. 1 kg"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Listed Country of Origin
             </label>
             <input
@@ -113,12 +113,12 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.country_of_origin || ''}
               onChange={(e) => setListingData({ ...listingData, country_of_origin: e.target.value })}
               placeholder="e.g. India"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Listed Manufacturer / Brand Name
             </label>
             <input
@@ -126,12 +126,12 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.manufacturer_name || ''}
               onChange={(e) => setListingData({ ...listingData, manufacturer_name: e.target.value })}
               placeholder="e.g. Rice Exporters Ltd"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Marketplace Product URL
             </label>
             <input
@@ -139,7 +139,7 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
               value={listingData.listing_url || ''}
               onChange={(e) => setListingData({ ...listingData, listing_url: e.target.value })}
               placeholder="https://ecom-marketplace.in/item/123"
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition-all"
             />
           </div>
         </div>
@@ -148,7 +148,7 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
           <button
             type="submit"
             disabled={loading}
-            className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg transition disabled:opacity-50 flex items-center gap-1.5"
+            className="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold rounded-xl transition shadow-xs disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
           >
             {loading ? 'Cross-Checking...' : 'Run E-Commerce Cross-Check'}
           </button>
@@ -157,45 +157,45 @@ export const DigitalListingCrossCheck: React.FC<DigitalListingCrossCheckProps> =
 
       {/* Results Comparison View */}
       {result && (
-        <div className="border-t border-slate-800 pt-4">
+        <div className="border-t border-slate-100 pt-5">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-semibold text-slate-300">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
               Cross-Check Comparison Report
             </h4>
-            <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
+            <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${
               result.has_contradictions
-                ? 'bg-rose-950 border border-rose-500/40 text-rose-300'
-                : 'bg-emerald-950 border border-emerald-500/40 text-emerald-300'
+                ? 'bg-rose-50 border-rose-200 text-rose-800'
+                : 'bg-emerald-50 border-emerald-200 text-emerald-800'
             }`}>
               {result.has_contradictions ? 'CONTRADICTIONS DETECTED' : 'DECLARATIONS MATCH'}
             </span>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-lg overflow-hidden">
-              <thead className="bg-slate-950 text-slate-400 border-b border-slate-800 text-[11px]">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200">
+            <table className="w-full text-left text-xs text-slate-800 overflow-hidden">
+              <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 text-[11px] font-semibold">
                 <tr>
-                  <th className="p-2.5">Field</th>
-                  <th className="p-2.5">Physical Package Declaration</th>
-                  <th className="p-2.5">Digital Marketplace Listing</th>
-                  <th className="p-2.5">Finding / Statutory Status</th>
+                  <th className="p-3">Field</th>
+                  <th className="p-3">Physical Package Declaration</th>
+                  <th className="p-3">Digital Marketplace Listing</th>
+                  <th className="p-3">Finding / Statutory Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {result.items.map((item, idx) => (
-                  <tr key={idx} className={item.is_contradiction ? 'bg-rose-950/20' : 'bg-slate-900/40'}>
-                    <td className="p-2.5 font-medium text-slate-200 capitalize">
+                  <tr key={idx} className={item.is_contradiction ? 'bg-rose-50/50 hover:bg-rose-50/80 transition' : 'bg-white hover:bg-slate-50/80 transition'}>
+                    <td className="p-3 font-semibold text-slate-900 capitalize">
                       {item.field_name.replace(/_/g, ' ')}
                     </td>
-                    <td className="p-2.5 text-slate-300 font-mono text-[11px]">
+                    <td className="p-3 text-slate-700 font-mono text-[11px]">
                       {item.physical_value || '—'}
                     </td>
-                    <td className="p-2.5 text-slate-300 font-mono text-[11px]">
+                    <td className="p-3 text-slate-700 font-mono text-[11px]">
                       {item.listing_value || '—'}
                     </td>
-                    <td className="p-2.5">
-                      <span className={`inline-flex items-center gap-1 ${
-                        item.is_contradiction ? 'text-rose-400 font-medium' : 'text-emerald-400'
+                    <td className="p-3">
+                      <span className={`inline-flex items-center gap-1 text-xs ${
+                        item.is_contradiction ? 'text-rose-700 font-bold' : 'text-emerald-700 font-bold'
                       }`}>
                         {item.is_contradiction ? '⚠️' : '✓'} {item.finding}
                       </span>

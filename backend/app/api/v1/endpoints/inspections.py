@@ -9,7 +9,7 @@ from sqlalchemy import delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.core.deps import get_current_user, get_db
+from app.core.deps import get_current_user, get_db, require_supervisor
 from app.core.enums import (
     CheckResult,
     ComplianceResult,
@@ -57,8 +57,10 @@ from app.schemas.review import (
     ReviewSubmissionRequest,
     ReviewWorkspaceResponse,
 )
+from app.schemas.case_intelligence import CaseIntelligenceResponse, SupervisorTriageResponse
 from app.schemas.violation import ComplianceCheckResponse, EvidenceResponse, ViolationResponse
 
+from app.services.case_intelligence_service import get_case_intelligence, get_supervisor_triage_queue
 from app.services.evidence_service import link_evidence_for_inspection
 from app.services.image_quality import assess_image_quality
 from app.services.listing_service import DigitalListingData, cross_check_digital_listing
@@ -231,6 +233,34 @@ async def list_inspections(
     return result.scalars().all()
 
 
+@router.get("/triage", response_model=SupervisorTriageResponse, tags=["Supervisor Triage"])
+async def get_supervisor_triage(
+    priority_level: Optional[str] = Query(None, description="Filter by priority level: CRITICAL, HIGH, MEDIUM, LOW"),
+    status_filter: Optional[str] = Query(None, description="Filter by status: CREATED, REVIEW_REQUIRED, COMPLETED"),
+    result_filter: Optional[str] = Query(None, description="Filter by result: COMPLIANT, NON_COMPLIANT, NEEDS_REVIEW, PENDING"),
+    min_priority_score: Optional[float] = Query(None, ge=0.0, le=100.0, description="Filter by minimum priority score"),
+    search: Optional[str] = Query(None, description="Search store, district, state, or entity name"),
+    limit: int = Query(50, ge=1, le=100, description="Items per page"),
+    offset: int = Query(0, ge=0, description="Page offset"),
+    current_user: User = Depends(require_supervisor),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Retrieves prioritized operational triage queue for supervisors and admins.
+    Sorted dynamically by priority score and urgency.
+    """
+    return await get_supervisor_triage_queue(
+        db=db,
+        priority_level=priority_level,
+        status_filter=status_filter,
+        result_filter=result_filter,
+        min_priority_score=min_priority_score,
+        search=search,
+        limit=limit,
+        offset=offset,
+    )
+
+
 @router.get("/{inspection_id}", response_model=InspectionDetailResponse, tags=["Inspections"])
 async def get_inspection_detail(
     inspection_id: uuid.UUID,
@@ -238,6 +268,21 @@ async def get_inspection_detail(
     db: AsyncSession = Depends(get_db),
 ):
     return await get_authorized_inspection(inspection_id, current_user, db, load_relations=True)
+
+
+@router.get("/{inspection_id}/intelligence", response_model=CaseIntelligenceResponse, tags=["Case Intelligence"])
+async def get_inspection_case_intelligence(
+    inspection_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Retrieves Evidence Completeness (0-100), Case Priority (0-100), and Advisory Next Steps.
+    Read-only decision-support endpoint.
+    """
+    # Verify RBAC authorization (inspectors can only access their own inspections)
+    await get_authorized_inspection(inspection_id, current_user, db, load_relations=False)
+    return await get_case_intelligence(db, inspection_id)
 
 
 @router.patch("/{inspection_id}/declaration", response_model=DeclarationResponse, tags=["Inspections"])
@@ -1244,12 +1289,15 @@ DEMO_PRESETS = [
             "net_quantity": "1 kg",
             "mrp": "MRP Rs. 175.00 incl. of all taxes",
             "manufacturing_date": "08/2026",
+            "expiry_date": "08/2027",
+            "best_before": "Best Before 12 Months from Packaging",
             "consumer_care": "1800-345-0020, care@tataconsumer.com",
             "is_imported": False,
             "pdp_area_sq_cm": 180.0,
             "unit_sale_price": "Rs. 175.00/kg",
             "is_human_verified": True,
         },
+        "status": InspectionStatus.COMPLETED,
         "overall_result": ComplianceResult.COMPLIANT,
     },
     {
@@ -1395,7 +1443,10 @@ async def seed_demo_inspections(
     seeded_count = 0
     for preset in DEMO_PRESETS:
         slug = preset["slug"]
-        stmt = select(Inspection).where(Inspection.store_address == slug)
+        stmt = select(Inspection).where(
+            Inspection.store_address == slug,
+            Inspection.inspector_id == current_user.id,
+        )
         existing = (await db.execute(stmt)).scalar_one_or_none()
 
         if existing:
@@ -1407,7 +1458,7 @@ async def seed_demo_inspections(
             store_address=slug,
             district=preset["district"],
             state=preset["state"],
-            status=InspectionStatus.REVIEW_REQUIRED,
+            status=preset.get("status", InspectionStatus.REVIEW_REQUIRED),
             overall_result=preset["overall_result"],
             started_at=datetime.now(timezone.utc),
         )
@@ -1426,6 +1477,8 @@ async def seed_demo_inspections(
             mrp=decl_data.get("mrp"),
             unit_sale_price=decl_data.get("unit_sale_price"),
             manufacturing_date=decl_data.get("manufacturing_date"),
+            expiry_date=decl_data.get("expiry_date"),
+            best_before=decl_data.get("best_before"),
             consumer_care=decl_data.get("consumer_care"),
             pdp_area_sq_cm=decl_data.get("pdp_area_sq_cm"),
             digital_listing_data=decl_data.get("digital_listing_data"),
@@ -1444,6 +1497,23 @@ async def seed_demo_inspections(
         raw_checks = (await db.execute(raw_checks_stmt)).scalars().all()
         violations = await generate_violations_for_inspection(db, insp.id, raw_checks)
         await link_evidence_for_inspection(db, insp.id, raw_checks, violations)
+
+        # If preset specifies COMPLETED or is compliant with human verification, finalize inspection
+        if preset.get("status") == InspectionStatus.COMPLETED or (insp.overall_result == ComplianceResult.COMPLIANT and decl.is_human_verified):
+            insp.status = InspectionStatus.COMPLETED
+            insp.completed_at = datetime.now(timezone.utc)
+            insp.finalized_by_id = current_user.id
+            insp.finalized_at = datetime.now(timezone.utc)
+            insp.review_notes = "[Controlled Demo Finalization]: All statutory declarations verified compliant under LMPC Rules, 2011."
+            await log_audit_event(
+                db=db,
+                inspection_id=insp.id,
+                actor_id=current_user.id,
+                action="INSPECTION_FINALIZED",
+                entity_type="Inspection",
+                entity_id=insp.id,
+                metadata_json={"final_verdict": insp.overall_result.value if insp.overall_result else "COMPLIANT", "is_demo": True},
+            )
 
         await log_audit_event(
             db=db,
